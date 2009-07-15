@@ -39,7 +39,7 @@ class MbUnitRunner
 		
 		assemblies.each do |assem|
 			file = File.expand_path("#{@sourceDir}/#{assem}/bin/#{@compileTarget}/#{assem}.dll")
-			sh "#{@nunitExe} #{file}"
+			sh "#{@nunitExe} #{file} /re:TeamCityExtension,Gallio.TeamCityIntegration"
 		end
 	end
 end
