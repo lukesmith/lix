@@ -29,28 +29,6 @@ namespace Lix.Commons.Repositories
 
         public abstract void Remove(T entity);
 
-        protected virtual IQueryable<T> Query(IQueryableSpecification<T> specification)
-        {
-            return specification.Build(this.RepositoryQuery);
-        }
-
-        protected virtual T Get(IQueryableSpecification<T> specification)
-        {
-            return this.Query(specification).SingleOrDefault();
-        }
-
-        protected virtual IEnumerable<T> List(IQueryableSpecification<T> specification)
-        {
-            return this.Query(specification).ToList();
-        }
-
-        protected virtual PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
-        {
-            var specificationQuery = this.Query(specification);
-
-            return specificationQuery.PagedList(startIndex, pageSize);
-        }
-
         public bool Exists(IQueryableSpecification<T> specification)
         {
             return specification.Build(this.RepositoryQuery).FirstOrDefault() != null;
@@ -90,6 +68,28 @@ namespace Lix.Commons.Repositories
             {
                 throw new NotImplementedException();
             }
+        }
+
+        protected virtual IQueryable<T> Query(IQueryableSpecification<T> specification)
+        {
+            return specification.Build(this.RepositoryQuery);
+        }
+
+        protected virtual T Get(IQueryableSpecification<T> specification)
+        {
+            return this.Query(specification).SingleOrDefault();
+        }
+
+        protected virtual IEnumerable<T> List(IQueryableSpecification<T> specification)
+        {
+            return this.Query(specification).ToList();
+        }
+
+        protected virtual PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
+        {
+            var specificationQuery = this.Query(specification);
+
+            return specificationQuery.PagedList(startIndex, pageSize);
         }
     }
 }
