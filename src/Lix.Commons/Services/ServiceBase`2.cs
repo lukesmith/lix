@@ -4,10 +4,10 @@ using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Services
 {
-    public abstract class BaseService<T, TRepository> : IService<T>
+    public abstract class ServiceBase<T, TRepository> : IService<T>
         where TRepository : class, IRepository<T>
     {
-        protected BaseService(TRepository repository)
+        protected ServiceBase(TRepository repository)
         {
             this.Repository = repository;
         }
