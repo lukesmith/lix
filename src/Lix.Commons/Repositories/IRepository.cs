@@ -49,7 +49,7 @@ namespace Lix.Commons.Repositories
         /// <param name="startIndex">The index to start the list from.</param>
         /// <param name="pageSize">The number of items to return.</param>
         /// <returns>
-        /// A <see cref="PagedResult{T}"/> collection of <typeparamref name="TEntity"/> items that matched the specification.
+        /// A <see cref="PagedResult{TEntity}"/> collection of <typeparamref name="TEntity"/> items that matched the specification.
         /// </returns>
         PagedResult<TEntity> List(ISpecification specification, int startIndex, int pageSize);
 
