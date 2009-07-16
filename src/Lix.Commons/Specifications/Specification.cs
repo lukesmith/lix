@@ -1,11 +1,21 @@
 ﻿
 namespace Lix.Commons.Specifications
 {
+    /// <summary>
+    /// Represents a specification.
+    /// </summary>
     public class Specification
     {
-        public static IQueryableSpecification<T> Empty<T>()
+        /// <summary>
+        /// Creates an <see cref="EmptySpecification{TEntity}"/>.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity to create the specification for.</typeparam>
+        /// <returns>
+        /// An <see cref="EmptySpecification{TEntity}"/> object.
+        /// </returns>
+        public static IQueryableSpecification<TEntity> Empty<TEntity>()
         {
-            return new EmptySpecification<T>();
+            return new EmptySpecification<TEntity>();
         }
     }
 }

@@ -2,9 +2,20 @@ using System.Linq;
 
 namespace Lix.Commons.Specifications
 {
-    public class EmptySpecification<T> : IQueryableSpecification<T>
+    /// <summary>
+    /// Represents an empty specification.
+    /// </summary>
+    /// <typeparam name="TEntity">Type type of the entity to build the specification for.</typeparam>
+    public class EmptySpecification<TEntity> : IQueryableSpecification<TEntity>
     {
-        public IQueryable<T> Build(IQueryable<T> context)
+        /// <summary>
+        /// Builds the specification for an <see cref="IQueryable{TEntity}"/>.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns>
+        /// An object representing the built specification.
+        /// </returns>
+        public IQueryable<TEntity> Build(IQueryable<TEntity> context)
         {
             return context;
         }

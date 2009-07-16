@@ -69,6 +69,7 @@
     <Compile Include="Services\IService`1.cs" />
     <Compile Include="Specifications\EmptySpecification`1.cs" />
     <Compile Include="Specifications\IQueryableSpecification`1.cs" />
+    <Compile Include="Specifications\ISpecification.cs" />
     <Compile Include="Specifications\ISpecification`2.cs" />
     <Compile Include="Specifications\NHibernate\INHibernateSpecification.cs" />
     <Compile Include="Specifications\NHibernate\NHibernateCriteriaSpecificationBase`1.cs" />
