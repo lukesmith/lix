@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Lix.Commons.Repositories.InMemory
 {
-    public class InMemoryRepositoryBase<T> : RepositoryBase<T, InMemoryUnitOfWork>
+    public abstract class InMemoryRepositoryBase<T> : RepositoryBase<T, InMemoryUnitOfWork>
         where T : class
     {
         private IList<T> repository = new List<T>();
