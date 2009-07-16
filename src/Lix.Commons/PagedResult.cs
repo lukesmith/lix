@@ -3,13 +3,18 @@ using System.Collections;
 
 namespace Lix.Commons
 {
+    /// <summary>
+    /// Represents a collection of paged objects.
+    /// </summary>
     public class PagedResult : IEnumerable
     {
-        public static int GetStartIndex(int? pageNumber, int pageSize)
-        {
-            return pageNumber.GetValueOrDefault(0) * pageSize;
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PagedResult"/> class.
+        /// </summary>
+        /// <param name="startIndex">The start index.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="totalItems">The total items.</param>
+        /// <param name="items">The items in the paged result.</param>
         public PagedResult(int startIndex, int pageSize, long totalItems, IEnumerable items)
         {
             this.StartIndex = startIndex;
@@ -18,30 +23,40 @@ namespace Lix.Commons
             this.InnerItems = items;
         }
 
-        protected IEnumerable InnerItems
-        {
-            get;
-            set;
-        }
-
+        /// <summary>
+        /// Gets the total item count.
+        /// </summary>
+        /// <value>The total item count.</value>
         public long TotalItemCount
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the start index.
+        /// </summary>
+        /// <value>The start index.</value>
         public int StartIndex
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the size of the page.
+        /// </summary>
+        /// <value>The size of the page.</value>
         public int PageSize
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the total number pages.
+        /// </summary>
+        /// <value>The total number pages.</value>
         public int TotalNumberPages
         {
             get
@@ -67,6 +82,12 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance has more items.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance has more items; otherwise, <c>false</c>.
+        /// </value>
         public bool HasMoreItems
         {
             get
@@ -82,6 +103,10 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets the page number.
+        /// </summary>
+        /// <value>The page number.</value>
         public int PageNumber
         {
             get
@@ -100,6 +125,10 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets the zero-based index of the page.
+        /// </summary>
+        /// <value>The index of the page.</value>
         public int PageIndex
         {
             get
@@ -108,6 +137,10 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets the next page number.
+        /// </summary>
+        /// <value>The next page number.</value>
         public int NextPageNumber
         {
             get
@@ -116,6 +149,10 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets the zero-based index of the next page.
+        /// </summary>
+        /// <value>The index of the next page.</value>
         public int NextPageIndex
         {
             get
@@ -124,6 +161,10 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets the previous page number.
+        /// </summary>
+        /// <value>The previous page number.</value>
         public int PreviousPageNumber
         {
             get
@@ -139,6 +180,10 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets the zero-based index of the previous page.
+        /// </summary>
+        /// <value>The index of the previous page.</value>
         public int PreviousPageIndex
         {
             get
@@ -147,12 +192,41 @@ namespace Lix.Commons
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is the first page.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is the first page; otherwise, <c>false</c>.
+        /// </value>
         public bool IsFirstPage
         {
             get
             {
                 return this.PageIndex == 0;
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the inner items.
+        /// </summary>
+        /// <value>The inner items.</value>
+        protected IEnumerable InnerItems
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the start index given a page number and page size.
+        /// </summary>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <returns>
+        /// Value representing the start index.
+        /// </returns>
+        public static int GetStartIndex(int? pageNumber, int pageSize)
+        {
+            return pageNumber.GetValueOrDefault(0) * pageSize;
         }
 
         /// <summary>
