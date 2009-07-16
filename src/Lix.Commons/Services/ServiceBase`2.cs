@@ -4,8 +4,8 @@ using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Services
 {
-    public abstract class ServiceBase<T, TRepository> : IService<T>
-        where TRepository : class, IRepository<T>
+    public abstract class ServiceBase<TEntity, TRepository> : IService<TEntity>
+        where TRepository : class, IRepository<TEntity>
     {
         protected ServiceBase(TRepository repository)
         {
@@ -18,27 +18,27 @@ namespace Lix.Commons.Services
             private set;
         }
 
-        public virtual IQueryableSpecification<T> GetListSpecification()
+        public virtual IQueryableSpecification<TEntity> GetListSpecification()
         {
-            return Specification.Empty<T>();
+            return Specification.Empty<TEntity>();
         }
 
-        public IEnumerable<T> List()
+        public IEnumerable<TEntity> List()
         {
             return this.Repository.List(this.GetListSpecification());
         }
 
-        public PagedResult<T> List(int startIndex, int pageSize)
+        public PagedResult<TEntity> List(int startIndex, int pageSize)
         {
             return this.Repository.List(this.GetListSpecification(), startIndex, pageSize);
         }
 
-        public virtual T Save(T entity)
+        public virtual TEntity Save(TEntity entity)
         {
             return this.Repository.Save(entity);
         }
 
-        public virtual void Delete(T entity)
+        public virtual void Delete(TEntity entity)
         {
             this.Repository.Remove(entity);
         }
