@@ -5,6 +5,9 @@ using NHibernate.Criterion;
 
 namespace Lix.Commons.Repositories.NHibernate
 {
+    /// <summary>
+    /// Represents extensions on the <see cref="ICriteria"/> object.
+    /// </summary>
     public static class CriteriaExtensions
     {
         /// <summary>
@@ -19,7 +22,9 @@ namespace Lix.Commons.Repositories.NHibernate
         /// <param name="session">The session.</param>
         /// <param name="startIndex">The start index.</param>
         /// <param name="pageSize">Size of the page.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// A <see cref="PagedResult{TEntity}"/> collection from the.
+        /// </returns>
         public static PagedResult<TEntity> PagedList<TEntity>(this ICriteria criteria, ISession session, int startIndex, int pageSize)
         {
             IMultiCriteria multiCriteria = session.CreateMultiCriteria();

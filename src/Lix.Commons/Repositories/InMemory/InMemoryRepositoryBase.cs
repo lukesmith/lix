@@ -3,16 +3,28 @@ using System.Linq;
 
 namespace Lix.Commons.Repositories.InMemory
 {
-    public abstract class InMemoryRepositoryBase<T> : RepositoryBase<T, InMemoryUnitOfWork>
-        where T : class
+    /// <summary>
+    /// Represents an in memory repository.
+    /// </summary>
+    /// <typeparam name="TEntity">Type type of the entity contained within the repository.</typeparam>
+    public abstract class InMemoryRepositoryBase<TEntity> : RepositoryBase<TEntity, InMemoryUnitOfWork>
+        where TEntity : class
     {
-        private IList<T> repository = new List<T>();
+        private IList<TEntity> repository = new List<TEntity>();
 
-        public InMemoryRepositoryBase(InMemoryUnitOfWork unitOfWork) : base(unitOfWork)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InMemoryRepositoryBase{TEntity}"/> class.
+        /// </summary>
+        /// <param name="unitOfWork">The unit of work.</param>
+        protected InMemoryRepositoryBase(InMemoryUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 
-        protected IList<T> Repository
+        /// <summary>
+        /// Gets the repository.
+        /// </summary>
+        /// <value>The repository.</value>
+        protected IList<TEntity> Repository
         {
             get
             {
@@ -20,19 +32,34 @@ namespace Lix.Commons.Repositories.InMemory
             }
         }
 
-        protected override IQueryable<T> RepositoryQuery
+        /// <summary>
+        /// Gets the repository query.
+        /// </summary>
+        /// <value>The repository query.</value>
+        protected override IQueryable<TEntity> RepositoryQuery
         {
             get { return this.Repository.AsQueryable(); }
         }
 
-        public override T Save(T entity)
+        /// <summary>
+        /// Saves the specified entity.
+        /// </summary>
+        /// <param name="entity">The entity to save.</param>
+        /// <returns>
+        /// The <typeparamref name="TEntity"/> that was saved.
+        /// </returns>
+        public override TEntity Save(TEntity entity)
         {
             this.Repository.Add(entity);
 
             return entity;
         }
 
-        public override void Remove(T entity)
+        /// <summary>
+        /// Removes the specified entity.
+        /// </summary>
+        /// <param name="entity">The entity to remove.</param>
+        public override void Remove(TEntity entity)
         {
             this.Repository.Remove(entity);
         }
