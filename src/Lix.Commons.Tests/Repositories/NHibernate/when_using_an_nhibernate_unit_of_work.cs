@@ -1,6 +1,6 @@
 ﻿using System;
 using Lix.Commons.Repositories.NHibernate;
-using Lix.Commons.Tests.Repositories.NHibernate.Examples;
+using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 using Moq;
 

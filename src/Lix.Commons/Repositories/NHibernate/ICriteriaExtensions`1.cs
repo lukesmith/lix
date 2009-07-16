@@ -20,7 +20,7 @@ namespace Lix.Commons.Repositories.NHibernate
         /// <param name="startIndex">The start index.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <returns></returns>
-        public static PagedList<TEntity> PagedList<TEntity>(this ICriteria criteria, ISession session, int startIndex, int pageSize)
+        public static PagedResult<TEntity> PagedList<TEntity>(this ICriteria criteria, ISession session, int startIndex, int pageSize)
         {
             IMultiCriteria multiCriteria = session.CreateMultiCriteria();
 
@@ -48,7 +48,7 @@ namespace Lix.Commons.Repositories.NHibernate
 
             // Create a new pagedresult object and populate it, use the paged query
             // to get the items, and the count query to get the total item count.
-            var pagedResult = new PagedList<TEntity>(
+            var pagedResult = new PagedResult<TEntity>(
                 startIndex,
                 pageSize,
                 count,

@@ -1,4 +1,5 @@
 using FluentNHibernate.Mapping;
+using Lix.Commons.Tests.Examples;
 
 namespace Lix.Commons.Tests.Repositories.NHibernate.Examples
 {

@@ -1,4 +1,4 @@
-namespace Lix.Commons.Tests.Repositories.NHibernate.Examples
+namespace Lix.Commons.Tests.Examples
 {
     public class Fish
     {

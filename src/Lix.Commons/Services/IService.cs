@@ -10,6 +10,6 @@ namespace Lix.Commons.Services
 
         IQueryableSpecification<T> GetListSpecification();
         IEnumerable<T> List();
-        PagedList<T> List(int startIndex, int pageSize);
+        PagedResult<T> List(int startIndex, int pageSize);
     }
 }

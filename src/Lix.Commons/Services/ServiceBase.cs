@@ -28,7 +28,7 @@ namespace Lix.Commons.Services
             return this.Repository.List(this.GetListSpecification());
         }
 
-        public PagedList<T> List(int startIndex, int pageSize)
+        public PagedResult<T> List(int startIndex, int pageSize)
         {
             return this.Repository.List(this.GetListSpecification(), startIndex, pageSize);
         }

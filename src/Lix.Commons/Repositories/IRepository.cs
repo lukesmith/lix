@@ -10,7 +10,7 @@ namespace Lix.Commons.Repositories
 
         T Get(ISpecification specification);
         IEnumerable<T> List(ISpecification specification);
-        PagedList<T> List(ISpecification specification, int startIndex, int pageSize);
+        PagedResult<T> List(ISpecification specification, int startIndex, int pageSize);
 
         bool Exists(IQueryableSpecification<T> specification);
     }

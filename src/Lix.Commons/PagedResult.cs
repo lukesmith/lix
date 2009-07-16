@@ -3,25 +3,25 @@ using System.Collections;
 
 namespace Lix.Commons
 {
-    public class PagedList
+    public class PagedResult : IEnumerable
     {
         public static int GetStartIndex(int? pageNumber, int pageSize)
         {
             return pageNumber.GetValueOrDefault(0) * pageSize;
         }
 
-        public PagedList(int startIndex, int pageSize, long totalItems, IEnumerable items)
+        public PagedResult(int startIndex, int pageSize, long totalItems, IEnumerable items)
         {
             this.StartIndex = startIndex;
             this.PageSize = pageSize;
             this.TotalItemCount = totalItems;
-            this.Items = items;
+            this.InnerItems = items;
         }
 
-        public IEnumerable Items
+        protected IEnumerable InnerItems
         {
             get;
-            protected set;
+            set;
         }
 
         public long TotalItemCount
@@ -153,6 +153,18 @@ namespace Lix.Commons
             {
                 return this.PageIndex == 0;
             }
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+        /// </returns>
+        /// <filterpriority>2</filterpriority>
+        public IEnumerator GetEnumerator()
+        {
+            return this.InnerItems.GetEnumerator();
         }
     }
 }

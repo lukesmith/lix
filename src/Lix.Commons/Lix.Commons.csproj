@@ -55,8 +55,8 @@
   <ItemGroup>
     <Compile Include="Repositories\EnumerableExtensions.cs" />
     <Compile Include="Repositories\NHibernate\ICriteriaExtensions`1.cs" />
-    <Compile Include="PagedList.cs" />
-    <Compile Include="PagedList`1.cs" />
+    <Compile Include="PagedResult.cs" />
+    <Compile Include="PagedResult`1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\InMemory\InMemoryRepositoryBase.cs" />
     <Compile Include="Repositories\InMemory\InMemoryUnitOfWork.cs" />

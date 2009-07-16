@@ -38,9 +38,9 @@ namespace Lix.Commons.Repositories.NHibernate
             return result;
         }
 
-        protected override PagedList<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
+        protected override PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
         {
-            PagedList<T> result = null;
+            PagedResult<T> result = null;
 
             this.Execute(s =>
                              {
@@ -102,7 +102,7 @@ namespace Lix.Commons.Repositories.NHibernate
             return result;
         }
 
-        public override PagedList<T> List(ISpecification specification, int startIndex, int pageSize)
+        public override PagedResult<T> List(ISpecification specification, int startIndex, int pageSize)
         {
             if (specification is INHibernateCriteriaSpecification)
             {
@@ -112,9 +112,9 @@ namespace Lix.Commons.Repositories.NHibernate
             return base.List(specification, startIndex, pageSize);
         }
 
-        protected PagedList<T> List(INHibernateCriteriaSpecification specification, int startIndex, int pageSize)
+        protected PagedResult<T> List(INHibernateCriteriaSpecification specification, int startIndex, int pageSize)
         {
-            PagedList<T> result = null;
+            PagedResult<T> result = null;
 
             this.Execute(s =>
                              {

@@ -44,7 +44,7 @@ namespace Lix.Commons.Repositories
             return this.Query(specification).ToList();
         }
 
-        protected virtual PagedList<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
+        protected virtual PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
         {
             var specificationQuery = this.Query(specification);
 
@@ -80,7 +80,7 @@ namespace Lix.Commons.Repositories
             }
         }
 
-        public virtual PagedList<T> List(ISpecification specification, int startIndex, int pageSize)
+        public virtual PagedResult<T> List(ISpecification specification, int startIndex, int pageSize)
         {
             if (specification is IQueryableSpecification<T>)
             {
