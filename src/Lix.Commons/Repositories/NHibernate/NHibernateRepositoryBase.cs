@@ -25,31 +25,6 @@ namespace Lix.Commons.Repositories.NHibernate
             }
         }
 
-        protected override IQueryable<T> Query(IQueryableSpecification<T> specification)
-        {
-            IQueryable<T> result = null;
-
-            this.Execute(s =>
-                             {
-                                 result = specification.Build(s.Linq<T>())
-                                     .ToList().AsQueryable();
-                             });
-            
-            return result;
-        }
-
-        protected override PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
-        {
-            PagedResult<T> result = null;
-
-            this.Execute(s =>
-                             {
-                                 result = s.Linq<T>().PagedList(specification, startIndex, pageSize);
-                             });
-
-            return result;
-        }
-
         public override T Get(ISpecification specification)
         {
             if (specification is INHibernateCriteriaSpecification)
@@ -60,46 +35,14 @@ namespace Lix.Commons.Repositories.NHibernate
             return base.Get(specification);
         }
 
-        protected T Get(INHibernateCriteriaSpecification specification)
-        {
-            T result = null;
-
-            this.Execute(s =>
-                             {
-                                 if (specification != null)
-                                 {
-                                     ICriteria criteria = specification.Build(s);
-                                     result = criteria.UniqueResult<T>();
-                                 }
-                             });
-
-            return result;
-        }
-
         public override IEnumerable<T> List(ISpecification specification)
         {
             if (specification is INHibernateCriteriaSpecification)
             {
                 return this.List(specification as INHibernateCriteriaSpecification);
             }
-            
+
             return base.List(specification);
-        }
-
-        protected IEnumerable<T> List(INHibernateCriteriaSpecification specification)
-        {
-            IList<T> result = null;
-
-            this.Execute(s =>
-                             {
-                                 if (specification != null)
-                                 {
-                                     ICriteria criteria = specification.Build(s);
-                                     result = criteria.List<T>();
-                                 }
-                             });
-
-            return result;
         }
 
         public override PagedResult<T> List(ISpecification specification, int startIndex, int pageSize)
@@ -112,22 +55,6 @@ namespace Lix.Commons.Repositories.NHibernate
             return base.List(specification, startIndex, pageSize);
         }
 
-        protected PagedResult<T> List(INHibernateCriteriaSpecification specification, int startIndex, int pageSize)
-        {
-            PagedResult<T> result = null;
-
-            this.Execute(s =>
-                             {
-                                 if (specification != null)
-                                 {
-                                     ICriteria criteria = specification.Build(s);
-                                     result = criteria.PagedList<T>(s, startIndex, pageSize);
-                                 }
-                             });
-
-            return result;
-        }
-
         public override T Save(T entity)
         {
             T result = default(T);
@@ -136,9 +63,6 @@ namespace Lix.Commons.Repositories.NHibernate
             {
                 this.Execute(s =>
                                  {
-                                     //var d = s.Merge(entity);
-                                     //s.Save(d);
-                                     //result = d as T;
                                      s.SaveOrUpdate(entity);
                                      result = entity;
                                  });
@@ -161,6 +85,79 @@ namespace Lix.Commons.Repositories.NHibernate
         public override void Remove(T entity)
         {
             this.Execute(s => s.Delete(entity));
+        }
+
+        protected override IQueryable<T> Query(IQueryableSpecification<T> specification)
+        {
+            IQueryable<T> result = null;
+
+            this.Execute(s =>
+            {
+                result = specification.Build(s.Linq<T>())
+                    .ToList().AsQueryable();
+            });
+
+            return result;
+        }
+
+        protected override PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
+        {
+            PagedResult<T> result = null;
+
+            this.Execute(s =>
+            {
+                result = s.Linq<T>().PagedList(specification, startIndex, pageSize);
+            });
+
+            return result;
+        }
+
+        protected T Get(INHibernateCriteriaSpecification specification)
+        {
+            T result = null;
+
+            this.Execute(s =>
+            {
+                if (specification != null)
+                {
+                    ICriteria criteria = specification.Build(s);
+                    result = criteria.UniqueResult<T>();
+                }
+            });
+
+            return result;
+        }
+
+        protected IEnumerable<T> List(INHibernateCriteriaSpecification specification)
+        {
+            IList<T> result = null;
+
+            this.Execute(s =>
+            {
+                if (specification != null)
+                {
+                    ICriteria criteria = specification.Build(s);
+                    result = criteria.List<T>();
+                }
+            });
+
+            return result;
+        }
+
+        protected PagedResult<T> List(INHibernateCriteriaSpecification specification, int startIndex, int pageSize)
+        {
+            PagedResult<T> result = null;
+
+            this.Execute(s =>
+            {
+                if (specification != null)
+                {
+                    ICriteria criteria = specification.Build(s);
+                    result = criteria.PagedList<T>(s, startIndex, pageSize);
+                }
+            });
+
+            return result;
         }
 
         protected void Execute(Action<ISession> action)
