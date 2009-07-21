@@ -23,7 +23,7 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         public static void BuildSchema(ISession session)
         {
             var export = new SchemaExport(SavedConfig);
-            export.Execute(true, true, false, false, session.Connection, null);
+            export.Execute(true, true, false, session.Connection, null);
         }
     }
 }

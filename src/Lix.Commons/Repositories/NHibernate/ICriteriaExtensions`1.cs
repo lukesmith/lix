@@ -36,7 +36,7 @@ namespace Lix.Commons.Repositories.NHibernate
                 .SetProjection(Projections.RowCountInt64());
 
             // Clear the ordering of the results
-            countCriteria.Orders.Clear();
+            countCriteria.ClearOrders();
 
             // Clone a copy fo the criteria to get the page of data,
             // setting max and first result, this will get the page of data.s
