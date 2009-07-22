@@ -153,7 +153,7 @@ namespace Lix.Commons.Repositories.NHibernate
                 if (specification != null)
                 {
                     ICriteria criteria = specification.Build(s);
-                    result = criteria.PagedList<T>(s, startIndex, pageSize);
+                    result = criteria.PagedList<T>(startIndex, pageSize);
                 }
             });
 

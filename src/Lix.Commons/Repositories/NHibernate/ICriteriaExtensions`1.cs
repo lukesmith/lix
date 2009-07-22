@@ -25,10 +25,8 @@ namespace Lix.Commons.Repositories.NHibernate
         /// <returns>
         /// A <see cref="PagedResult{TEntity}"/> collection from the.
         /// </returns>
-        public static PagedResult<TEntity> PagedList<TEntity>(this ICriteria criteria, ISession session, int startIndex, int pageSize)
+        public static PagedResult<TEntity> PagedList<TEntity>(this ICriteria criteria, int startIndex, int pageSize)
         {
-            IMultiCriteria multiCriteria = session.CreateMultiCriteria();
-
             // Clone a copy of the criteria, setting a projection
             // to get the row count, this will get the total number of
             // items in the query using a select count(*)
@@ -41,15 +39,14 @@ namespace Lix.Commons.Repositories.NHibernate
             // Clone a copy fo the criteria to get the page of data,
             // setting max and first result, this will get the page of data.s
             ICriteria pageCriteria = CriteriaTransformer.Clone(criteria)
-                .SetMaxResults(pageSize)
-                .SetFirstResult(startIndex);
+                    .SetMaxResults(pageSize)
+                    .SetFirstResult(startIndex);
 
-            multiCriteria.Add(countCriteria);
-            multiCriteria.Add(pageCriteria);
+            var countFuture = countCriteria.FutureValue<long>();
+            var listFuture = pageCriteria.Future<TEntity>();
 
-            var result = multiCriteria.List();
-            var count = (long)((IList)result[0])[0];
-            var list = ((IList)result[1]).Cast<TEntity>();
+            var count = countFuture.Value;
+            var list = listFuture.ToList();
 
             // Create a new pagedresult object and populate it, use the paged query
             // to get the items, and the count query to get the total item count.

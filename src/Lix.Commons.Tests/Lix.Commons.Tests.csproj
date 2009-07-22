@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Gallio\bin\Gallio35.dll</HintPath>
     </Reference>
+    <Reference Include="HibernatingRhinos.NHibernate.Profiler.Appender, Version=0.9.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\HibernatingRhinos.NHibernate.Profiler.Appender.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libs\log4net.dll</HintPath>
@@ -98,6 +102,7 @@
     <Compile Include="Repositories\NHibernate\Examples\FishNHibernateRepository.cs" />
     <Compile Include="Repositories\NHibernate\nhibernate_test_setups.cs" />
     <Compile Include="Repositories\NHibernate\SessionFactory.cs" />
+    <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_criteria.cs" />
     <Compile Include="Repositories\NHibernate\when_using_an_nhibernate_unit_of_work.cs" />
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />

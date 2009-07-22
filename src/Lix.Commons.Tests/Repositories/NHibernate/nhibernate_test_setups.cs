@@ -12,6 +12,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         public void ClassSetup()
         {
             this.sessionFactory = SessionFactory.CreateSessionFactory();
+
+            HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
         }
 
         [SetUp(Order = 0)]
