@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 namespace Lix.Commons.Repositories.InMemory
 {
@@ -36,6 +37,15 @@ namespace Lix.Commons.Repositories.InMemory
         /// </summary>
         public void Commit()
         {
+            this.Commit(false);
+        }
+
+        /// <summary>
+        /// Commits the unit of work.
+        /// </summary>
+        public void Commit(bool begin)
+        {
+            
         }
 
         /// <summary>

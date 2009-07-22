@@ -24,6 +24,11 @@ namespace Lix.Commons.Repositories
         void Commit();
 
         /// <summary>
+        /// Commits the unit of work.
+        /// </summary>
+        void Commit(bool begin);
+
+        /// <summary>
         /// Rollbacks the unit of work.
         /// </summary>
         void Rollback();

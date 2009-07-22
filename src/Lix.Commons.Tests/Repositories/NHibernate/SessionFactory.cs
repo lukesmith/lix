@@ -1,6 +1,7 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
@@ -10,6 +11,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
     {
         public static ISessionFactory CreateSessionFactory()
         {
+            var type = typeof(global::NHibernate.ByteCode.Castle.ProxyFactory);
+
             return Fluently
                 .Configure()
                 .Database(SQLiteConfiguration.Standard.InMemory().ShowSql())
