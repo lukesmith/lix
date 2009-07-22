@@ -35,7 +35,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libs\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.Linq, Version=1.0.0.0, Culture=neutral, PublicKeyToken=444cf6a87fdab271, processorArchitecture=MSIL">
+    <Reference Include="NHibernate.Linq, Version=1.0.0.1001, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libs\NHibernate.Linq.dll</HintPath>
     </Reference>
@@ -62,6 +62,7 @@
     <Compile Include="Repositories\InMemory\InMemoryUnitOfWork.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\NHibernate\ISessionExtensions.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateRepositoryBase.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateUnitOfWork.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />

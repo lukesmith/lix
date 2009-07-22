@@ -19,11 +19,10 @@ namespace Lix.Commons.Repositories.NHibernate
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="criteria">The criteria.</param>
-        /// <param name="session">The session.</param>
         /// <param name="startIndex">The start index.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <returns>
-        /// A <see cref="PagedResult{TEntity}"/> collection from the.
+        /// A <see cref="PagedResult{TEntity}"/> collection.
         /// </returns>
         public static PagedResult<TEntity> PagedList<TEntity>(this ICriteria criteria, int startIndex, int pageSize)
         {

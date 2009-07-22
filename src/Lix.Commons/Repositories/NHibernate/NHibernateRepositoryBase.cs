@@ -106,7 +106,7 @@ namespace Lix.Commons.Repositories.NHibernate
 
             this.Execute(s =>
             {
-                result = s.Linq<T>().PagedList(specification, startIndex, pageSize);
+                result = s.PagedList(specification, startIndex, pageSize);
             });
 
             return result;
