@@ -5,13 +5,22 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
 {
     public abstract class nhibernate_test_setups
     {
-        private ISessionFactory sessionFactory;
-        protected ISession session;
+        public ISessionFactory SessionFactory
+        {
+            get;
+            private set;
+        }
+        
+        protected ISession Session
+        {
+            get;
+            private set;
+        }
 
         [FixtureSetUp]
         public void ClassSetup()
         {
-            this.sessionFactory = SessionFactory.CreateSessionFactory();
+            this.SessionFactory = SessionFactoryFactory.CreateSessionFactory();
 
             HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
         }
@@ -19,15 +28,15 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [SetUp(Order = 0)]
         public virtual void SetUp()
         {
-            this.session = this.sessionFactory.OpenSession();
-            SessionFactory.BuildSchema(this.session);
+            this.Session = this.SessionFactory.OpenSession();
+            SessionFactoryFactory.BuildSchema(this.Session);
         }
 
         [TearDown(Order = 0)]
         public void TearDown()
         {
-            this.session.Close();
-            this.session.Dispose();
+            this.Session.Close();
+            this.Session.Dispose();
         }
     }
 }

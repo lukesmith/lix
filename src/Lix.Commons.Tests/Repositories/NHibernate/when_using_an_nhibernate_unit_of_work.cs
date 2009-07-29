@@ -15,14 +15,14 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [FixtureSetUp]
         public void ClassSetup()
         {
-            this.sessionFactory = SessionFactory.CreateSessionFactory();
+            this.sessionFactory = SessionFactoryFactory.CreateSessionFactory();
         }
 
         [SetUp(Order = 0)]
         public virtual void SetUp()
         {
             this.session = this.sessionFactory.OpenSession();
-            SessionFactory.BuildSchema(this.session);
+            SessionFactoryFactory.BuildSchema(this.session);
         }
 
         [TearDown(Order = 0)]

@@ -101,7 +101,7 @@
     <Compile Include="Repositories\NHibernate\Examples\FishMap.cs" />
     <Compile Include="Repositories\NHibernate\Examples\FishNHibernateRepository.cs" />
     <Compile Include="Repositories\NHibernate\nhibernate_test_setups.cs" />
-    <Compile Include="Repositories\NHibernate\SessionFactory.cs" />
+    <Compile Include="Repositories\NHibernate\SessionFactoryFactory.cs" />
     <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_criteria.cs" />
     <Compile Include="Repositories\NHibernate\when_using_an_nhibernate_unit_of_work.cs" />
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />

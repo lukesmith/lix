@@ -14,22 +14,22 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         {
             base.SetUp();
 
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
         }
 
         [Test]
         public void should_obtain_the_correct_total_item_count()
         {
-            var result = this.session.PagedList(Specification.Empty<Fish>(), 0, 5);
+            var result = this.Session.PagedList(Specification.Empty<Fish>(), 0, 5);
 
             result.TotalItemCount.ShouldBeEqualTo(10);
         }
@@ -37,7 +37,7 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [Test]
         public void should_obtain_the_correct_number_of_items_in_page()
         {
-            var result = this.session.PagedList(Specification.Empty<Fish>(), 0, 5);
+            var result = this.Session.PagedList(Specification.Empty<Fish>(), 0, 5);
 
             result.Count().ShouldBeEqualTo(5);
         }
@@ -50,22 +50,22 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         {
             base.SetUp();
 
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
-            this.session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
+            this.Session.Save(new Fish());
         }
 
         [Test]
         public void should_obtain_the_correct_total_item_count()
         {
-            var result = this.session.CreateCriteria(typeof(Fish)).PagedList<Fish>(0, 5);
+            var result = this.Session.CreateCriteria(typeof(Fish)).PagedList<Fish>(0, 5);
 
             result.TotalItemCount.ShouldBeEqualTo(10);
         }
@@ -73,7 +73,7 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [Test]
         public void should_obtain_the_correct_number_of_items_in_page()
         {
-            var result = this.session.CreateCriteria(typeof(Fish)).PagedList<Fish>(0, 5);
+            var result = this.Session.CreateCriteria(typeof(Fish)).PagedList<Fish>(0, 5);
 
             result.Count().ShouldBeEqualTo(5);
         }

@@ -6,7 +6,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Lix.Commons.Tests.Repositories.NHibernate
 {
-    public class SessionFactory
+    public class SessionFactoryFactory
     {
         public static ISessionFactory CreateSessionFactory()
         {
@@ -15,7 +15,7 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
             return Fluently
                 .Configure()
                 .Database(SQLiteConfiguration.Standard.InMemory().ShowSql())
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SessionFactory>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SessionFactoryFactory>())
                 .ExposeConfiguration(c => SavedConfig = c)
                 .BuildSessionFactory();
         }
