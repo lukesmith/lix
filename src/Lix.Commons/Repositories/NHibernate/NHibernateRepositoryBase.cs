@@ -17,6 +17,14 @@ namespace Lix.Commons.Repositories.NHibernate
         {
         }
 
+        public new NHibernateUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return base.UnitOfWork as NHibernateUnitOfWork;
+            }
+        }
+
         protected override IQueryable<T> RepositoryQuery
         {
             get

@@ -27,7 +27,7 @@ namespace Lix.Commons.Repositories
         /// Gets the unit of work.
         /// </summary>
         /// <value>The unit of work.</value>
-        public TUnitOfWork UnitOfWork
+        public virtual IUnitOfWork UnitOfWork
         {
             get;
             private set;
