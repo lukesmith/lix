@@ -53,5 +53,34 @@ namespace Lix.Commons.Tests.Repositories.InMemory
                 this.unitOfWork.CurrentTransactionDataStore.List<Fish>().Count().ShouldBeEqualTo(2);
             }
         }
+
+        [Test]
+        public void should_not_save_entities_to_the_main_data_source_before_committing()
+        {
+            using (this.unitOfWork)
+            {
+                this.unitOfWork.Begin();
+
+                var fishA = new Fish { Id = 2 };
+                this.unitOfWork.Save(fishA);
+
+                this.mainDataStore.List<Fish>().Count().ShouldBeEqualTo(0);
+            }
+        }
+
+        [Test]
+        public void should_save_entities_to_the_main_data_source_after_committing()
+        {
+            using (this.unitOfWork)
+            {
+                this.unitOfWork.Begin();
+
+                var fishA = new Fish { Id = 2 };
+                this.unitOfWork.Save(fishA);
+                this.unitOfWork.Commit();
+
+                this.mainDataStore.List<Fish>().Count().ShouldBeEqualTo(1);
+            }
+        }
     }
 }
