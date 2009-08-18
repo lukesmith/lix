@@ -49,6 +49,9 @@ namespace Lix.Commons.Repositories.InMemory
         /// </summary>
         public void Begin()
         {
+            // TODO: Check whether a unit of work already exists for this DataStore
+            ///throw new InvalidOperationException("A unit of work has already begun for this session.");
+
             this.CurrentTransactionDataStore = new InMemoryDataStore();
             this.CurrentTransactionDataStore.Merge(this.DataStore);
             this.IsActive = true;
