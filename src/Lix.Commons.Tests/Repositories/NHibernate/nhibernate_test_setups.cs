@@ -34,17 +34,33 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         }
 
         [SetUp(Order = 0)]
-        public virtual void SetUp()
+        public void SetUp()
         {
             this.Session = this.SessionFactory.OpenSession();
-            SessionFactoryFactory.BuildSchema(this.Session);
+
+            using (var tx = this.Session.BeginTransaction())
+            {
+                SessionFactoryFactory.BuildSchema(this.Session);
+
+                tx.Commit();
+            }
 
             this.UnitOfWork = new NHibernateUnitOfWork(this.Session);
+            this.UnitOfWork.Begin();
+
+            this.PerformSetUp();
+
+            this.UnitOfWork.Commit(true);
+        }
+
+        protected virtual void PerformSetUp()
+        {
         }
 
         [TearDown(Order = 0)]
-        public void TearDown()
+        public virtual void TearDown()
         {
+            this.UnitOfWork.Commit();
             this.Session.Close();
             this.Session.Dispose();
         }

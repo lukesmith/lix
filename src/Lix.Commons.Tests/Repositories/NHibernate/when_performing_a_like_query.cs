@@ -11,10 +11,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
     {
         private FishNHibernateRepository fishRepository;
 
-        public override void SetUp()
+        protected override void PerformSetUp()
         {
-            base.SetUp();
-
             this.UnitOfWork.Save(new Fish
                                   {
                                       Description = "A fish called wanda"
@@ -31,6 +29,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
                                   {
                                       Description = "There was big and good travel thru time."
                                   });
+
+            this.UnitOfWork.Commit(true);
 
             fishRepository = new FishNHibernateRepository(this.UnitOfWork);
         }

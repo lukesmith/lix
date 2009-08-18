@@ -32,14 +32,9 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
             this.session.Dispose();
         }
 
-        protected override NHibernateUnitOfWork GetUnitOfWork()
+        protected override NHibernateUnitOfWork CreateUnitOfWork()
         {
             return new NHibernateUnitOfWork(this.session);
-        }
-
-        protected override void Save(Fish entity)
-        {
-            this.session.Save(entity);
         }
 
         protected override IEnumerable<Fish> List()

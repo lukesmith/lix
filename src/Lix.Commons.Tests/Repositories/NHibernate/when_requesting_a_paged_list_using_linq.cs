@@ -9,10 +9,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
     [TestFixture]
     public class when_requesting_a_paged_list_using_linq : nhibernate_test_setups
     {
-        public override void SetUp()
+        protected override void PerformSetUp()
         {
-            base.SetUp();
-
             this.UnitOfWork.Save(new Fish());
             this.UnitOfWork.Save(new Fish());
             this.UnitOfWork.Save(new Fish());
