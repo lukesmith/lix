@@ -1,5 +1,6 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Lix.Commons.Repositories.InMemory
 {
@@ -8,13 +9,32 @@ namespace Lix.Commons.Repositories.InMemory
     /// </summary>
     public class InMemoryUnitOfWork : IUnitOfWork
     {
+        public InMemoryUnitOfWork(InMemoryDataStore dataStore)
+        {
+            this.DataStore = dataStore;
+            this.CurrentTransactionDataStore = new InMemoryDataStore();
+        }
+
+        internal InMemoryDataStore DataStore
+        {
+            get;
+            set;
+        }
+
+        public InMemoryDataStore CurrentTransactionDataStore
+        {
+            get;
+            private set;
+        }
+
         /// <summary>
         /// Gets a value indicating whether unit of work is active.
         /// </summary>
         /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
         public bool IsActive
         {
-            get { throw new NotImplementedException(); }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -29,7 +49,9 @@ namespace Lix.Commons.Repositories.InMemory
         /// </summary>
         public void Begin()
         {
-            throw new NotImplementedException();
+            this.CurrentTransactionDataStore = new InMemoryDataStore();
+            this.CurrentTransactionDataStore.Merge(this.DataStore);
+            this.IsActive = true;
         }
 
         /// <summary>
@@ -45,7 +67,23 @@ namespace Lix.Commons.Repositories.InMemory
         /// </summary>
         public void Commit(bool begin)
         {
-            
+            if (!this.IsActive)
+            {
+                throw new InvalidOperationException("Unable to commit when not active.");
+            }
+
+            // Commit transactionaldatastore to InMemoryDataStore
+            this.DataStore.Merge(this.CurrentTransactionDataStore);
+
+            if (begin)
+            {
+                this.Begin();
+            }
+            else
+            {
+                this.CurrentTransactionDataStore.Clear();
+                this.IsActive = false;
+            }
         }
 
         /// <summary>
@@ -53,7 +91,15 @@ namespace Lix.Commons.Repositories.InMemory
         /// </summary>
         public void Rollback()
         {
-            throw new NotImplementedException();
+            if (!this.IsActive)
+            {
+                throw new InvalidOperationException("Unable to rollback when not active.");
+            }
+            else
+            {
+                this.CurrentTransactionDataStore.Clear();
+                this.IsActive = false;
+            }
         }
     }
 }

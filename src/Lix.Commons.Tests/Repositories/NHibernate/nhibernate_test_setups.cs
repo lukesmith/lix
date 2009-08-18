@@ -1,4 +1,6 @@
-﻿using MbUnit.Framework;
+﻿using System;
+using Lix.Commons.Repositories.NHibernate;
+using MbUnit.Framework;
 using NHibernate;
 
 namespace Lix.Commons.Tests.Repositories.NHibernate
@@ -11,7 +13,13 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
             private set;
         }
         
-        protected ISession Session
+        private ISession Session
+        {
+            get;
+            set;
+        }
+
+        protected NHibernateUnitOfWork UnitOfWork
         {
             get;
             private set;
@@ -30,6 +38,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         {
             this.Session = this.SessionFactory.OpenSession();
             SessionFactoryFactory.BuildSchema(this.Session);
+
+            this.UnitOfWork = new NHibernateUnitOfWork(this.Session);
         }
 
         [TearDown(Order = 0)]

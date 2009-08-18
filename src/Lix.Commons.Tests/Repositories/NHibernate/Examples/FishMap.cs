@@ -11,6 +11,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate.Examples
                 .GeneratedBy.Native();
 
             Map(x => x.IsDeleted);
+
+            Map(x => x.Description);
         }
     }
 }

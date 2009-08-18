@@ -13,5 +13,11 @@ namespace Lix.Commons.Tests.Examples
             get;
             set;
         }
+
+        public virtual string Description
+        {
+            get;
+            set;
+        }
     }
 }

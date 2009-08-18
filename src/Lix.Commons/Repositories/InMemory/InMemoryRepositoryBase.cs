@@ -10,7 +10,7 @@ namespace Lix.Commons.Repositories.InMemory
     public abstract class InMemoryRepositoryBase<TEntity> : RepositoryBase<TEntity, InMemoryUnitOfWork>
         where TEntity : class
     {
-        private IList<TEntity> repository = new List<TEntity>();
+        private readonly IList<TEntity> repository = new List<TEntity>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InMemoryRepositoryBase{TEntity}"/> class.
@@ -18,6 +18,14 @@ namespace Lix.Commons.Repositories.InMemory
         /// <param name="unitOfWork">The unit of work.</param>
         protected InMemoryRepositoryBase(InMemoryUnitOfWork unitOfWork) : base(unitOfWork)
         {
+        }
+
+        public new InMemoryUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return base.UnitOfWork as InMemoryUnitOfWork;
+            }
         }
 
         /// <summary>
@@ -28,7 +36,7 @@ namespace Lix.Commons.Repositories.InMemory
         {
             get
             {
-                return this.repository;
+                return this.UnitOfWork.CurrentTransactionDataStore.List<TEntity>().ToList();
             }
         }
 
