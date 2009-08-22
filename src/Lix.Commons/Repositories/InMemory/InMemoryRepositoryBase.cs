@@ -30,7 +30,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// Gets the repository.
         /// </summary>
         /// <value>The repository.</value>
-        protected InMemoryDataStore Repository
+        protected InMemoryDataStore TransactionalDataStore
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// <value>The repository query.</value>
         protected override IQueryable<TEntity> RepositoryQuery
         {
-            get { return this.Repository.List<TEntity>().ToList().AsQueryable(); }
+            get { return this.TransactionalDataStore.List<TEntity>().AsQueryable(); }
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// </returns>
         public override TEntity Save(TEntity entity)
         {
-            this.Repository.Save(entity);
+            this.TransactionalDataStore.Save(entity);
 
             return entity;
         }
@@ -67,7 +67,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// <param name="entity">The entity to remove.</param>
         public override void Remove(TEntity entity)
         {
-            this.Repository.Remove(entity);
+            this.TransactionalDataStore.Remove(entity);
         }
     }
 }

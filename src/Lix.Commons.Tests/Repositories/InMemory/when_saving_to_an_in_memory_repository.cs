@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Repositories.InMemory.Examples;
 using MbUnit.Framework;

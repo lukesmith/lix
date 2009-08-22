@@ -46,6 +46,24 @@ namespace Lix.Commons.Repositories.InMemory
             }
         }
 
+        public bool Contains<T>(T entity)
+        {
+            return this.Contains(entity, EqualityComparer<T>.Default);
+        }
+
+        public bool Contains<T>(T entity, IEqualityComparer<T> comparer)
+        {
+            var type = entity.GetType();
+
+            if (this.internalStore.ContainsKey(type))
+            {
+                var list = this.internalStore[type];
+                return list.Cast<T>().Contains(entity, comparer);
+            }
+
+            return false;
+        }
+
         public IEnumerable<T> List<T>()
         {
             var type = typeof (T);

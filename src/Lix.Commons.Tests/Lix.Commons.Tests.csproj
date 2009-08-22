@@ -98,7 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Examples\Fish.cs" />
     <Compile Include="Repositories\InMemory\Examples\FishInMemoryRepository.cs" />
+    <Compile Include="Examples\FishIdEqualityComparer.cs" />
     <Compile Include="Repositories\InMemory\in_memory_test_setups.cs" />
+    <Compile Include="Repositories\InMemory\when_checking_whether_an_in_memory_datastore_contains_an_entity.cs" />
     <Compile Include="Repositories\InMemory\when_performing_a_like_query.cs" />
     <Compile Include="Repositories\InMemory\when_saving_to_an_in_memory_repository.cs" />
     <Compile Include="Repositories\IUnitOfWorkExtensions.cs" />
