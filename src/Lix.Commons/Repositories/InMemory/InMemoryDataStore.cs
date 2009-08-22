@@ -35,6 +35,17 @@ namespace Lix.Commons.Repositories.InMemory
             }
         }
 
+        public void Remove<T>(T entity)
+        {
+            var type = entity.GetType();
+
+            if (this.internalStore.ContainsKey(type))
+            {
+                var list = this.internalStore[type];
+                list.Remove(entity);
+            }
+        }
+
         public IEnumerable<T> List<T>()
         {
             var type = typeof (T);

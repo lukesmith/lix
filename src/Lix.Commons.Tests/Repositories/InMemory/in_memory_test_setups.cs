@@ -11,10 +11,17 @@ namespace Lix.Commons.Tests.Repositories.InMemory
             private set;
         }
 
+        protected InMemoryDataStore MainDataStore
+        {
+            get;
+            private set;
+        }
+
         [SetUp(Order = 0)]
         public virtual void SetUp()
         {
-            this.UnitOfWork = new InMemoryUnitOfWork(new InMemoryDataStore());
+            this.MainDataStore = new InMemoryDataStore();
+            this.UnitOfWork = new InMemoryUnitOfWork(this.MainDataStore);
         }
 
         [TearDown(Order = 0)]

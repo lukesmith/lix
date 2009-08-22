@@ -100,6 +100,7 @@
     <Compile Include="Repositories\InMemory\Examples\FishInMemoryRepository.cs" />
     <Compile Include="Repositories\InMemory\in_memory_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_performing_a_like_query.cs" />
+    <Compile Include="Repositories\InMemory\when_saving_to_an_in_memory_repository.cs" />
     <Compile Include="Repositories\IUnitOfWorkExtensions.cs" />
     <Compile Include="Repositories\NHibernate\Examples\FishMap.cs" />
     <Compile Include="Repositories\NHibernate\Examples\FishNHibernateRepository.cs" />

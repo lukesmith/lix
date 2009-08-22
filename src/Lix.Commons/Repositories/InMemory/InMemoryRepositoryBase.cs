@@ -10,8 +10,6 @@ namespace Lix.Commons.Repositories.InMemory
     public abstract class InMemoryRepositoryBase<TEntity> : RepositoryBase<TEntity, InMemoryUnitOfWork>
         where TEntity : class
     {
-        private readonly IList<TEntity> repository = new List<TEntity>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="InMemoryRepositoryBase{TEntity}"/> class.
         /// </summary>
@@ -32,11 +30,11 @@ namespace Lix.Commons.Repositories.InMemory
         /// Gets the repository.
         /// </summary>
         /// <value>The repository.</value>
-        protected IList<TEntity> Repository
+        protected InMemoryDataStore Repository
         {
             get
             {
-                return this.UnitOfWork.CurrentTransactionDataStore.List<TEntity>().ToList();
+                return this.UnitOfWork.CurrentTransactionDataStore;
             }
         }
 
@@ -46,7 +44,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// <value>The repository query.</value>
         protected override IQueryable<TEntity> RepositoryQuery
         {
-            get { return this.Repository.AsQueryable(); }
+            get { return this.Repository.List<TEntity>().ToList().AsQueryable(); }
         }
 
         /// <summary>
@@ -58,7 +56,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// </returns>
         public override TEntity Save(TEntity entity)
         {
-            this.Repository.Add(entity);
+            this.Repository.Save(entity);
 
             return entity;
         }
