@@ -170,10 +170,10 @@ namespace Lix.Commons.Repositories.NHibernate
 
         protected void Execute(Action<ISession> action)
         {
-            this.Execute(this.UnitOfWork.Session, action);
+            Execute(this.UnitOfWork.Session, action);
         }
 
-        private void Execute(ISession session, Action<ISession> action)
+        private static void Execute(ISession session, Action<ISession> action)
         {
             if (session == null)
             {
