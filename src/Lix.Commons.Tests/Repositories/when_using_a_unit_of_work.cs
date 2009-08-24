@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Lix.Commons.Repositories;
-using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories
 {
-    public abstract class when_using_a_unit_of_work<TUnitOfWork>
+    public abstract class when_using_a_unit_of_work<TUnitOfWork, TEntity>
         where TUnitOfWork : IUnitOfWork
+        where TEntity : new()
     {
         protected abstract TUnitOfWork CreateUnitOfWork();
 
-        protected abstract IEnumerable<Fish> List();
+        protected abstract IEnumerable<TEntity> List();
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException), Message = "Unable to commit before begin.")]
@@ -48,7 +48,7 @@ namespace Lix.Commons.Tests.Repositories
             {
                 unitOfWork.Begin();
 
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
 
                 unitOfWork.Commit();
             }
@@ -63,12 +63,12 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
 
                 using (var unitOfWork2 = this.CreateUnitOfWork())
                 {
                     unitOfWork2.Begin();
-                    unitOfWork.Save(new Fish());
+                    unitOfWork.Save(new TEntity());
                     unitOfWork2.Commit();
                 }
 
@@ -82,7 +82,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
             }
 
             this.List().Count().ShouldBeEqualTo(0);
@@ -94,7 +94,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Rollback();
             }
 
@@ -107,7 +107,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Commit();
             }
 
@@ -120,7 +120,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Commit();
 
                 unitOfWork.IsActive.ShouldBeEqualTo(false);
@@ -133,7 +133,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Commit(true);
 
                 unitOfWork.IsActive.ShouldBeEqualTo(true);
@@ -146,10 +146,10 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Commit(true);
 
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
             }
 
             this.List().Count().ShouldBeEqualTo(1);
@@ -172,7 +172,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Commit();
             }
 
@@ -181,7 +181,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new Fish());
+                unitOfWork.Save(new TEntity());
                 unitOfWork.Commit();
             }
 

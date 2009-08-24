@@ -7,7 +7,7 @@ using NHibernate;
 namespace Lix.Commons.Tests.Repositories.NHibernate
 {
     [TestFixture]
-    public class when_using_an_nhibernate_unit_of_work : when_using_a_unit_of_work<NHibernateUnitOfWork>
+    public class when_using_an_nhibernate_unit_of_work : when_using_a_unit_of_work<NHibernateUnitOfWork, Fish>
     {
         private ISessionFactory sessionFactory;
         protected ISession session;

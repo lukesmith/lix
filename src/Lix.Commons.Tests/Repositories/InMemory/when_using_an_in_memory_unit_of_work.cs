@@ -7,7 +7,7 @@ using MbUnit.Framework;
 namespace Lix.Commons.Tests.Repositories.InMemory
 {
     [TestFixture]
-    public class when_using_an_in_memory_unit_of_work : when_using_a_unit_of_work<InMemoryUnitOfWork>
+    public class when_using_an_in_memory_unit_of_work : when_using_a_unit_of_work<InMemoryUnitOfWork, Fish>
     {
         private InMemoryDataStore mainDataStore;
 

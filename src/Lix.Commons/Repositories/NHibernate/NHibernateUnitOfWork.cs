@@ -83,7 +83,7 @@ namespace Lix.Commons.Repositories.NHibernate
         /// </summary>
         public void Begin()
         {
-            if (this.Transaction.IsActive)
+            if (this.IsActive)
             {
                 throw new InvalidOperationException("A unit of work has already begun for this session.");
             }
