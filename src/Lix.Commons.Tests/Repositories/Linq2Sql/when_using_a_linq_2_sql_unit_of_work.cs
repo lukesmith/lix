@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Lix.Commons.Repositories.Linq2Sql;
@@ -15,7 +16,8 @@ namespace Lix.Commons.Tests.Repositories.Linq2Sql
         [SetUp(Order = 0)]
         public virtual void SetUp()
         {
-            this.dataContext = new FoodDataClassesDataContext(ConfigurationManager.ConnectionStrings["Linq2SqlTests"].ConnectionString);
+            var connectionString = ConfigurationManager.ConnectionStrings["Linq2SqlTests"].ConnectionString.Replace("|DataDirectory|", AppDomain.CurrentDomain.GetData("DataDirectory").ToString());
+            this.dataContext = new FoodDataClassesDataContext(connectionString);
             this.dataContext.CreateDatabase();
         }
 

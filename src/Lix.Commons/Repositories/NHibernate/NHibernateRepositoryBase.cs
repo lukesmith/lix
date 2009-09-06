@@ -33,34 +33,34 @@ namespace Lix.Commons.Repositories.NHibernate
             }
         }
 
-        public override T Get(ISpecification specification)
+        protected override T PerformGet(ISpecification specification)
         {
             if (specification is INHibernateCriteriaSpecification)
             {
                 return this.Get(specification as INHibernateCriteriaSpecification);
             }
 
-            return base.Get(specification);
+            return base.PerformGet(specification);
         }
 
-        public override IEnumerable<T> List(ISpecification specification)
+        protected override IEnumerable<T> PerformList(ISpecification specification)
         {
             if (specification is INHibernateCriteriaSpecification)
             {
                 return this.List(specification as INHibernateCriteriaSpecification);
             }
 
-            return base.List(specification);
+            return base.PerformList(specification);
         }
 
-        public override PagedResult<T> List(ISpecification specification, int startIndex, int pageSize)
+        protected override PagedResult<T> PerformList(ISpecification specification, int startIndex, int pageSize)
         {
             if (specification is INHibernateCriteriaSpecification)
             {
                 return this.List(specification as INHibernateCriteriaSpecification, startIndex, pageSize);
             }
-            
-            return base.List(specification, startIndex, pageSize);
+
+            return base.PerformList(specification, startIndex, pageSize);
         }
 
         public override T Save(T entity)

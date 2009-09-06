@@ -8,6 +8,11 @@ namespace Lix.Commons.Specifications
     /// <typeparam name="TEntity">Type type of the entity to build the specification for.</typeparam>
     public class EmptySpecification<TEntity> : IQueryableSpecification<TEntity>
     {
+        public object Build(object context)
+        {
+            return this.Build(context as IQueryable<object>);
+        }
+
         /// <summary>
         /// Builds the specification for an <see cref="IQueryable{TEntity}"/>.
         /// </summary>

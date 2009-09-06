@@ -64,9 +64,9 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
         /// </returns>
-        public bool Exists(IQueryableSpecification<TEntity> specification)
+        public bool Exists(ISpecification specification)
         {
-            return specification.Build(this.RepositoryQuery).FirstOrDefault() != null;
+            return this.PerformExists(Intercept(specification));
         }
 
         /// <summary>
@@ -76,16 +76,9 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        public virtual TEntity Get(ISpecification specification)
+        public TEntity Get(ISpecification specification)
         {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.Get(specification as IQueryableSpecification<TEntity>);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            return this.PerformGet(Intercept(specification));
         }
 
         /// <summary>
@@ -95,16 +88,9 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// An enumerable collection of <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        public virtual IEnumerable<TEntity> List(ISpecification specification)
+        public IEnumerable<TEntity> List(ISpecification specification)
         {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.List(specification as IQueryableSpecification<TEntity>);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            return this.PerformList(Intercept(specification));
         }
 
         /// <summary>
@@ -116,16 +102,9 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <see cref="PagedResult{TEntity}"/> collection of <typeparamref name="TEntity"/> items that matched the specification.
         /// </returns>
-        public virtual PagedResult<TEntity> List(ISpecification specification, int startIndex, int pageSize)
+        public PagedResult<TEntity> List(ISpecification specification, int startIndex, int pageSize)
         {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.List(specification as IQueryableSpecification<TEntity>, startIndex, pageSize);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            return this.PerformList(Intercept(specification), startIndex, pageSize);
         }
 
         /// <summary>
@@ -138,6 +117,18 @@ namespace Lix.Commons.Repositories
         protected virtual TEntity Get(IQueryableSpecification<TEntity> specification)
         {
             return this.Query(specification).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// Determines whether a <typeparamref name="TEntity"/> that matches the specification exists.
+        /// </summary>
+        /// <param name="specification">The specification.</param>
+        /// <returns>
+        /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
+        /// </returns>
+        protected virtual bool Exists(IQueryableSpecification<TEntity> specification)
+        {
+            return specification.Build(this.RepositoryQuery).FirstOrDefault() != null;
         }
 
         /// <summary>
@@ -178,6 +169,59 @@ namespace Lix.Commons.Repositories
         protected virtual IQueryable<TEntity> Query(IQueryableSpecification<TEntity> specification)
         {
             return specification.Build(this.RepositoryQuery);
+        }
+
+        protected virtual bool PerformExists(ISpecification specification)
+        {
+            if (specification is IQueryableSpecification<TEntity>)
+            {
+                return this.Exists(specification as IQueryableSpecification<TEntity>);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        protected virtual TEntity PerformGet(ISpecification specification)
+        {
+            if (specification is IQueryableSpecification<TEntity>)
+            {
+                return this.Get(specification as IQueryableSpecification<TEntity>);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        protected virtual IEnumerable<TEntity> PerformList(ISpecification specification)
+        {
+            if (specification is IQueryableSpecification<TEntity>)
+            {
+                return this.List(specification as IQueryableSpecification<TEntity>);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        protected virtual PagedResult<TEntity> PerformList(ISpecification specification, int startIndex, int pageSize)
+        {
+            if (specification is IQueryableSpecification<TEntity>)
+            {
+                return this.List(specification as IQueryableSpecification<TEntity>, startIndex, pageSize);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private static ISpecification Intercept(ISpecification specification)
+        {
+            return Specification.Interceptors.GetReplacement(specification);
         }
     }
 }

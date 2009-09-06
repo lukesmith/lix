@@ -1,5 +1,4 @@
-﻿
-namespace Lix.Commons.Specifications
+﻿namespace Lix.Commons.Specifications
 {
     /// <summary>
     /// Represents a specification.
@@ -16,6 +15,30 @@ namespace Lix.Commons.Specifications
         public static IQueryableSpecification<TEntity> Empty<TEntity>()
         {
             return new EmptySpecification<TEntity>();
+        }
+
+        public static ISpecificationInterceptor Intercept<TSpecification>()
+            where TSpecification : ISpecification
+        {
+            var interceptor = new DefaultSpecificationInterceptor();
+
+            Interceptors.Add<TSpecification>(interceptor);
+
+            return interceptor;
+        }
+
+        private static SpecificationInterceptors _interceptors;
+        public static SpecificationInterceptors Interceptors
+        {
+            get
+            {
+                if (_interceptors == null)
+                {
+                    _interceptors = new SpecificationInterceptors();
+                }
+
+                return _interceptors;
+            }
         }
     }
 }

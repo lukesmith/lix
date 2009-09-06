@@ -8,6 +8,11 @@ namespace Lix.Commons.Specifications.NHibernate
     /// <typeparam name="TEntity">The type of the entity to build the specification for.</typeparam>
     public abstract class NHibernateCriteriaSpecificationBase<TEntity> : INHibernateCriteriaSpecification
     {
+        public object Build(object context)
+        {
+            return this.Build(context as ISession);
+        }
+
         /// <summary>
         /// Builds the specification for the <see cref="ISession"/>.
         /// </summary>

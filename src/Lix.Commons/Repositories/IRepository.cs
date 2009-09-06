@@ -60,7 +60,7 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
         /// </returns>
-        bool Exists(IQueryableSpecification<TEntity> specification);
+        bool Exists(ISpecification specification);
 
         /// <summary>
         /// Gets the unit of work.

@@ -4,7 +4,7 @@ using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Tests.Examples.Specifications
 {
-    public class FindFishDescriptionStartsWithSpecification : IQueryableSpecification<Fish>
+    public class FindFishDescriptionStartsWithSpecification : DefaultQueryableSpecification<Fish>
     {
         private readonly string description;
 
@@ -13,7 +13,7 @@ namespace Lix.Commons.Tests.Examples.Specifications
             this.description = description;
         }
 
-        public IQueryable<Fish> Build(IQueryable<Fish> context)
+        public override IQueryable<Fish> Build(IQueryable<Fish> context)
         {
             return context.Like(x => x.Description, this.description, ComparisonType.StartsWith);
         }
