@@ -11,6 +11,12 @@ namespace Lix.Commons.Tests.Specifications
     [TestFixture]
     public class when_a_lamba_inteceptor_has_been_defined
     {
+        [TearDown]
+        public void TearDown()
+        {
+            Specification.Interceptors.Clear();
+        }
+
         [Test]
         public void should_return_the_lamba_functions_result_when_building_the_specification()
         {
