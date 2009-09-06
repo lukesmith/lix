@@ -6,7 +6,7 @@ namespace Lix.Commons.Specifications.NHibernate
     /// Represents a specification for building <see cref="ICriteria"/> instances.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity to build the specification for.</typeparam>
-    public abstract class NHibernateCriteriaSpecificationBase<TEntity> : INHibernateCriteriaSpecification
+    public abstract class DefaultNHibernateCriteriaSpecification<TEntity> : INHibernateCriteriaSpecification
     {
         public object Build(object context)
         {

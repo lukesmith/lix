@@ -77,7 +77,7 @@
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Services\ServiceBase`2.cs" />
     <Compile Include="Services\IService`1.cs" />
-    <Compile Include="Specifications\DefaultQueryableSpecification.cs" />
+    <Compile Include="Specifications\DefaultQueryableSpecification`1.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
     <Compile Include="Specifications\EmptySpecification`1.cs" />
     <Compile Include="Specifications\FakeQueryableSpecification.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Specifications\ISpecification`2.cs" />
     <Compile Include="Specifications\NHibernate\INHibernateCriteriaSpecification.cs" />
     <Compile Include="Specifications\NHibernate\INHibernateSpecification.cs" />
-    <Compile Include="Specifications\NHibernate\NHibernateCriteriaSpecificationBase`1.cs" />
+    <Compile Include="Specifications\NHibernate\DefaultNHibernateCriteriaSpecification`1.cs" />
     <Compile Include="Specifications\Specification.cs" />
     <Compile Include="Specifications\SpecificationInterceptors.cs" />
   </ItemGroup>
