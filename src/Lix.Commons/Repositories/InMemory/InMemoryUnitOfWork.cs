@@ -50,7 +50,10 @@ namespace Lix.Commons.Repositories.InMemory
         public void Begin()
         {
             // TODO: Check whether a unit of work already exists for this DataStore
-            ///throw new InvalidOperationException("A unit of work has already begun for this session.");
+            //if (this.IsActive)
+            //{
+            //    throw new InvalidOperationException("A unit of work has already begun for this session.");
+            //}
 
             this.CurrentTransactionDataStore = new InMemoryDataStore();
             this.CurrentTransactionDataStore.Merge(this.DataStore);
@@ -78,6 +81,8 @@ namespace Lix.Commons.Repositories.InMemory
             // Commit transactionaldatastore to InMemoryDataStore
             this.DataStore.Merge(this.CurrentTransactionDataStore);
 
+            this.IsActive = false;
+
             if (begin)
             {
                 this.Begin();
@@ -85,7 +90,6 @@ namespace Lix.Commons.Repositories.InMemory
             else
             {
                 this.CurrentTransactionDataStore.Clear();
-                this.IsActive = false;
             }
         }
 
