@@ -63,6 +63,15 @@ namespace Lix.Commons.Repositories
         bool Exists(ISpecification specification);
 
         /// <summary>
+        /// Determines how many <typeparamref name="TEntity"/> matching the <paramref name="specification"/> are contained within the repository.
+        /// </summary>
+        /// <param name="specification">The specification</param>
+        /// <returns>
+        /// The number of <typeparamref name="TEntity"/> matching the specification.
+        /// </returns>
+        long Count(ISpecification specification);
+
+        /// <summary>
         /// Gets the unit of work.
         /// </summary>
         /// <value>The unit of work.</value>

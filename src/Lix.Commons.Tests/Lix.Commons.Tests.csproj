@@ -140,6 +140,7 @@
     <Compile Include="Examples\Specifications\FindFishDescriptionStartsWithSpecification.cs" />
     <Compile Include="Repositories\NHibernate\nhibernate_test_setups.cs" />
     <Compile Include="Repositories\NHibernate\SessionFactoryFactory.cs" />
+    <Compile Include="Repositories\NHibernate\when_doing_a_count_on_criteria.cs" />
     <Compile Include="Repositories\NHibernate\when_performing_a_like_query.cs" />
     <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_criteria.cs" />
     <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_linq.cs" />

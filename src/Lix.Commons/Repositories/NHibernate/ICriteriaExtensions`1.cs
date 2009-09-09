@@ -26,13 +26,9 @@ namespace Lix.Commons.Repositories.NHibernate
         /// </returns>
         public static PagedResult<TEntity> PagedList<TEntity>(this ICriteria criteria, int startIndex, int pageSize)
         {
-            // Clone a copy of the criteria, setting a projection
-            // to get the row count, this will get the total number of
-            // items in the query using a select count(*)
             ICriteria countCriteria = CriteriaTransformer.Clone(criteria)
                 .SetProjection(Projections.RowCountInt64());
 
-            // Clear the ordering of the results
             countCriteria.ClearOrders();
 
             // Clone a copy fo the criteria to get the page of data,
@@ -57,6 +53,23 @@ namespace Lix.Commons.Repositories.NHibernate
 
             // Return the result.
             return pagedResult;
+        }
+
+        /// <summary>
+        /// Performs a COUNT(*) on the criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria to add a count to.</param>
+        /// <returns>
+        /// A numerical value of the number of items matching the criteria.
+        /// </returns>
+        public static long Count(this ICriteria criteria)
+        {
+            ICriteria countCriteria = CriteriaTransformer.Clone(criteria)
+                .SetProjection(Projections.RowCountInt64());
+
+            countCriteria.ClearOrders();
+
+            return countCriteria.UniqueResult<long>();
         }
     }
 }

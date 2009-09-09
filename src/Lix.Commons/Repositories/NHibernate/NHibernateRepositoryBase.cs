@@ -33,6 +33,16 @@ namespace Lix.Commons.Repositories.NHibernate
             }
         }
 
+        protected override bool PerformExists(ISpecification specification)
+        {
+            if (specification is INHibernateCriteriaSpecification)
+            {
+                return this.Count(specification as INHibernateCriteriaSpecification) > 0;
+            }
+
+            return base.PerformExists(specification);
+        }
+
         protected override T PerformGet(ISpecification specification)
         {
             if (specification is INHibernateCriteriaSpecification)
@@ -61,6 +71,16 @@ namespace Lix.Commons.Repositories.NHibernate
             }
 
             return base.PerformList(specification, startIndex, pageSize);
+        }
+
+        protected override long PerformCount(ISpecification specification)
+        {
+            if (specification is INHibernateCriteriaSpecification)
+            {
+                return this.Count(specification as INHibernateCriteriaSpecification);
+            }
+
+            return base.PerformCount(specification);
         }
 
         public override T Save(T entity)
@@ -120,18 +140,34 @@ namespace Lix.Commons.Repositories.NHibernate
             return result;
         }
 
+        protected long Count(INHibernateCriteriaSpecification specification)
+        {
+            long result = 0;
+
+            if (specification != null)
+            {
+                this.Execute(s =>
+                {
+                    ICriteria criteria = specification.Build(s);
+                    result = criteria.Count();
+                });
+            }
+
+            return result;
+        }
+
         protected T Get(INHibernateCriteriaSpecification specification)
         {
             T result = null;
 
-            this.Execute(s =>
+            if (specification != null)
             {
-                if (specification != null)
-                {
-                    ICriteria criteria = specification.Build(s);
-                    result = criteria.UniqueResult<T>();
-                }
-            });
+                this.Execute(s =>
+                                 {
+                                     ICriteria criteria = specification.Build(s);
+                                     result = criteria.UniqueResult<T>();
+                                 });
+            }
 
             return result;
         }
@@ -140,14 +176,14 @@ namespace Lix.Commons.Repositories.NHibernate
         {
             IList<T> result = null;
 
-            this.Execute(s =>
+            if (specification != null)
             {
-                if (specification != null)
-                {
-                    ICriteria criteria = specification.Build(s);
-                    result = criteria.List<T>();
-                }
-            });
+                this.Execute(s =>
+                                 {
+                                     ICriteria criteria = specification.Build(s);
+                                     result = criteria.List<T>();
+                                 });
+            }
 
             return result;
         }
@@ -156,14 +192,15 @@ namespace Lix.Commons.Repositories.NHibernate
         {
             PagedResult<T> result = null;
 
-            this.Execute(s =>
+            if (specification != null)
             {
-                if (specification != null)
-                {
-                    ICriteria criteria = specification.Build(s);
-                    result = criteria.PagedList<T>(startIndex, pageSize);
-                }
-            });
+                this.Execute(s =>
+                                 {
+
+                                     ICriteria criteria = specification.Build(s);
+                                     result = criteria.PagedList<T>(startIndex, pageSize);
+                                 });
+            }
 
             return result;
         }
