@@ -21,7 +21,7 @@ namespace Lix.Commons.Tests.Specifications
         public void should_return_the_lamba_functions_result_when_building_the_specification()
         {
             var fish = new Fish();
-            var interceptWith = new Func<IQueryable>(() => new List<Fish> { fish }.AsQueryable());
+            var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish> { fish }.AsQueryable());
             Specification.Intercept<TestSpecification>().With(interceptWith);
 
             var interceptBy = Specification.Interceptors.GetReplacement(new TestSpecification());

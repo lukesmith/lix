@@ -119,8 +119,10 @@
     <Compile Include="Examples\Fish.cs" />
     <Compile Include="Repositories\InMemory\Examples\FishInMemoryRepository.cs" />
     <Compile Include="Examples\FishIdEqualityComparer.cs" />
+    <Compile Include="Repositories\InMemory\Examples\FindFishWithIdSpecification.cs" />
     <Compile Include="Repositories\InMemory\in_memory_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_checking_whether_an_in_memory_datastore_contains_an_entity.cs" />
+    <Compile Include="Repositories\InMemory\when_getting_an_entity_from_an_in_memory_repository.cs" />
     <Compile Include="Repositories\InMemory\when_performing_a_like_query.cs" />
     <Compile Include="Repositories\InMemory\when_saving_to_an_in_memory_repository.cs" />
     <Compile Include="Repositories\IUnitOfWorkExtensions.cs" />
@@ -148,9 +150,11 @@
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />
     <Compile Include="Specifications\Examples\TestSpecification.cs" />
-    <Compile Include="Specifications\Examples\TestSpecificationImpl.cs" />
+    <Compile Include="Specifications\Examples\TestSpecification2.cs" />
+    <Compile Include="Specifications\when_a_specification_is_executed.cs" />
     <Compile Include="Specifications\when_an_interceptor_has_been_defined_for_a_specification.cs" />
     <Compile Include="Specifications\when_a_lamba_inteceptor_has_been_defined.cs" />
+    <Compile Include="Specifications\when_a_queryable_specification_is_executed.cs" />
     <Compile Include="Specifications\when_no_interceptor_has_been_defined.cs" />
     <Compile Include="UnitTestingExtensions.cs" />
     <Compile Include="when_using_generic_paged_results.cs" />

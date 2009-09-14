@@ -25,7 +25,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         }
 
         [TearDown(Order = 0)]
-        public void TearDown()
+        public virtual void TearDown()
         {
         }
     }

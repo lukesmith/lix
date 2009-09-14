@@ -31,7 +31,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        TEntity Get(ISpecification specification);
+        TEntity Get<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification;
 
         /// <summary>
         /// Lists all the <typeparamref name="TEntity"/> that match the specified specification.

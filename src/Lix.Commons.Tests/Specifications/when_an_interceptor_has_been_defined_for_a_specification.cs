@@ -20,7 +20,7 @@ namespace Lix.Commons.Tests.Specifications
         [Test]
         public void should_execute_the_replacement_lambda_function()
         {
-            var interceptWith = new Func<IQueryable>(() => new List<Fish>().AsQueryable());
+            var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
             Specification.Intercept<TestSpecification>().With(interceptWith);
 
             var interceptBy = Specification.Interceptors.GetReplacement(new TestSpecification());
@@ -30,7 +30,7 @@ namespace Lix.Commons.Tests.Specifications
         [Test]
         public void should_find_the_replacement_specification()
         {
-            var interceptWith = new TestSpecificationImpl();
+            var interceptWith = new TestSpecification2();
             Specification.Intercept<TestSpecification>().With(interceptWith);
 
             var interceptBy = Specification.Interceptors.GetReplacement(new TestSpecification());

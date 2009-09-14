@@ -21,6 +21,15 @@ namespace Lix.Commons.Repositories
         protected RepositoryBase(TUnitOfWork unitOfWork)
         {
             this.UnitOfWork = unitOfWork;
+
+            this.SpecificationExecutionEngine = new SpecificationExecutionEngine();
+            this.RegisterContext();
+        }
+
+        private void RegisterContext()
+        {
+            this.SpecificationExecutionEngine.RegisterContext<IQueryable<TEntity>>(() => this.RepositoryQuery);
+            //this.SpecificationExecutionEngine.RegisterContext(this.RepositoryQuery);
         }
 
         /// <summary>
@@ -28,6 +37,12 @@ namespace Lix.Commons.Repositories
         /// </summary>
         /// <value>The unit of work.</value>
         public virtual IUnitOfWork UnitOfWork
+        {
+            get;
+            private set;
+        }
+
+        protected SpecificationExecutionEngine SpecificationExecutionEngine
         {
             get;
             private set;
@@ -64,9 +79,11 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        public TEntity Get(ISpecification specification)
+        public TEntity Get<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification
         {
-            return this.PerformGet(Intercept(specification));
+            var executor = this.SpecificationExecutionEngine.GetExecutor<TSpecification, TEntity>(specification, true);
+            return executor.Get();
         }
 
         /// <summary>

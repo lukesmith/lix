@@ -72,15 +72,20 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\NHibernate\ISessionExtensions.cs" />
+    <Compile Include="Specifications\NHibernate\NHibernateSpecificationExecutor.cs" />
+    <Compile Include="Specifications\ISpecificationExecutor.cs" />
+    <Compile Include="Specifications\NHibernate\NHibernateCriteriaSpecificationExecutor.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateRepositoryBase.cs" />
+    <Compile Include="Repositories\NHibernate\SpecificationExecutionEngine.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateUnitOfWork.cs" />
+    <Compile Include="Specifications\QueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Services\ServiceBase`2.cs" />
     <Compile Include="Services\IService`1.cs" />
     <Compile Include="Specifications\DefaultQueryableSpecification`1.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
     <Compile Include="Specifications\EmptySpecification`1.cs" />
-    <Compile Include="Specifications\FakeQueryableSpecification.cs" />
+    <Compile Include="Specifications\FakeQueryableSpecification`1.cs" />
     <Compile Include="Specifications\IQueryableSpecification`1.cs" />
     <Compile Include="Specifications\ISpecification.cs" />
     <Compile Include="Specifications\ISpecificationInterceptor.cs" />
@@ -89,6 +94,7 @@
     <Compile Include="Specifications\NHibernate\INHibernateSpecification.cs" />
     <Compile Include="Specifications\NHibernate\DefaultNHibernateCriteriaSpecification`1.cs" />
     <Compile Include="Specifications\Specification.cs" />
+    <Compile Include="Specifications\SpecificationExecutorBase`3.cs" />
     <Compile Include="Specifications\SpecificationInterceptors.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

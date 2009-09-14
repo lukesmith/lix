@@ -7,7 +7,8 @@ namespace Lix.Commons.Specifications
     {
         void With(ISpecification specification);
         
-        void With(Func<IQueryable> func);
+        void With<TEntity>(Func<IQueryable<TEntity>> func)
+            where TEntity : class;
 
         ISpecification InterceptedBy();
     }

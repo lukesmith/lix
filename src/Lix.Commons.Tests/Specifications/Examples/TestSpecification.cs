@@ -6,7 +6,7 @@ namespace Lix.Commons.Tests.Specifications.Examples
 {
     public class TestSpecification : DefaultQueryableSpecification<Fish>
     {
-        public override  IQueryable<Fish> Build(IQueryable<Fish> context)
+        public override IQueryable<Fish> Build(IQueryable<Fish> context)
         {
             return context;
         }
