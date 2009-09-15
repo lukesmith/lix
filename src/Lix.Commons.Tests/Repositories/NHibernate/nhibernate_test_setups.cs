@@ -13,7 +13,7 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
             private set;
         }
         
-        private ISession Session
+        protected ISession Session
         {
             get;
             set;

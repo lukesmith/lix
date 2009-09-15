@@ -4,7 +4,7 @@ using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Repositories.InMemory.Examples;
+using Lix.Commons.Tests.Examples.Specifications;
 using Lix.Commons.Tests.Specifications.Examples;
 using MbUnit.Framework;
 
@@ -19,7 +19,7 @@ namespace Lix.Commons.Tests.Repositories
             base.SetUp();
 
             this.UnitOfWork.Begin();
-            this.Repository.Save(new Fish { Id = 2 });
+            this.UnitOfWork.Save(new Fish { Description = "Slippery Fish" });
             this.UnitOfWork.Commit(true);
         }
 
@@ -34,9 +34,9 @@ namespace Lix.Commons.Tests.Repositories
         public void should_intercept_the_specification_with_a_lambda()
         {
             var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
-            Specification.Intercept<FindFishWithIdSpecification>().With(interceptWith);
+            Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
 
-            var fish = this.Repository.Get(new FindFishWithIdSpecification(2));
+            var fish = this.Repository.Get(new FindFishWithDescriptionSpecification("Slippery Fish"));
 
             fish.ShouldBeEqualTo(null);
         }
@@ -45,19 +45,19 @@ namespace Lix.Commons.Tests.Repositories
         public void should_intercept_the_specification_with_a_specification()
         {
             var interceptWith = new TestSpecification2();
-            Specification.Intercept<FindFishWithIdSpecification>().With(interceptWith);
+            Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
 
-            var fish = this.Repository.Get(new FindFishWithIdSpecification(3));
+            var fish = this.Repository.Get(new FindFishWithDescriptionSpecification("Not slippery fish"));
 
-            fish.Id.ShouldBeEqualTo(2);
+            fish.Description.ShouldBeEqualTo("Slippery Fish");
         }
 
         [Test]
         public void should_get_the_entity()
         {
-            var fish = this.Repository.Get(new FindFishWithIdSpecification(2));
+            var fish = this.Repository.Get(new FindFishWithDescriptionSpecification("Slippery Fish"));
 
-            fish.Id.ShouldBeEqualTo(2);
+            fish.Description.ShouldBeEqualTo("Slippery Fish");
         }
     }
 }

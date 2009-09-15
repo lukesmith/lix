@@ -1,6 +1,10 @@
 ﻿using Lix.Commons.Repositories.InMemory;
+using Lix.Commons.Repositories.NHibernate;
 using Lix.Commons.Tests.Repositories.InMemory.Examples;
+using Lix.Commons.Tests.Repositories.NHibernate;
+using Lix.Commons.Tests.Repositories.NHibernate.Examples;
 using MbUnit.Framework;
+using NHibernate;
 
 namespace Lix.Commons.Tests.Repositories.InMemory
 {
@@ -16,6 +20,64 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         {
             var dataStore = new InMemoryDataStore();
             return new InMemoryUnitOfWork(dataStore);
+        }
+    }
+
+    [TestFixture]
+    public class when_getting_an_entity_from_an_nhibernate_repository : when_getting_an_entity_from_a_repository<NHibernateUnitOfWork, FishNHibernateRepository>
+    {
+        public ISessionFactory SessionFactory
+        {
+            get;
+            private set;
+        }
+
+        private ISession Session
+        {
+            get;
+            set;
+        }
+
+        [FixtureSetUp]
+        public void ClassSetup()
+        {
+            this.SessionFactory = SessionFactoryFactory.CreateSessionFactory();
+
+            HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
+        }
+
+        public override void SetUp()
+        {
+            this.Session = this.SessionFactory.OpenSession();
+
+            using (var tx = this.Session.BeginTransaction())
+            {
+                SessionFactoryFactory.BuildSchema(this.Session);
+
+                tx.Commit();
+            }
+
+            base.SetUp();
+        }
+
+        public override void TearDown()
+        {
+            this.UnitOfWork.Commit();
+            this.Session.Close();
+            this.Session.Dispose();
+            this.Session = null;
+
+            base.TearDown();
+        }
+
+        protected override FishNHibernateRepository CreateRepository()
+        {
+            return new FishNHibernateRepository(this.UnitOfWork);
+        }
+
+        protected override NHibernateUnitOfWork CreateUnitOfWork()
+        {
+            return new NHibernateUnitOfWork(this.Session);
         }
     }
 }

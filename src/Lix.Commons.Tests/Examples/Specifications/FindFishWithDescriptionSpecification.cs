@@ -1,16 +1,15 @@
 using System.Linq;
 using Lix.Commons.Specifications;
-using Lix.Commons.Tests.Examples;
 
-namespace Lix.Commons.Tests.Repositories.InMemory.Examples
+namespace Lix.Commons.Tests.Examples.Specifications
 {
-    public class FindFishWithIdSpecification : DefaultQueryableSpecification<Fish>
+    public class FindFishWithDescriptionSpecification : DefaultQueryableSpecification<Fish>
     {
-        private readonly int id;
+        private readonly string description;
 
-        public FindFishWithIdSpecification(int id)
+        public FindFishWithDescriptionSpecification(string description)
         {
-            this.id = id;
+            this.description = description;
         }
 
         /// <summary>
@@ -22,7 +21,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory.Examples
         /// </returns>
         public override IQueryable<Fish> Build(IQueryable<Fish> context)
         {
-            return context.Where(x => x.Id == this.id);
+            return context.Where(x => x.Description == this.description);
         }
     }
 }

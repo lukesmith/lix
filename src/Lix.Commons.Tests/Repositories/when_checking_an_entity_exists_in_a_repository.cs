@@ -4,7 +4,7 @@ using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Repositories.InMemory.Examples;
+using Lix.Commons.Tests.Examples.Specifications;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories

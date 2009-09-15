@@ -114,12 +114,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblySetUps.cs" />
+    <Compile Include="Examples\Specifications\FindFishWithDescriptionSpecification.cs" />
     <Compile Include="FluentAnd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Examples\Fish.cs" />
     <Compile Include="Repositories\InMemory\Examples\FishInMemoryRepository.cs" />
     <Compile Include="Examples\FishIdEqualityComparer.cs" />
-    <Compile Include="Repositories\InMemory\Examples\FindFishWithIdSpecification.cs" />
+    <Compile Include="Examples\Specifications\FindFishWithIdSpecification.cs" />
     <Compile Include="Repositories\InMemory\in_memory_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_checking_an_entity_exists_in_an_in_memory_repository.cs" />
     <Compile Include="Repositories\repository_test_setups.cs" />
@@ -153,12 +154,15 @@
     <Compile Include="Repositories\NHibernate\when_using_an_nhibernate_unit_of_work.cs" />
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />
+    <Compile Include="Specifications\Examples\TestNHibernateCriteriaSpecification.cs" />
     <Compile Include="Specifications\Examples\TestSpecification.cs" />
     <Compile Include="Specifications\Examples\TestSpecification2.cs" />
-    <Compile Include="Specifications\when_a_specification_is_executed.cs" />
+    <Compile Include="Specifications\Executors\when_a_specification_is_executed`1.cs" />
+    <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_an_iqueryable_context.cs" />
+    <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_a_session_context.cs" />
     <Compile Include="Specifications\when_an_interceptor_has_been_defined_for_a_specification.cs" />
     <Compile Include="Specifications\when_a_lamba_inteceptor_has_been_defined.cs" />
-    <Compile Include="Specifications\when_a_queryable_specification_is_executed.cs" />
+    <Compile Include="Specifications\Executors\when_a_queryable_specification_is_executed.cs" />
     <Compile Include="Specifications\when_no_interceptor_has_been_defined.cs" />
     <Compile Include="UnitTestingExtensions.cs" />
     <Compile Include="when_using_generic_paged_results.cs" />

@@ -76,24 +76,16 @@ namespace Lix.Commons.Repositories
 
         private static Type FindExecutor(ISpecification specification)
         {
-            var interfaces = specification.GetType().GetInterfaces();
+            var specificationInterfaces = specification.GetType().GetInterfaces();
             Type foundExecutor = null;
 
             foreach (var executorType in specificationExecutors)
             {
-                var implementorType = executorType.Key.GetType();
+                var implementorType = executorType.Key;
 
-                foreach (var @interface in interfaces)
+                if (specificationInterfaces.Any(x => DoTypesMatch(x, implementorType)))
                 {
-                    if (implementorType == @interface.GetType())
-                    {
-                        foundExecutor = executorType.Value;
-                        break;
-                    }
-                }
-
-                if (foundExecutor != null)
-                {
+                    foundExecutor = executorType.Value;
                     break;
                 }
             }
@@ -105,30 +97,45 @@ namespace Lix.Commons.Repositories
         {
             var executorsConstructorParameters = executorType.GetConstructors()[0].GetParameters();
             
-            object context = null;
-            foreach (var contextA in contexts)
+            object result = null;
+            foreach (var context in contexts)
             {
-                var contextValue = contextA.Value();
+                var contextValue = context.Value();
                 var contextsInterfaces = contextValue.GetType().GetInterfaces();
 
-                var contextParemeter = executorsConstructorParameters[1];
+                var contextParemeter = executorsConstructorParameters.FirstOrDefault(x => x.Name == "context");
 
-                foreach (var type in contextsInterfaces)
+                if (contextsInterfaces.Any(x => DoTypesMatch(x, contextParemeter.ParameterType)))
                 {
-                    if (contextParemeter.ParameterType.GetGenericTypeDefinition() == type.GetGenericTypeDefinition())
-                    {
-                        context = contextValue;
-                        break;
-                    }
-                }
-
-                if (context != null)
-                {
+                    result = contextValue;
                     break;
                 }
             }
 
-            return context;
+            return result;
+        }
+
+        /// <summary>
+        /// Checks whether the two types match, including whether they are the same generic type.
+        /// </summary>
+        /// <param name="typeA">The first type.</param>
+        /// <param name="typeB">The second type.</param>
+        /// <returns>
+        /// true if the types match; otherwise false.
+        /// </returns>
+        private static bool DoTypesMatch(Type typeA, Type typeB)
+        {
+            if (typeA == typeB)
+            {
+                return true;
+            }
+
+            if (typeA.IsGenericType && typeB.GetGenericTypeDefinition() == typeA.GetGenericTypeDefinition())
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
