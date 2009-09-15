@@ -34,26 +34,6 @@ namespace Lix.Commons.Repositories.NHibernate
             }
         }
 
-        protected override bool PerformExists(ISpecification specification)
-        {
-            if (specification is INHibernateCriteriaSpecification)
-            {
-                return this.Count(specification as INHibernateCriteriaSpecification) > 0;
-            }
-
-            return base.PerformExists(specification);
-        }
-
-        protected override T PerformGet(ISpecification specification)
-        {
-            if (specification is INHibernateCriteriaSpecification)
-            {
-                return this.Get(specification as INHibernateCriteriaSpecification);
-            }
-
-            return base.PerformGet(specification);
-        }
-
         protected override IEnumerable<T> PerformList(ISpecification specification)
         {
             if (specification is INHibernateCriteriaSpecification)

@@ -160,7 +160,7 @@
     <Compile Include="Specifications\Executors\when_a_specification_is_executed.cs" />
     <Compile Include="Specifications\Executors\when_a_specification_is_executed`1.cs" />
     <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_an_iqueryable_context.cs" />
-    <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_a_session_context.cs" />
+    <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_an_isession_context.cs" />
     <Compile Include="Specifications\when_an_interceptor_has_been_defined_for_a_specification.cs" />
     <Compile Include="Specifications\when_a_lamba_inteceptor_has_been_defined.cs" />
     <Compile Include="Specifications\Executors\when_a_queryable_specification_is_executed.cs" />

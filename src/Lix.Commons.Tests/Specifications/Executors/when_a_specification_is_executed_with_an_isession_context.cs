@@ -6,7 +6,7 @@ using NHibernate;
 namespace Lix.Commons.Tests.Specifications.Executors
 {
     [TestFixture]
-    public class when_a_specification_is_executed_with_a_session_context : when_a_specification_is_executed<TestNHibernateCriteriaSpecification>
+    public class when_a_specification_is_executed_with_an_isession_context : when_a_specification_is_executed<TestNHibernateCriteriaSpecification>
     {
         private ISessionFactory sessionFactory;
 

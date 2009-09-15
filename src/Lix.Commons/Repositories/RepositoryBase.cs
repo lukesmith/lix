@@ -218,35 +218,11 @@ namespace Lix.Commons.Repositories
             return specification.Build(this.RepositoryQuery);
         }
 
-        protected virtual bool PerformExists(ISpecification specification)
-        {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.Exists(specification as IQueryableSpecification<TEntity>);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         protected virtual long PerformCount(ISpecification specification)
         {
             if (specification is IQueryableSpecification<TEntity>)
             {
                 return this.Count(specification as IQueryableSpecification<TEntity>);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        protected virtual TEntity PerformGet(ISpecification specification)
-        {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.Get(specification as IQueryableSpecification<TEntity>);
             }
             else
             {
