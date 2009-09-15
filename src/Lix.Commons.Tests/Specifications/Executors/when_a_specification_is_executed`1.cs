@@ -1,22 +1,10 @@
 ﻿using System;
-using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Specifications.Executors
 {
-    public class when_a_specification_is_executed
-    {
-        [Test]
-        [Pending]
-        [ExpectedException(typeof(InvalidOperationException), "A constructor argument named 'context' could not be found.")]
-        public void should_throw_if_the_executor_does_not_have_a_constructor_argument_named_context()
-        {
-            
-        }
-    }
-
     public abstract class when_a_specification_is_executed<TSpecification>
         where TSpecification : class, ISpecification
     {

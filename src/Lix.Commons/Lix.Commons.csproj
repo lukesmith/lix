@@ -77,7 +77,7 @@
     <Compile Include="Specifications\ISpecificationExecutor`1.cs" />
     <Compile Include="Specifications\NHibernate\NHibernateCriteriaSpecificationExecutor.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateRepositoryBase.cs" />
-    <Compile Include="Repositories\NHibernate\SpecificationExecutionEngine.cs" />
+    <Compile Include="Specifications\SpecificationExecutionEngine.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateUnitOfWork.cs" />
     <Compile Include="Specifications\QueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />

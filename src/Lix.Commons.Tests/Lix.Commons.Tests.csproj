@@ -157,6 +157,7 @@
     <Compile Include="Specifications\Examples\TestNHibernateCriteriaSpecification.cs" />
     <Compile Include="Specifications\Examples\TestSpecification.cs" />
     <Compile Include="Specifications\Examples\TestSpecification2.cs" />
+    <Compile Include="Specifications\Executors\when_a_specification_is_executed.cs" />
     <Compile Include="Specifications\Executors\when_a_specification_is_executed`1.cs" />
     <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_an_iqueryable_context.cs" />
     <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_a_session_context.cs" />

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using Lix.Commons.Specifications;
 using Lix.Commons.Specifications.NHibernate;
 
-namespace Lix.Commons.Repositories
+namespace Lix.Commons.Specifications
 {
     public class SpecificationExecutionEngine
     {
-        private static IDictionary<Type, Type> specificationExecutors = new Dictionary<Type, Type>();
-        private IDictionary<Type, Func<object>> contexts = new Dictionary<Type, Func<object>>();
+        private static readonly IDictionary<Type, Type> specificationExecutors = new Dictionary<Type, Type>();
+        private readonly IDictionary<Type, Func<object>> contexts = new Dictionary<Type, Func<object>>();
 
         static SpecificationExecutionEngine()
         {
@@ -77,7 +75,7 @@ namespace Lix.Commons.Repositories
         private static Type FindExecutor(ISpecification specification)
         {
             var specificationInterfaces = specification.GetType().GetInterfaces();
-            Type foundExecutor = null;
+            Type result = null;
 
             foreach (var executorType in specificationExecutors)
             {
@@ -85,12 +83,12 @@ namespace Lix.Commons.Repositories
 
                 if (specificationInterfaces.Any(x => DoTypesMatch(x, implementorType)))
                 {
-                    foundExecutor = executorType.Value;
+                    result = executorType.Value;
                     break;
                 }
             }
 
-            return foundExecutor;
+            return result;
         }
 
         private object FindContextForExecutor(Type executorType)
@@ -98,12 +96,17 @@ namespace Lix.Commons.Repositories
             var executorsConstructorParameters = executorType.GetConstructors()[0].GetParameters();
             
             object result = null;
-            foreach (var context in contexts)
+            foreach (var context in this.contexts)
             {
                 var contextValue = context.Value();
                 var contextsInterfaces = contextValue.GetType().GetInterfaces();
 
                 var contextParemeter = executorsConstructorParameters.FirstOrDefault(x => x.Name == "context");
+
+                if (contextParemeter == null)
+                {
+                    throw new InvalidOperationException("A constructor argument named 'context' could not be found.");
+                }
 
                 if (contextsInterfaces.Any(x => DoTypesMatch(x, contextParemeter.ParameterType)))
                 {
