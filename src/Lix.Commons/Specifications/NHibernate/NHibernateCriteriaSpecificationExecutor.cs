@@ -37,9 +37,9 @@ namespace Lix.Commons.Specifications.NHibernate
             return criteria.Count();
         }
 
-        public override bool Exists(INHibernateCriteriaSpecification specification)
+        public override bool Exists()
         {
-            return this.Count(specification) > 0;
+            return this.Specification.Build(this.Context).Count() > 0;
         }
     }
 }

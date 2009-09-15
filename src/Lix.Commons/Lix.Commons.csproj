@@ -73,7 +73,7 @@
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\NHibernate\ISessionExtensions.cs" />
     <Compile Include="Specifications\NHibernate\NHibernateSpecificationExecutor.cs" />
-    <Compile Include="Specifications\ISpecificationExecutor.cs" />
+    <Compile Include="Specifications\ISpecificationExecutor`1.cs" />
     <Compile Include="Specifications\NHibernate\NHibernateCriteriaSpecificationExecutor.cs" />
     <Compile Include="Repositories\NHibernate\NHibernateRepositoryBase.cs" />
     <Compile Include="Repositories\NHibernate\SpecificationExecutionEngine.cs" />

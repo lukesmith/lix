@@ -32,9 +32,9 @@ namespace Lix.Commons.Specifications
             throw new NotImplementedException();
         }
 
-        public override bool Exists(IQueryableSpecification<TEntity> specification)
+        public override bool Exists()
         {
-            throw new NotImplementedException();
+            return this.Specification.Build(this.Context).Count() > 0;
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using Lix.Commons.Repositories.InMemory;
+using Lix.Commons.Repositories.InMemory;
 using Lix.Commons.Tests.Repositories.InMemory.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories.InMemory
 {
     [TestFixture]
-    public class when_getting_an_entity_from_an_in_memory_repository : when_getting_an_entity_from_a_repository<InMemoryUnitOfWork, FishInMemoryRepository>
+    public class when_checking_an_entity_exists_in_an_in_memory_repository : when_checking_an_entity_exists_in_a_repository<InMemoryUnitOfWork, FishInMemoryRepository>
     {
         protected override FishInMemoryRepository CreateRepository()
         {

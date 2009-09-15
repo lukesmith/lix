@@ -72,6 +72,12 @@ namespace Lix.Commons.Repositories
         /// <param name="entity">The entity to remove.</param>
         public abstract void Remove(TEntity entity);
 
+        private ISpecificationExecutor<TEntity> GetExecutor<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification
+        {
+            return this.SpecificationExecutionEngine.GetExecutor<TSpecification, TEntity>(specification, true);
+        }
+
         /// <summary>
         /// Gets a single <typeparamref name="TEntity"/> that matches the specified specification.
         /// </summary>
@@ -82,8 +88,7 @@ namespace Lix.Commons.Repositories
         public TEntity Get<TSpecification>(TSpecification specification)
             where TSpecification : class, ISpecification
         {
-            var executor = this.SpecificationExecutionEngine.GetExecutor<TSpecification, TEntity>(specification, true);
-            return executor.Get();
+            return this.GetExecutor(specification).Get();
         }
 
         /// <summary>
@@ -121,7 +126,8 @@ namespace Lix.Commons.Repositories
         /// </returns>
         public bool Exists(ISpecification specification)
         {
-            return this.PerformExists(Intercept(specification));
+            return this.GetExecutor(specification).Exists();
+            //return this.PerformExists(Intercept(specification));
         }
 
         /// <summary>

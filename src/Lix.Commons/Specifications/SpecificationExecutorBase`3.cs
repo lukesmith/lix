@@ -34,7 +34,7 @@ namespace Lix.Commons.Specifications
 
         public abstract long Count(TSpecification specification);
 
-        public abstract bool Exists(TSpecification specification);
+        public abstract bool Exists();
 
         object ISpecificationExecutor<TEntity>.Specification
         {
@@ -59,9 +59,9 @@ namespace Lix.Commons.Specifications
             return this.Count(specification as TSpecification);
         }
 
-        bool ISpecificationExecutor<TEntity>.Exists(object specification)
+        bool ISpecificationExecutor<TEntity>.Exists()
         {
-            return this.Exists(specification as TSpecification);
+            return this.Exists();
         }
     }
 }
