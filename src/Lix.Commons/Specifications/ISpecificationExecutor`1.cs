@@ -19,22 +19,4 @@ namespace Lix.Commons.Specifications
 
         bool Exists();
     }
-
-    public interface ISpecificationExecutor<TSpecification, TEntity> : ISpecificationExecutor<TEntity>
-    {
-        TSpecification Specification
-        {
-            get;
-        }
-
-        TEntity Get();
-
-        IEnumerable<TEntity> List(TSpecification specification);
-
-        IEnumerable<TEntity> List(TSpecification specification, int startIndex, int pageSize);
-
-        long Count(TSpecification specification);
-
-        bool Exists();
-    }
 }
