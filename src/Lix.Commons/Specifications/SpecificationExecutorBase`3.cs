@@ -32,7 +32,7 @@ namespace Lix.Commons.Specifications
 
         public abstract IEnumerable<TEntity> List(TSpecification specification, int startIndex, int pageSize);
 
-        public abstract long Count(TSpecification specification);
+        public abstract long Count();
 
         public abstract bool Exists();
 
@@ -54,9 +54,9 @@ namespace Lix.Commons.Specifications
             return this.List(specification as TSpecification, startIndex, pageSize);
         }
 
-        long ISpecificationExecutor<TEntity>.Count(object specification)
+        long ISpecificationExecutor<TEntity>.Count()
         {
-            return this.Count(specification as TSpecification);
+            return this.Count();
         }
 
         bool ISpecificationExecutor<TEntity>.Exists()

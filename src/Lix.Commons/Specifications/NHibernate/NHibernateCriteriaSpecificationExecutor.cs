@@ -31,15 +31,14 @@ namespace Lix.Commons.Specifications.NHibernate
             return criteria.PagedList<TEntity>(startIndex, pageSize);
         }
 
-        public override long Count(INHibernateCriteriaSpecification specification)
+        public override long Count()
         {
-            var criteria = specification.Build(this.Context);
-            return criteria.Count();
+            return this.Specification.Build(this.Context).Count();
         }
 
         public override bool Exists()
         {
-            return this.Specification.Build(this.Context).Count() > 0;
+            return this.Count() > 0;
         }
     }
 }

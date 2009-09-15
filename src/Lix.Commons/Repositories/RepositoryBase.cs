@@ -127,7 +127,6 @@ namespace Lix.Commons.Repositories
         public bool Exists(ISpecification specification)
         {
             return this.GetExecutor(specification).Exists();
-            //return this.PerformExists(Intercept(specification));
         }
 
         /// <summary>
@@ -139,7 +138,7 @@ namespace Lix.Commons.Repositories
         /// </returns>
         public long Count(ISpecification specification)
         {
-            return this.PerformCount(Intercept(specification));
+            return this.GetExecutor(specification).Count();
         }
 
         /// <summary>
@@ -164,18 +163,6 @@ namespace Lix.Commons.Repositories
         protected virtual bool Exists(IQueryableSpecification<TEntity> specification)
         {
             return specification.Build(this.RepositoryQuery).FirstOrDefault() != null;
-        }
-
-        /// <summary>
-        /// Determines how many <typeparamref name="TEntity"/> matching the <paramref name="specification"/> are contained within the repository.
-        /// </summary>
-        /// <param name="specification">The specification</param>
-        /// <returns>
-        /// The number of <typeparamref name="TEntity"/> matching the specification.
-        /// </returns>
-        protected virtual long Count(IQueryableSpecification<TEntity> specification)
-        {
-            return specification.Build(this.RepositoryQuery).Count();
         }
 
         /// <summary>
@@ -216,18 +203,6 @@ namespace Lix.Commons.Repositories
         protected virtual IQueryable<TEntity> Query(IQueryableSpecification<TEntity> specification)
         {
             return specification.Build(this.RepositoryQuery);
-        }
-
-        protected virtual long PerformCount(ISpecification specification)
-        {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.Count(specification as IQueryableSpecification<TEntity>);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
         }
 
         protected virtual IEnumerable<TEntity> PerformList(ISpecification specification)

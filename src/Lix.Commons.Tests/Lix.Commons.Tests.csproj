@@ -123,10 +123,14 @@
     <Compile Include="Examples\Specifications\FindFishWithIdSpecification.cs" />
     <Compile Include="Repositories\InMemory\in_memory_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_checking_an_entity_exists_in_an_in_memory_repository.cs" />
+    <Compile Include="Repositories\InMemory\when_counting_the_number_of_entities_in_an_in_memory_repository.cs" />
+    <Compile Include="Repositories\NHibernate\when_counting_the_number_of_entities_in_an_nhibernate_repository.cs" />
+    <Compile Include="Repositories\NHibernate\when_getting_an_entity_from_an_nhibernate_repository.cs" />
     <Compile Include="Repositories\repository_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_checking_whether_an_in_memory_datastore_contains_an_entity.cs" />
     <Compile Include="Repositories\InMemory\when_getting_an_entity_from_an_in_memory_repository.cs" />
     <Compile Include="Repositories\when_checking_an_entity_exists_in_a_repository.cs" />
+    <Compile Include="Repositories\when_counting_the_number_of_entities_in_a_repository.cs" />
     <Compile Include="Repositories\when_getting_an_entity_from_a_repository.cs" />
     <Compile Include="Repositories\InMemory\when_performing_a_like_query.cs" />
     <Compile Include="Repositories\InMemory\when_saving_to_an_in_memory_repository.cs" />

@@ -54,16 +54,6 @@ namespace Lix.Commons.Repositories.NHibernate
             return base.PerformList(specification, startIndex, pageSize);
         }
 
-        protected override long PerformCount(ISpecification specification)
-        {
-            if (specification is INHibernateCriteriaSpecification)
-            {
-                return this.Count(specification as INHibernateCriteriaSpecification);
-            }
-
-            return base.PerformCount(specification);
-        }
-
         public override T Save(T entity)
         {
             T result = default(T);
@@ -116,22 +106,6 @@ namespace Lix.Commons.Repositories.NHibernate
             {
                 result = s.PagedList(specification, startIndex, pageSize);
             });
-
-            return result;
-        }
-
-        protected long Count(INHibernateCriteriaSpecification specification)
-        {
-            long result = 0;
-
-            if (specification != null)
-            {
-                this.Execute(s =>
-                {
-                    ICriteria criteria = specification.Build(s);
-                    result = criteria.Count();
-                });
-            }
 
             return result;
         }

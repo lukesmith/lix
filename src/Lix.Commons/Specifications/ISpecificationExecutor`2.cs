@@ -15,7 +15,7 @@ namespace Lix.Commons.Specifications
 
         IEnumerable<TEntity> List(TSpecification specification, int startIndex, int pageSize);
 
-        long Count(TSpecification specification);
+        long Count();
 
         bool Exists();
     }
