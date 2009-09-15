@@ -136,22 +136,6 @@ namespace Lix.Commons.Repositories.NHibernate
             return result;
         }
 
-        protected T Get(INHibernateCriteriaSpecification specification)
-        {
-            T result = null;
-
-            if (specification != null)
-            {
-                this.Execute(s =>
-                                 {
-                                     ICriteria criteria = specification.Build(s);
-                                     result = criteria.UniqueResult<T>();
-                                 });
-            }
-
-            return result;
-        }
-
         protected IEnumerable<T> List(INHibernateCriteriaSpecification specification)
         {
             IList<T> result = null;
