@@ -114,7 +114,7 @@ namespace Lix.Commons.Repositories
         /// </returns>
         public PagedResult<TEntity> List(ISpecification specification, int startIndex, int pageSize)
         {
-            return this.PerformList(Intercept(specification), startIndex, pageSize);
+            return this.GetExecutor(specification).List(startIndex, pageSize);
         }
 
         /// <summary>
@@ -139,51 +139,6 @@ namespace Lix.Commons.Repositories
         public long Count(ISpecification specification)
         {
             return this.GetExecutor(specification).Count();
-        }
-
-        /// <summary>
-        /// Lists all the <typeparamref name="TEntity"/> that match the specified specification.
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <param name="startIndex">The index to start the list from.</param>
-        /// <param name="pageSize">The number of items to return.</param>
-        /// <returns>
-        /// A <see cref="PagedResult{TEntity}"/> collection of <typeparamref name="TEntity"/> items that matched the specification.
-        /// </returns>
-        protected virtual PagedResult<TEntity> List(IQueryableSpecification<TEntity> specification, int startIndex, int pageSize)
-        {
-            var specificationQuery = this.Query(specification);
-
-            return specificationQuery.PagedList(startIndex, pageSize);
-        }
-
-        /// <summary>
-        /// Queries the repository for items that match the specified specification.
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <returns>
-        /// A <see cref="IQueryable{TEntity}"/> query of the specification.
-        /// </returns>
-        protected virtual IQueryable<TEntity> Query(IQueryableSpecification<TEntity> specification)
-        {
-            return specification.Build(this.RepositoryQuery);
-        }
-
-        protected virtual PagedResult<TEntity> PerformList(ISpecification specification, int startIndex, int pageSize)
-        {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.List(specification as IQueryableSpecification<TEntity>, startIndex, pageSize);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private static ISpecification Intercept(ISpecification specification)
-        {
-            return Specification.Interceptors.GetReplacement(specification);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Lix.Commons.Specifications.NHibernate
             return criteria.List<TEntity>();
         }
 
-        public override IEnumerable<TEntity> List(int startIndex, int pageSize)
+        public override PagedResult<TEntity> List(int startIndex, int pageSize)
         {
             var criteria = this.Specification.Build(this.Context);
             return criteria.PagedList<TEntity>(startIndex, pageSize);

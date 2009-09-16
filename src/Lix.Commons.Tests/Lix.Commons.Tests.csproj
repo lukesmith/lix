@@ -118,6 +118,9 @@
     <Compile Include="FluentAnd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Examples\Fish.cs" />
+    <Compile Include="Repositories\InMemory\when_listing_paged_entities_in_an_in_memory_repository.cs" />
+    <Compile Include="Repositories\NHibernate\when_listing_paged_entities_in_an_nhibernate_repository.cs" />
+    <Compile Include="Repositories\when_listing_paged_entities_in_a_repository`2.cs" />
     <Compile Include="Repositories\InMemory\when_listing_entities_in_an_in_memory_repository.cs" />
     <Compile Include="Repositories\NHibernate\when_listing_entities_in_an_nhibernate_repository.cs" />
     <Compile Include="Repositories\when_listing_entities_in_a_repository`2.cs" />

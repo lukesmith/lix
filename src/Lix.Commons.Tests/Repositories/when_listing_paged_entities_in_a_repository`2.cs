@@ -10,7 +10,7 @@ using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories
 {
-    public abstract class when_listing_entities_in_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
+    public abstract class when_listing_paged_entities_in_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
         where TUnitOfWork : class, IUnitOfWork
         where TRepository : IRepository<Fish>
     {
@@ -39,7 +39,7 @@ namespace Lix.Commons.Tests.Repositories
             var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
             Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
 
-            var result = this.Repository.List(new FindFishWithDescriptionSpecification("Slippery Fish"));
+            var result = this.Repository.List(new FindFishWithDescriptionSpecification("Slippery Fish"), 0, 10);
 
             result.Count().ShouldBeEqualTo(0);
         }
@@ -50,17 +50,33 @@ namespace Lix.Commons.Tests.Repositories
             var interceptWith = new TestSpecification2();
             Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
 
-            var result = this.Repository.List(new FindFishWithDescriptionSpecification("Not slippery fish"));
+            var result = this.Repository.List(new FindFishWithDescriptionSpecification("Not slippery fish"), 0, 2);
+
+            result.Count().ShouldBeEqualTo(2);
+        }
+
+        [Test]
+        public void should_list_all_the_entities()
+        {
+            var result = this.Repository.List(new TestSpecification2(), 0, 10);
 
             result.Count().ShouldBeEqualTo(4);
         }
 
         [Test]
-        public void should_list_the_entities()
+        public void should_list_the_entities_starting_not_including_the_first()
         {
-            var result = this.Repository.List(new FindFishWithDescriptionSpecification("Slippery Fish"));
+            var result = this.Repository.List(new TestSpecification2(), 1, 10);
 
-            result.Count().ShouldBeEqualTo(1);
+            result.Any(f => f.Description == "Slippery Fish").ShouldBeEqualTo(false);
+        }
+
+        [Test]
+        public void should_list_a_sub_selection_of_entities()
+        {
+            var result = this.Repository.List(new TestSpecification2(), 1, 2);
+
+            result.Last().Description.ShouldBeEqualTo("A fish called wanda");
         }
     }
 }

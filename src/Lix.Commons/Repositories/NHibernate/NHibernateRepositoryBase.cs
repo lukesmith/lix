@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using Lix.Commons.Specifications;
-using Lix.Commons.Specifications.NHibernate;
 using NHibernate;
 using NHibernate.Exceptions;
 using NHibernate.Linq;
@@ -32,16 +29,6 @@ namespace Lix.Commons.Repositories.NHibernate
             {
                 return this.UnitOfWork.Session.Linq<T>();
             }
-        }
-
-        protected override PagedResult<T> PerformList(ISpecification specification, int startIndex, int pageSize)
-        {
-            if (specification is INHibernateCriteriaSpecification)
-            {
-                return this.List(specification as INHibernateCriteriaSpecification, startIndex, pageSize);
-            }
-
-            return base.PerformList(specification, startIndex, pageSize);
         }
 
         public override T Save(T entity)
@@ -74,47 +61,6 @@ namespace Lix.Commons.Repositories.NHibernate
         public override void Remove(T entity)
         {
             this.Execute(s => s.Delete(entity));
-        }
-
-        protected override IQueryable<T> Query(IQueryableSpecification<T> specification)
-        {
-            IQueryable<T> result = null;
-
-            this.Execute(s =>
-            {
-                result = specification.Build(s.Linq<T>()).ToList().AsQueryable();
-            });
-
-            return result;
-        }
-
-        protected override PagedResult<T> List(IQueryableSpecification<T> specification, int startIndex, int pageSize)
-        {
-            PagedResult<T> result = null;
-
-            this.Execute(s =>
-            {
-                result = s.PagedList(specification, startIndex, pageSize);
-            });
-
-            return result;
-        }
-
-        protected PagedResult<T> List(INHibernateCriteriaSpecification specification, int startIndex, int pageSize)
-        {
-            PagedResult<T> result = null;
-
-            if (specification != null)
-            {
-                this.Execute(s =>
-                                 {
-
-                                     ICriteria criteria = specification.Build(s);
-                                     result = criteria.PagedList<T>(startIndex, pageSize);
-                                 });
-            }
-
-            return result;
         }
 
         protected void Execute(Action<ISession> action)

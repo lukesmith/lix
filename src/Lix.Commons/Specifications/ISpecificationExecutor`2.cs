@@ -13,7 +13,7 @@ namespace Lix.Commons.Specifications
 
         IEnumerable<TEntity> List();
 
-        IEnumerable<TEntity> List(int startIndex, int pageSize);
+        PagedResult<TEntity> List(int startIndex, int pageSize);
 
         long Count();
 

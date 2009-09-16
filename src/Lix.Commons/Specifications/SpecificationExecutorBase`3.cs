@@ -30,7 +30,7 @@ namespace Lix.Commons.Specifications
 
         public abstract IEnumerable<TEntity> List();
 
-        public abstract IEnumerable<TEntity> List(int startIndex, int pageSize);
+        public abstract PagedResult<TEntity> List(int startIndex, int pageSize);
 
         public abstract long Count();
 
@@ -49,7 +49,7 @@ namespace Lix.Commons.Specifications
             return this.List();
         }
 
-        IEnumerable<TEntity> ISpecificationExecutor<TEntity>.List(int startIndex, int pageSize)
+        PagedResult<TEntity> ISpecificationExecutor<TEntity>.List(int startIndex, int pageSize)
         {
             return this.List(startIndex, pageSize);
         }

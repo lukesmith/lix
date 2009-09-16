@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using Lix.Commons.Repositories;
 
 namespace Lix.Commons.Specifications
 {
@@ -22,9 +22,9 @@ namespace Lix.Commons.Specifications
             return this.Specification.Build(this.Context).ToList();
         }
 
-        public override IEnumerable<TEntity> List(int startIndex, int pageSize)
+        public override PagedResult<TEntity> List(int startIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            return this.Specification.Build(this.Context).PagedList(startIndex, pageSize);
         }
 
         public override long Count()
