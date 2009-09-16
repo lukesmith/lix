@@ -28,9 +28,9 @@ namespace Lix.Commons.Specifications
 
         public abstract TEntity Get();
 
-        public abstract IEnumerable<TEntity> List(TSpecification specification);
+        public abstract IEnumerable<TEntity> List();
 
-        public abstract IEnumerable<TEntity> List(TSpecification specification, int startIndex, int pageSize);
+        public abstract IEnumerable<TEntity> List(int startIndex, int pageSize);
 
         public abstract long Count();
 
@@ -44,14 +44,14 @@ namespace Lix.Commons.Specifications
             }
         }
 
-        IEnumerable<TEntity> ISpecificationExecutor<TEntity>.List(object specification)
+        IEnumerable<TEntity> ISpecificationExecutor<TEntity>.List()
         {
-            return this.List(specification as TSpecification);
+            return this.List();
         }
 
-        IEnumerable<TEntity> ISpecificationExecutor<TEntity>.List(object specification, int startIndex, int pageSize)
+        IEnumerable<TEntity> ISpecificationExecutor<TEntity>.List(int startIndex, int pageSize)
         {
-            return this.List(specification as TSpecification, startIndex, pageSize);
+            return this.List(startIndex, pageSize);
         }
 
         long ISpecificationExecutor<TEntity>.Count()

@@ -19,15 +19,15 @@ namespace Lix.Commons.Specifications.NHibernate
             return criteria.UniqueResult<TEntity>();
         }
 
-        public override IEnumerable<TEntity> List(INHibernateCriteriaSpecification specification)
+        public override IEnumerable<TEntity> List()
         {
-            var criteria = specification.Build(this.Context);
+            var criteria = this.Specification.Build(this.Context);
             return criteria.List<TEntity>();
         }
 
-        public override IEnumerable<TEntity> List(INHibernateCriteriaSpecification specification, int startIndex, int pageSize)
+        public override IEnumerable<TEntity> List(int startIndex, int pageSize)
         {
-            var criteria = specification.Build(this.Context);
+            var criteria = this.Specification.Build(this.Context);
             return criteria.PagedList<TEntity>(startIndex, pageSize);
         }
 

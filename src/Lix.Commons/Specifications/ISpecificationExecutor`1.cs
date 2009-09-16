@@ -11,9 +11,9 @@ namespace Lix.Commons.Specifications
 
         TEntity Get();
 
-        IEnumerable<TEntity> List(object specification);
+        IEnumerable<TEntity> List();
 
-        IEnumerable<TEntity> List(object specification, int startIndex, int pageSize);
+        IEnumerable<TEntity> List(int startIndex, int pageSize);
 
         long Count();
 

@@ -34,16 +34,6 @@ namespace Lix.Commons.Repositories.NHibernate
             }
         }
 
-        protected override IEnumerable<T> PerformList(ISpecification specification)
-        {
-            if (specification is INHibernateCriteriaSpecification)
-            {
-                return this.List(specification as INHibernateCriteriaSpecification);
-            }
-
-            return base.PerformList(specification);
-        }
-
         protected override PagedResult<T> PerformList(ISpecification specification, int startIndex, int pageSize)
         {
             if (specification is INHibernateCriteriaSpecification)
@@ -106,22 +96,6 @@ namespace Lix.Commons.Repositories.NHibernate
             {
                 result = s.PagedList(specification, startIndex, pageSize);
             });
-
-            return result;
-        }
-
-        protected IEnumerable<T> List(INHibernateCriteriaSpecification specification)
-        {
-            IList<T> result = null;
-
-            if (specification != null)
-            {
-                this.Execute(s =>
-                                 {
-                                     ICriteria criteria = specification.Build(s);
-                                     result = criteria.List<T>();
-                                 });
-            }
 
             return result;
         }

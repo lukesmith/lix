@@ -100,7 +100,7 @@ namespace Lix.Commons.Repositories
         /// </returns>
         public IEnumerable<TEntity> List(ISpecification specification)
         {
-            return this.PerformList(Intercept(specification));
+            return this.GetExecutor(specification).List();
         }
 
         /// <summary>
@@ -142,42 +142,6 @@ namespace Lix.Commons.Repositories
         }
 
         /// <summary>
-        /// Gets a single <typeparamref name="TEntity"/> that matches the specified specification.
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <returns>
-        /// A <typeparamref name="TEntity"/> that matched the specification.
-        /// </returns>
-        protected virtual TEntity Get(IQueryableSpecification<TEntity> specification)
-        {
-            return this.Query(specification).SingleOrDefault();
-        }
-
-        /// <summary>
-        /// Determines whether a <typeparamref name="TEntity"/> that matches the specification exists.
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <returns>
-        /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
-        /// </returns>
-        protected virtual bool Exists(IQueryableSpecification<TEntity> specification)
-        {
-            return specification.Build(this.RepositoryQuery).FirstOrDefault() != null;
-        }
-
-        /// <summary>
-        /// Lists all the <typeparamref name="TEntity"/> that match the specified specification.
-        /// </summary>
-        /// <param name="specification">The specification.</param>
-        /// <returns>
-        /// An enumerable collection of <typeparamref name="TEntity"/> that matched the specification.
-        /// </returns>
-        protected virtual IEnumerable<TEntity> List(IQueryableSpecification<TEntity> specification)
-        {
-            return this.Query(specification).ToList();
-        }
-
-        /// <summary>
         /// Lists all the <typeparamref name="TEntity"/> that match the specified specification.
         /// </summary>
         /// <param name="specification">The specification.</param>
@@ -203,18 +167,6 @@ namespace Lix.Commons.Repositories
         protected virtual IQueryable<TEntity> Query(IQueryableSpecification<TEntity> specification)
         {
             return specification.Build(this.RepositoryQuery);
-        }
-
-        protected virtual IEnumerable<TEntity> PerformList(ISpecification specification)
-        {
-            if (specification is IQueryableSpecification<TEntity>)
-            {
-                return this.List(specification as IQueryableSpecification<TEntity>);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
         }
 
         protected virtual PagedResult<TEntity> PerformList(ISpecification specification, int startIndex, int pageSize)

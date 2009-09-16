@@ -17,12 +17,12 @@ namespace Lix.Commons.Specifications
             return this.Specification.Build(this.Context).SingleOrDefault();
         }
 
-        public override IEnumerable<TEntity> List(IQueryableSpecification<TEntity> specification)
+        public override IEnumerable<TEntity> List()
         {
-            throw new NotImplementedException();
+            return this.Specification.Build(this.Context).ToList();
         }
 
-        public override IEnumerable<TEntity> List(IQueryableSpecification<TEntity> specification, int startIndex, int pageSize)
+        public override IEnumerable<TEntity> List(int startIndex, int pageSize)
         {
             throw new NotImplementedException();
         }
