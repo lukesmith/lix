@@ -1,10 +1,10 @@
 using System;
 using MbUnit.Framework;
 
-namespace Lix.Commons.Tests.Specifications.Executors
+namespace Lix.Commons.Tests.when_getting_an_executor
 {
     [TestFixture]
-    public class when_a_specification_is_executed
+    public class when_getting_an_executor
     {
         [Test]
         [Pending]

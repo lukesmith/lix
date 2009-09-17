@@ -3,9 +3,9 @@ using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 
-namespace Lix.Commons.Tests.Specifications.Executors
+namespace Lix.Commons.Tests.when_getting_an_executor
 {
-    public abstract class when_a_specification_is_executed<TSpecification>
+    public abstract class with_a_specification<TSpecification>
         where TSpecification : class, ISpecification
     {
         protected SpecificationExecutionEngine SpecificationExecutionEngine

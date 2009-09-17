@@ -1,8 +1,7 @@
 using Lix.Commons.Specifications.NHibernate;
-using Lix.Commons.Tests.Examples;
 using NHibernate;
 
-namespace Lix.Commons.Tests.Specifications.Examples
+namespace Lix.Commons.Tests.Examples.Specifications
 {
     public class TestNHibernateCriteriaSpecification : DefaultNHibernateCriteriaSpecification<Fish>
     {

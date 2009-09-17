@@ -1,12 +1,12 @@
+using Lix.Commons.Tests.Examples.Specifications;
 using Lix.Commons.Tests.Repositories.NHibernate;
-using Lix.Commons.Tests.Specifications.Examples;
 using MbUnit.Framework;
 using NHibernate;
 
-namespace Lix.Commons.Tests.Specifications.Executors
+namespace Lix.Commons.Tests.when_getting_an_executor
 {
     [TestFixture]
-    public class when_a_specification_is_executed_with_an_isession_context : when_a_specification_is_executed<TestNHibernateCriteriaSpecification>
+    public class with_an_isession_context : with_a_specification<TestNHibernateCriteriaSpecification>
     {
         private ISessionFactory sessionFactory;
 

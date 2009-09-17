@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Specifications.Examples;
+using Lix.Commons.Tests.Examples.Specifications;
 using MbUnit.Framework;
 
-namespace Lix.Commons.Tests.Specifications.Executors
+namespace Lix.Commons.Tests.when_getting_an_executor
 {
     [TestFixture]
-    public class when_a_specification_is_executed_with_an_iqueryable_context : when_a_specification_is_executed<TestSpecification>
+    public class with_an_iqueryable_context : with_a_specification<EmptyFishQueryableSpecification>
     {
         protected override void RegisterContext()
         {
             this.SpecificationExecutionEngine.RegisterContext<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
         }
 
-        protected override TestSpecification CreateSpecification()
+        protected override EmptyFishQueryableSpecification CreateSpecification()
         {
-            return new TestSpecification();
+            return new EmptyFishQueryableSpecification();
         }
     }
 }

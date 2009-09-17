@@ -5,7 +5,6 @@ using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
-using Lix.Commons.Tests.Specifications.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories
@@ -46,7 +45,7 @@ namespace Lix.Commons.Tests.Repositories
         [Test]
         public void should_intercept_the_specification_with_a_specification()
         {
-            var interceptWith = new TestSpecification2();
+            var interceptWith = new EmptyFishQueryableSpecification2();
             Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
 
             var result = this.Repository.Count(new FindFishWithDescriptionSpecification("Not slippery fish"));

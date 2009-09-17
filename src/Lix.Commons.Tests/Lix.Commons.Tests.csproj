@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblySetUps.cs" />
+    <Compile Include="Examples\Specifications\FindFishWithDescriptionNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionSpecification.cs" />
     <Compile Include="FluentAnd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,17 +165,18 @@
     <Compile Include="Repositories\NHibernate\when_using_an_nhibernate_unit_of_work.cs" />
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />
-    <Compile Include="Specifications\Examples\TestNHibernateCriteriaSpecification.cs" />
-    <Compile Include="Specifications\Examples\TestSpecification.cs" />
-    <Compile Include="Specifications\Examples\TestSpecification2.cs" />
-    <Compile Include="Specifications\Executors\when_a_specification_is_executed.cs" />
-    <Compile Include="Specifications\Executors\when_a_specification_is_executed`1.cs" />
-    <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_an_iqueryable_context.cs" />
-    <Compile Include="Specifications\Executors\when_a_specification_is_executed_with_an_isession_context.cs" />
-    <Compile Include="Specifications\when_an_interceptor_has_been_defined_for_a_specification.cs" />
-    <Compile Include="Specifications\when_a_lamba_inteceptor_has_been_defined.cs" />
-    <Compile Include="Specifications\Executors\when_a_queryable_specification_is_executed.cs" />
-    <Compile Include="Specifications\when_no_interceptor_has_been_defined.cs" />
+    <Compile Include="Examples\Specifications\TestNHibernateCriteriaSpecification.cs" />
+    <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification.cs" />
+    <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification2.cs" />
+    <Compile Include="when_a_specification_interceptor\of_type_queryable_has_been_defined.cs" />
+    <Compile Include="when_getting_an_executor\when_getting_an_executor.cs" />
+    <Compile Include="when_getting_an_executor\with_a_specification`1.cs" />
+    <Compile Include="when_getting_an_executor\with_an_iqueryable_context.cs" />
+    <Compile Include="when_getting_an_executor\with_an_isession_context.cs" />
+    <Compile Include="when_a_specification_interceptor\of_type_lamda_function_has_been_defined.cs" />
+    <Compile Include="when_executing_a_specification\of_type_queryable_specification.cs" />
+    <Compile Include="when_executing_a_specification\of_type_nhibernate_criteria_specification.cs" />
+    <Compile Include="when_a_specification_interceptor\has_not_been_defined.cs" />
     <Compile Include="UnitTestingExtensions.cs" />
     <Compile Include="when_using_generic_paged_results.cs" />
   </ItemGroup>
