@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Linq;
 using NHibernate;
 using NHibernate.Exceptions;
@@ -33,15 +32,10 @@ namespace Lix.Commons.Repositories.NHibernate
 
         public override T Save(T entity)
         {
-            T result = default(T);
-
             try
             {
-                this.Execute(s =>
-                                 {
-                                     s.SaveOrUpdate(entity);
-                                     result = entity;
-                                 });
+                this.UnitOfWork.Session.SaveOrUpdate(entity);
+                return entity;
             }
             catch (GenericADOException ex)
             {
@@ -54,33 +48,11 @@ namespace Lix.Commons.Repositories.NHibernate
                 
                 throw;
             }
-
-            return result;
         }
 
         public override void Remove(T entity)
         {
-            this.Execute(s => s.Delete(entity));
-        }
-
-        protected void Execute(Action<ISession> action)
-        {
-            Execute(this.UnitOfWork.Session, action);
-        }
-
-        private static void Execute(ISession session, Action<ISession> action)
-        {
-            if (session == null)
-            {
-                throw new ArgumentNullException("session");
-            }
-
-            if (action == null)
-            {
-                throw new ArgumentNullException("action");
-            }
-
-            action.Invoke(session);
+            this.UnitOfWork.Session.Delete(entity);
         }
     }
 }
