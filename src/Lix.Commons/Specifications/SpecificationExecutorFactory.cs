@@ -1,19 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Lix.Commons.Specifications.NHibernate;
 
 namespace Lix.Commons.Specifications
 {
-    public class SpecificationExecutionEngine
+    public class SpecificationExecutorFactory
     {
-        private static readonly IDictionary<Type, Type> specificationExecutors = new Dictionary<Type, Type>();
+        private static readonly IDictionary<Type, Type> SpecificationExecutors = new Dictionary<Type, Type>();
         private readonly IDictionary<Type, Func<object>> contexts = new Dictionary<Type, Func<object>>();
 
-        static SpecificationExecutionEngine()
+        public static ISpecificationExecutorInitializer Initialize()
         {
-            specificationExecutors.Add(typeof(IQueryableSpecification<>), typeof(QueryableSpecificationExecutor<>));
-            specificationExecutors.Add(typeof(INHibernateCriteriaSpecification), typeof(NHibernateCriteriaSpecificationExecutor<>));
+            return new DefaultSpecificationExecutorInitializer();
+        }
+
+        public static void RegisterSpecificationExecutor(Type specificationType, Type specificationExecutorType)
+        {
+            if (!specificationType.GetInterfaces().Contains(typeof(ISpecification)))
+            {
+                throw new ArgumentException("specificationType");
+            }
+
+            if (!specificationExecutorType.GetInterfaces().Any(x => DoTypesMatch(x, typeof(ISpecificationExecutor<>))))
+            {
+                throw new ArgumentException("specificationExecutorType");
+            }
+
+            if (SpecificationExecutors.ContainsKey(specificationType))
+            {
+                SpecificationExecutors[specificationType] = specificationExecutorType;
+            }
+            else
+            {
+                SpecificationExecutors.Add(specificationType, specificationExecutorType);
+            }
+        }
+
+        public static void ClearExecutors()
+        {
+            SpecificationExecutors.Clear();
         }
 
         public void RegisterContext<TContext>(Func<object> func)
@@ -77,7 +102,7 @@ namespace Lix.Commons.Specifications
             var specificationInterfaces = specification.GetType().GetInterfaces();
             Type result = null;
 
-            foreach (var executorType in specificationExecutors)
+            foreach (var executorType in SpecificationExecutors)
             {
                 var implementorType = executorType.Key;
 

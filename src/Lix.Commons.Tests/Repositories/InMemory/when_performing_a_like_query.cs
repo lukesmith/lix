@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Lix.Commons.Repositories.InMemory;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
 using Lix.Commons.Tests.Repositories.InMemory.Examples;
@@ -7,15 +9,23 @@ using MbUnit.Framework;
 namespace Lix.Commons.Tests.Repositories.InMemory
 {
     [TestFixture]
-    public class when_performing_a_like_query : in_memory_test_setups
+    public class when_performing_a_like_query : repository_test_setups<InMemoryUnitOfWork, FishInMemoryRepository, Fish>
     {
-        private FishInMemoryRepository fishRepository;
+        protected override InMemoryUnitOfWork CreateUnitOfWork()
+        {
+            var dataStore = new InMemoryDataStore();
+            return new InMemoryUnitOfWork(dataStore);
+        }
+
+        protected override FishInMemoryRepository CreateRepository()
+        {
+            return new FishInMemoryRepository(this.UnitOfWork);
+        }
 
         public override void SetUp()
         {
             base.SetUp();
 
-            fishRepository = new FishInMemoryRepository(this.UnitOfWork);
             this.UnitOfWork.Begin();
 
             this.UnitOfWork.Save(new Fish
@@ -44,7 +54,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         [Test]
         public void should_find_results_including_search_term_within_text()
         {
-            var result = fishRepository.List(new FindFishDescriptionContainingSpecification("time"));
+            var result = this.Repository.List(new FindFishDescriptionContainingSpecification("time"));
 
             result.Count().ShouldBeEqualTo(3);
         }
@@ -52,7 +62,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         [Test]
         public void should_find_results_ending_with_search_term()
         {
-            var result = fishRepository.List(new FindFishDescriptionEndingWithSpecification("nod."));
+            var result = this.Repository.List(new FindFishDescriptionEndingWithSpecification("nod."));
 
             result.Count().ShouldBeEqualTo(1);
         }
@@ -60,7 +70,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         [Test]
         public void should_find_results_beginning_with_search_term()
         {
-            var result = fishRepository.List(new FindFishDescriptionStartsWithSpecification("There"));
+            var result = this.Repository.List(new FindFishDescriptionStartsWithSpecification("There"));
 
             result.Count().ShouldBeEqualTo(2);
         }

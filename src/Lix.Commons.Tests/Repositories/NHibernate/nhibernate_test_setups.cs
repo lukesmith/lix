@@ -1,4 +1,5 @@
 ﻿using Lix.Commons.Repositories.NHibernate;
+using Lix.Commons.Specifications;
 using MbUnit.Framework;
 using NHibernate;
 
@@ -33,6 +34,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [SetUp(Order = 0)]
         public void SetUp()
         {
+            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+
             this.Session = this.SessionFactory.OpenSession();
 
             using (var tx = this.Session.BeginTransaction())
@@ -57,6 +60,8 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [TearDown(Order = 0)]
         public virtual void TearDown()
         {
+            SpecificationExecutorFactory.ClearExecutors();
+
             this.UnitOfWork.Commit();
             this.Session.Close();
             this.Session.Dispose();

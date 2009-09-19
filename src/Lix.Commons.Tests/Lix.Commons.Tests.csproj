@@ -170,6 +170,15 @@
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification.cs" />
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification2.cs" />
     <Compile Include="when_a_specification_interceptor\of_type_queryable_has_been_defined.cs" />
+    <Compile Include="when_registering_a_specification_executor\that_has_already_had_the_same_specification_type_registered.cs" />
+    <Compile Include="when_registering_a_specification_executor\with_a_specification_executor_type_that_implements_ispecificationexecutor.cs" />
+    <Compile Include="when_registering_a_specification_executor\Examples\IImplementISpecification.cs" />
+    <Compile Include="when_registering_a_specification_executor\Examples\IDontImplementISpecificationExecutor.cs" />
+    <Compile Include="when_registering_a_specification_executor\Examples\IDontImplementISpecification.cs" />
+    <Compile Include="when_registering_a_specification_executor\Examples\IImplementISpecificationExecutor.cs" />
+    <Compile Include="when_registering_a_specification_executor\with_a_specification_executor_type_that_does_not_implement_ispecificationexecutor.cs" />
+    <Compile Include="when_registering_a_specification_executor\with_a_specification_type_that_implements_ispecification.cs" />
+    <Compile Include="when_registering_a_specification_executor\with_a_specification_type_that_does_not_implement_ispecification.cs" />
     <Compile Include="when_using_an_in_memory_datastore\and_beginning_a_transaction.cs" />
     <Compile Include="HelperExtensions\InMemoryDataStoreExtensions.cs" />
     <Compile Include="when_getting_an_executor\when_getting_an_executor.cs" />

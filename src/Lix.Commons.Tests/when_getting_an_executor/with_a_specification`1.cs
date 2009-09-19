@@ -8,7 +8,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
     public abstract class with_a_specification<TSpecification>
         where TSpecification : class, ISpecification
     {
-        protected SpecificationExecutionEngine SpecificationExecutionEngine
+        protected SpecificationExecutorFactory SpecificationExecutorFactory
         {
             get; private set;
         }
@@ -20,7 +20,14 @@ namespace Lix.Commons.Tests.when_getting_an_executor
         [SetUp]
         public virtual void SetUp()
         {
-            this.SpecificationExecutionEngine = new SpecificationExecutionEngine();
+            SpecificationExecutorFactory.Initialize();
+            this.SpecificationExecutorFactory = new SpecificationExecutorFactory();
+        }
+
+        [TearDown]
+        public virtual void TearDown()
+        {
+            SpecificationExecutorFactory.ClearExecutors();
         }
 
         [Test]
@@ -29,7 +36,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
             this.RegisterContext();
 
             var specification = this.CreateSpecification();
-            var executor = this.SpecificationExecutionEngine.GetExecutor<TSpecification, Fish>(specification);
+            var executor = this.SpecificationExecutorFactory.GetExecutor<TSpecification, Fish>(specification);
 
             executor.Specification.ShouldBeTheSameObjectAs(specification);
         }
@@ -40,7 +47,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
             this.RegisterContext();
 
             var specification = this.CreateSpecification();
-            var executor = this.SpecificationExecutionEngine.GetExecutor<TSpecification, Fish>(specification);
+            var executor = this.SpecificationExecutorFactory.GetExecutor<TSpecification, Fish>(specification);
 
             executor.ShouldSatisfy(x => x != null);
         }
@@ -50,7 +57,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
         public void should_throw_if_the_required_context_is_not_registered()
         {
             var specification = this.CreateSpecification();
-            this.SpecificationExecutionEngine.GetExecutor<TSpecification, Fish>(specification);
+            this.SpecificationExecutorFactory.GetExecutor<TSpecification, Fish>(specification);
         }
     }
 }

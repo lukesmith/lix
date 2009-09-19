@@ -11,7 +11,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
     {
         protected override void RegisterContext()
         {
-            this.SpecificationExecutionEngine.RegisterContext<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
+            this.SpecificationExecutorFactory.RegisterContext<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
         }
 
         protected override EmptyFishQueryableSpecification CreateSpecification()

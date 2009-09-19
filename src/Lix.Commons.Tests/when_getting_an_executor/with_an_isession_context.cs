@@ -1,3 +1,4 @@
+using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples.Specifications;
 using Lix.Commons.Tests.Repositories.NHibernate;
 using MbUnit.Framework;
@@ -12,6 +13,8 @@ namespace Lix.Commons.Tests.when_getting_an_executor
 
         public override void SetUp()
         {
+            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+
             base.SetUp();
 
             this.sessionFactory = SessionFactoryFactory.CreateSessionFactory();
@@ -19,7 +22,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
 
         protected override void RegisterContext()
         {
-            this.SpecificationExecutionEngine.RegisterContext<ISession>(() => this.sessionFactory.OpenSession());
+            this.SpecificationExecutorFactory.RegisterContext<ISession>(() => this.sessionFactory.OpenSession());
         }
 
         protected override TestNHibernateCriteriaSpecification CreateSpecification()

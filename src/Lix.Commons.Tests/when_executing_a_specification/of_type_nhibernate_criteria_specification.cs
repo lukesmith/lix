@@ -13,7 +13,7 @@ namespace Lix.Commons.Tests.when_executing_a_specification
     {
         private ISessionFactory sessionFactory;
         private ISession session;
-        private SpecificationExecutionEngine executionEngine;
+        private SpecificationExecutorFactory executionFactory;
 
         [FixtureSetUp]
         public void ClassSetup()
@@ -36,8 +36,16 @@ namespace Lix.Commons.Tests.when_executing_a_specification
             this.session.Save(new Fish {Description = "A slippery fish"});
             this.session.Flush();
 
-            this.executionEngine = new SpecificationExecutionEngine();
-            this.executionEngine.RegisterContext<ISession>(() => this.session);
+            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+
+            this.executionFactory = new SpecificationExecutorFactory();
+            this.executionFactory.RegisterContext<ISession>(() => this.session);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            SpecificationExecutorFactory.ClearExecutors();
         }
 
         [Test]
@@ -45,7 +53,7 @@ namespace Lix.Commons.Tests.when_executing_a_specification
         {
             const string description = "A slippery fish";
             var specification = new FindFishWithDescriptionNHibernateCriteriaSpecification(description);
-            var executor = this.executionEngine.GetExecutor<INHibernateCriteriaSpecification, Fish>(specification);
+            var executor = this.executionFactory.GetExecutor<INHibernateCriteriaSpecification, Fish>(specification);
 
             executor.Get().Description.ShouldBeEqualTo(description);
         }

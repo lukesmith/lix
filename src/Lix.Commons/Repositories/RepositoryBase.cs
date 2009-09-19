@@ -21,13 +21,13 @@ namespace Lix.Commons.Repositories
         {
             this.UnitOfWork = unitOfWork;
 
-            this.SpecificationExecutionEngine = new SpecificationExecutionEngine();
+            this.SpecificationExecutorFactory = new SpecificationExecutorFactory();
             this.RegisterContext();
         }
 
         private void RegisterContext()
         {
-            this.SpecificationExecutionEngine.RegisterContext<IQueryable<TEntity>>(() => this.RepositoryQuery);
+            this.SpecificationExecutorFactory.RegisterContext<IQueryable<TEntity>>(() => this.RepositoryQuery);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Lix.Commons.Repositories
             private set;
         }
 
-        protected SpecificationExecutionEngine SpecificationExecutionEngine
+        protected SpecificationExecutorFactory SpecificationExecutorFactory
         {
             get;
             private set;
@@ -73,7 +73,7 @@ namespace Lix.Commons.Repositories
         private ISpecificationExecutor<TEntity> GetExecutor<TSpecification>(TSpecification specification)
             where TSpecification : class, ISpecification
         {
-            return this.SpecificationExecutionEngine.GetExecutor<TSpecification, TEntity>(specification, true);
+            return this.SpecificationExecutorFactory.GetExecutor<TSpecification, TEntity>(specification, true);
         }
 
         /// <summary>

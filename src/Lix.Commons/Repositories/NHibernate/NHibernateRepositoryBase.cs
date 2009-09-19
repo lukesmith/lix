@@ -11,7 +11,7 @@ namespace Lix.Commons.Repositories.NHibernate
     {
         protected NHibernateRepositoryBase(NHibernateUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            this.SpecificationExecutionEngine.RegisterContext<ISession>(() => unitOfWork.Session);
+            this.SpecificationExecutorFactory.RegisterContext<ISession>(() => unitOfWork.Session);
         }
 
         public new NHibernateUnitOfWork UnitOfWork
