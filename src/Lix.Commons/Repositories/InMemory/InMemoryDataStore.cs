@@ -8,6 +8,7 @@ namespace Lix.Commons.Repositories.InMemory
     public class InMemoryDataStore : IEnumerable<KeyValuePair<Type, IList<object>>>
     {
         private readonly Dictionary<Type, IList<object>> internalStore;
+        private bool useTransactionDataStore;
 
         public InMemoryDataStore()
         {
@@ -20,14 +21,6 @@ namespace Lix.Commons.Repositories.InMemory
             set;
         }
 
-        private bool IsTransactionActive
-        {
-            get
-            {
-                return this.Transaction != null;
-            }
-        }
-
         public InMemoryTransaction BeginTransaction()
         {
             this.Transaction = new InMemoryTransaction(this);
@@ -36,14 +29,36 @@ namespace Lix.Commons.Repositories.InMemory
             return this.Transaction;
         }
 
+        public IDisposable CurrentTransactionDataStore()
+        {
+            if (this.Transaction == null)
+            {
+                throw new InvalidOperationException("No transaction exists.");
+            }
+
+            if (this.useTransactionDataStore)
+            {
+                return null;
+            }
+
+            this.useTransactionDataStore = true;
+            
+            return new CurrentTransactionDataStoreDisposable(this);
+        }
+
         public void Save(object entity)
         {
-            if (this.IsTransactionActive)
+            if (this.useTransactionDataStore)
             {
                 this.Transaction.CurrentTransactionDataStore.Save(entity);
                 return;
             }
 
+            this.SaveToInternalStore(entity);
+        }
+
+        private void SaveToInternalStore(object entity)
+        {
             var type = entity.GetType();
 
             if (!this.internalStore.ContainsKey(type))
@@ -65,7 +80,7 @@ namespace Lix.Commons.Repositories.InMemory
 
         public void Remove<T>(T entity)
         {
-            if (this.IsTransactionActive)
+            if (this.useTransactionDataStore)
             {
                 this.Transaction.CurrentTransactionDataStore.Remove(entity);
                 return;
@@ -87,7 +102,7 @@ namespace Lix.Commons.Repositories.InMemory
 
         public bool Contains<T>(T entity, IEqualityComparer<T> comparer)
         {
-            if (this.IsTransactionActive)
+            if (this.useTransactionDataStore)
             {
                 return this.Transaction.CurrentTransactionDataStore.Contains(entity, comparer);
             }
@@ -105,12 +120,12 @@ namespace Lix.Commons.Repositories.InMemory
 
         public IEnumerable<T> List<T>()
         {
-            if (this.IsTransactionActive)
+            if (this.useTransactionDataStore)
             {
                 return this.Transaction.CurrentTransactionDataStore.List<T>();
             }
 
-            var type = typeof (T);
+            var type = typeof(T);
 
             if (this.internalStore.ContainsKey(type))
             {
@@ -124,7 +139,7 @@ namespace Lix.Commons.Repositories.InMemory
 
         public void Clear()
         {
-            if (this.IsTransactionActive)
+            if (this.useTransactionDataStore)
             {
                 this.Transaction.CurrentTransactionDataStore.Clear();
                 return;
@@ -135,18 +150,18 @@ namespace Lix.Commons.Repositories.InMemory
 
         internal void Merge(InMemoryDataStore dataStore)
         {
-            foreach (var store in dataStore)
+            foreach (var store in dataStore.internalStore)
             {
                 foreach (var d in store.Value)
                 {
-                    this.Save(d);
+                    this.SaveToInternalStore(d);
                 }
             }
         }
 
         public IEnumerator<KeyValuePair<Type, IList<object>>> GetEnumerator()
         {
-            if (this.IsTransactionActive)
+            if (this.useTransactionDataStore)
             {
                 return this.Transaction.CurrentTransactionDataStore.GetEnumerator();
             }
@@ -157,6 +172,25 @@ namespace Lix.Commons.Repositories.InMemory
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        private class CurrentTransactionDataStoreDisposable : IDisposable
+        {
+            private readonly InMemoryDataStore inMemoryDataStore;
+
+            public CurrentTransactionDataStoreDisposable(InMemoryDataStore inMemoryDataStore)
+            {
+                this.inMemoryDataStore = inMemoryDataStore;
+            }
+
+            /// <summary>
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// </summary>
+            /// <filterpriority>2</filterpriority>
+            public void Dispose()
+            {
+                inMemoryDataStore.useTransactionDataStore = false;
+            }
         }
     }
 }

@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblySetUps.cs" />
+    <Compile Include="Examples\Person.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionSpecification.cs" />
     <Compile Include="FluentAnd.cs" />
@@ -169,6 +170,8 @@
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification.cs" />
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification2.cs" />
     <Compile Include="when_a_specification_interceptor\of_type_queryable_has_been_defined.cs" />
+    <Compile Include="when_using_an_in_memory_datastore\and_beginning_a_transaction.cs" />
+    <Compile Include="HelperExtensions\InMemoryDataStoreExtensions.cs" />
     <Compile Include="when_getting_an_executor\when_getting_an_executor.cs" />
     <Compile Include="when_getting_an_executor\with_a_specification`1.cs" />
     <Compile Include="when_getting_an_executor\with_an_iqueryable_context.cs" />
