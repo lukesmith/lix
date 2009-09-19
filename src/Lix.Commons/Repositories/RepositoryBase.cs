@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Lix.Commons.Specifications;
 
@@ -29,7 +28,6 @@ namespace Lix.Commons.Repositories
         private void RegisterContext()
         {
             this.SpecificationExecutionEngine.RegisterContext<IQueryable<TEntity>>(() => this.RepositoryQuery);
-            //this.SpecificationExecutionEngine.RegisterContext(this.RepositoryQuery);
         }
 
         /// <summary>

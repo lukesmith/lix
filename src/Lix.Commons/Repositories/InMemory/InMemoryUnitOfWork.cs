@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Lix.Commons.Repositories.InMemory
 {
@@ -12,7 +10,6 @@ namespace Lix.Commons.Repositories.InMemory
         public InMemoryUnitOfWork(InMemoryDataStore dataStore)
         {
             this.DataStore = dataStore;
-            this.CurrentTransactionDataStore = new InMemoryDataStore();
         }
 
         public InMemoryDataStore DataStore
@@ -23,8 +20,15 @@ namespace Lix.Commons.Repositories.InMemory
 
         public InMemoryDataStore CurrentTransactionDataStore
         {
-            get;
-            private set;
+            get
+            {
+                if (this.IsActive)
+                {
+                    return this.DataStore.Transaction.CurrentTransactionDataStore;
+                }
+                
+                throw new InvalidOperationException("No transaction has begun.");
+            }
         }
 
         /// <summary>
@@ -33,8 +37,10 @@ namespace Lix.Commons.Repositories.InMemory
         /// <value><c>true</c> if this instance is active; otherwise, <c>false</c>.</value>
         public bool IsActive
         {
-            get;
-            private set;
+            get
+            {
+                return this.DataStore.Transaction != null;
+            }
         }
 
         /// <summary>
@@ -42,6 +48,11 @@ namespace Lix.Commons.Repositories.InMemory
         /// </summary>
         public void Dispose()
         {
+            if (this.IsActive)
+            {
+                this.DataStore.Transaction.Rollback();
+                this.DataStore.Transaction = null;
+            }
         }
 
         /// <summary>
@@ -50,14 +61,12 @@ namespace Lix.Commons.Repositories.InMemory
         public void Begin()
         {
             // TODO: Check whether a unit of work already exists for this DataStore
-            //if (this.IsActive)
-            //{
-            //    throw new InvalidOperationException("A unit of work has already begun for this session.");
-            //}
+            if (this.IsActive)
+            {
+                throw new InvalidOperationException("A unit of work has already begun for this session.");
+            }
 
-            this.CurrentTransactionDataStore = new InMemoryDataStore();
-            this.CurrentTransactionDataStore.Merge(this.DataStore);
-            this.IsActive = true;
+            this.DataStore.BeginTransaction();
         }
 
         /// <summary>
@@ -78,18 +87,12 @@ namespace Lix.Commons.Repositories.InMemory
                 throw new InvalidOperationException("Unable to commit when not active.");
             }
 
-            // Commit transactionaldatastore to InMemoryDataStore
-            this.DataStore.Merge(this.CurrentTransactionDataStore);
-
-            this.IsActive = false;
+            this.DataStore.Transaction.Commit();
+            this.DataStore.Transaction = null;
 
             if (begin)
             {
                 this.Begin();
-            }
-            else
-            {
-                this.CurrentTransactionDataStore.Clear();
             }
         }
 
@@ -104,8 +107,7 @@ namespace Lix.Commons.Repositories.InMemory
             }
             else
             {
-                this.CurrentTransactionDataStore.Clear();
-                this.IsActive = false;
+                this.DataStore.Transaction.Rollback();
             }
         }
     }

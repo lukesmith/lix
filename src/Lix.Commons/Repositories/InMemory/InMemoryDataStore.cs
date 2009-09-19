@@ -14,8 +14,36 @@ namespace Lix.Commons.Repositories.InMemory
             this.internalStore = new Dictionary<Type, IList<object>>();
         }
 
+        public InMemoryTransaction Transaction
+        {
+            get;
+            set;
+        }
+
+        private bool IsTransactionActive
+        {
+            get
+            {
+                return this.Transaction != null;
+            }
+        }
+
+        public InMemoryTransaction BeginTransaction()
+        {
+            this.Transaction = new InMemoryTransaction(this);
+            this.Transaction.Begin();
+
+            return this.Transaction;
+        }
+
         public void Save(object entity)
         {
+            if (this.IsTransactionActive)
+            {
+                this.Transaction.CurrentTransactionDataStore.Save(entity);
+                return;
+            }
+
             var type = entity.GetType();
 
             if (!this.internalStore.ContainsKey(type))
@@ -37,6 +65,12 @@ namespace Lix.Commons.Repositories.InMemory
 
         public void Remove<T>(T entity)
         {
+            if (this.IsTransactionActive)
+            {
+                this.Transaction.CurrentTransactionDataStore.Remove(entity);
+                return;
+            }
+
             var type = entity.GetType();
 
             if (this.internalStore.ContainsKey(type))
@@ -53,6 +87,11 @@ namespace Lix.Commons.Repositories.InMemory
 
         public bool Contains<T>(T entity, IEqualityComparer<T> comparer)
         {
+            if (this.IsTransactionActive)
+            {
+                return this.Transaction.CurrentTransactionDataStore.Contains(entity, comparer);
+            }
+
             var type = entity.GetType();
 
             if (this.internalStore.ContainsKey(type))
@@ -66,6 +105,11 @@ namespace Lix.Commons.Repositories.InMemory
 
         public IEnumerable<T> List<T>()
         {
+            if (this.IsTransactionActive)
+            {
+                return this.Transaction.CurrentTransactionDataStore.List<T>();
+            }
+
             var type = typeof (T);
 
             if (this.internalStore.ContainsKey(type))
@@ -80,10 +124,16 @@ namespace Lix.Commons.Repositories.InMemory
 
         public void Clear()
         {
+            if (this.IsTransactionActive)
+            {
+                this.Transaction.CurrentTransactionDataStore.Clear();
+                return;
+            }
+
             this.internalStore.Clear();
         }
 
-        public void Merge(InMemoryDataStore dataStore)
+        internal void Merge(InMemoryDataStore dataStore)
         {
             foreach (var store in dataStore)
             {
@@ -96,6 +146,11 @@ namespace Lix.Commons.Repositories.InMemory
 
         public IEnumerator<KeyValuePair<Type, IList<object>>> GetEnumerator()
         {
+            if (this.IsTransactionActive)
+            {
+                return this.Transaction.CurrentTransactionDataStore.GetEnumerator();
+            }
+
             return this.internalStore.GetEnumerator();
         }
 

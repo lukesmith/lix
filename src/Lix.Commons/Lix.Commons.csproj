@@ -61,6 +61,7 @@
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Repositories\EnumerableExtensions.cs" />
     <Compile Include="Repositories\InMemory\InMemoryDataStore.cs" />
+    <Compile Include="Repositories\InMemory\InMemoryTransaction.cs" />
     <Compile Include="Repositories\Linq2Sql\Linq2SqlRepositoryBase.cs" />
     <Compile Include="Repositories\Linq2Sql\Linq2SqlUnitOfWork.cs" />
     <Compile Include="Repositories\NHibernate\ICriteriaExtensions`1.cs" />

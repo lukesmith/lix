@@ -178,6 +178,8 @@
     <Compile Include="when_executing_a_specification\of_type_nhibernate_criteria_specification.cs" />
     <Compile Include="when_a_specification_interceptor\has_not_been_defined.cs" />
     <Compile Include="UnitTestingExtensions.cs" />
+    <Compile Include="when_using_an_in_memory_datastore\that_has_an_active_transaction.cs" />
+    <Compile Include="when_using_an_in_memory_datastore\that_has_an_inactive_transaction.cs" />
     <Compile Include="when_using_generic_paged_results.cs" />
   </ItemGroup>
   <ItemGroup>
