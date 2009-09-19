@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.Common;
 using System.Data.Linq;
 
@@ -66,7 +67,7 @@ namespace Lix.Commons.Repositories.Linq2Sql
         /// </summary>
         public void Begin()
         {
-            if (this.IsActive)
+            if (this.IsActive || this.DataContext.Transaction != null)
             {
                 throw new InvalidOperationException("A unit of work has already begun for this session.");
             }
@@ -99,6 +100,7 @@ namespace Lix.Commons.Repositories.Linq2Sql
             this.Transaction.Commit();
             this.Transaction.Dispose();
             this.Transaction = null;
+            this.DataContext.Transaction = null;
 
             this.wasTransactionCommitted = true;
             this.wasTransactionRolledback = false;
