@@ -12,10 +12,10 @@ namespace Lix.Commons.Repositories.InMemory
             this.DataStore = dataStore;
         }
 
-        public InMemoryDataStore DataStore
+        private InMemoryDataStore DataStore
         {
             get;
-            private set;
+            set;
         }
 
         public InMemoryDataStore CurrentTransactionDataStore

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Lix.Commons.Repositories.InMemory
 {
@@ -30,7 +29,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// Gets the repository.
         /// </summary>
         /// <value>The repository.</value>
-        protected InMemoryDataStore TransactionalDataStore
+        protected InMemoryDataStore DataStore
         {
             get
             {
@@ -44,7 +43,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// <value>The repository query.</value>
         protected override IQueryable<TEntity> RepositoryQuery
         {
-            get { return this.TransactionalDataStore.List<TEntity>().AsQueryable(); }
+            get { return this.DataStore.List<TEntity>().AsQueryable(); }
         }
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// </returns>
         public override TEntity Save(TEntity entity)
         {
-            this.TransactionalDataStore.Save(entity);
+            this.DataStore.Save(entity);
 
             return entity;
         }
@@ -67,7 +66,7 @@ namespace Lix.Commons.Repositories.InMemory
         /// <param name="entity">The entity to remove.</param>
         public override void Remove(TEntity entity)
         {
-            this.TransactionalDataStore.Remove(entity);
+            this.DataStore.Remove(entity);
         }
     }
 }
