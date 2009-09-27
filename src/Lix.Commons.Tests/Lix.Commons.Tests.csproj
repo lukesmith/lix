@@ -113,12 +113,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AssemblySetUps.cs" />
     <Compile Include="Examples\Person.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionSpecification.cs" />
     <Compile Include="FluentAnd.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Examples\Fish.cs" />
     <Compile Include="Examples\FakeSpecificationInterceptorToEnsureInterceptionCalled`1.cs" />
     <Compile Include="Repositories\InMemory\when_listing_paged_entities_in_an_in_memory_repository.cs" />
