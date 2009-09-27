@@ -57,8 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container.cs" />
     <Compile Include="Extensions\ComparisonType.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="IInitializeExpression.cs" />
+    <Compile Include="InitializeExpression.cs" />
+    <Compile Include="LixObjectFactory.cs" />
     <Compile Include="Repositories\EnumerableExtensions.cs" />
     <Compile Include="Repositories\InMemory\InMemoryDataStore.cs" />
     <Compile Include="Repositories\InMemory\InMemoryTransaction.cs" />

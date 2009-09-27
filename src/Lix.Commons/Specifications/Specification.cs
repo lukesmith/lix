@@ -20,7 +20,7 @@
         public static ISpecificationInterceptor Intercept<TSpecification>()
             where TSpecification : ISpecification
         {
-            var interceptor = new DefaultSpecificationInterceptor();
+            var interceptor = LixObjectFactory.CreateSpecificationInterceptor();
 
             Interceptors.Add<TSpecification>(interceptor);
 

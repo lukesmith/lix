@@ -5,6 +5,7 @@ using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
+using Lix.Commons.Tests.HelperExtensions;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories
@@ -32,25 +33,10 @@ namespace Lix.Commons.Tests.Repositories
         }
 
         [Test]
-        public void should_intercept_the_specification_with_a_lambda()
+        public void should_intercept_the_specification()
         {
-            var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
-            Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
-
-            var result = this.Repository.Count(new FindFishWithDescriptionSpecification("Slippery Fish"));
-
-            result.ShouldBeEqualTo(0);
-        }
-
-        [Test]
-        public void should_intercept_the_specification_with_a_specification()
-        {
-            var interceptWith = new EmptyFishQueryableSpecification2();
-            Specification.Intercept<FindFishWithDescriptionSpecification>().With(interceptWith);
-
-            var result = this.Repository.Count(new FindFishWithDescriptionSpecification("Not slippery fish"));
-
-            result.ShouldBeEqualTo(3);
+            RepositoryTestHelpers.TestRepositoryMethodInterceptsTheSpecification
+                <TRepository, Fish, EmptyFishQueryableSpecification>(this.Repository, (x, y) => x.Count(y));
         }
 
         [Test]

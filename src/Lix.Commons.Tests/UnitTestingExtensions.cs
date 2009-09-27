@@ -22,5 +22,11 @@ namespace Lix.Commons.Tests
             Assert.AreEqual(comparisonObject, testTarget);
             return new FluentAnd<T>(testTarget);
         }
+
+        public static FluentAnd<T> ShouldBeTheSameTypeAs<T>(this T testTarget, Type comparisonType)
+        {
+            Assert.AreEqual(testTarget.GetType(), comparisonType);
+            return new FluentAnd<T>(testTarget);
+        }
     }
 }

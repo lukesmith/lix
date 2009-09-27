@@ -11,5 +11,17 @@ namespace Lix.Commons.Tests
         {
             AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
         }
+
+        [SetUp]
+        public void TestSetUp()
+        {
+            LixObjectFactory.Initialize(x => x.UseDefaults());
+        }
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            LixObjectFactory.Reset();
+        }
     }
 }
