@@ -13,7 +13,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
 
         public override void SetUp()
         {
-            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+            LixObjectFactory.Initialize(x => x.WithDefaultNHibernateExecutors());
 
             base.SetUp();
 

@@ -34,7 +34,7 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [SetUp(Order = 0)]
         public void SetUp()
         {
-            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+            LixObjectFactory.Initialize(x => x.WithDefaultNHibernateExecutors());
 
             this.Session = this.SessionFactory.OpenSession();
 
@@ -60,8 +60,6 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         [TearDown(Order = 0)]
         public virtual void TearDown()
         {
-            SpecificationExecutorFactory.ClearExecutors();
-
             this.UnitOfWork.Commit();
             this.Session.Close();
             this.Session.Dispose();

@@ -36,16 +36,10 @@ namespace Lix.Commons.Tests.when_executing_a_specification
             this.session.Save(new Fish {Description = "A slippery fish"});
             this.session.Flush();
 
-            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+            LixObjectFactory.Initialize(x => x.WithDefaultNHibernateExecutors());
 
             this.executionFactory = new SpecificationExecutorFactory();
             this.executionFactory.RegisterContext<ISession>(() => this.session);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            SpecificationExecutorFactory.ClearExecutors();
         }
 
         [Test]

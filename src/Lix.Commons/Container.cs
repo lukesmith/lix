@@ -26,6 +26,19 @@ namespace Lix.Commons
             }
         }
 
+        public void RegisterForType(Type forType, Type type)
+        {
+            if (!this.innerContainer.ContainsKey(forType))
+            {
+                this.innerContainer.Add(forType, new List<Type>());
+            }
+
+            if (!this.innerContainer[forType].Contains(type))
+            {
+                this.innerContainer[forType].Add(type);
+            }
+        }
+
         public Type FindTypeFor<T>()
         {
             return this.FindTypeFor(typeof (T));

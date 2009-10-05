@@ -18,16 +18,10 @@ namespace Lix.Commons.Tests.when_executing_a_specification
         {
             this.context = new List<Fish>().AsQueryable();
 
-            SpecificationExecutorFactory.Initialize().WithDefaultNHibernateExecutors();
+            LixObjectFactory.Initialize(x => x.WithDefaultNHibernateExecutors());
 
             this.executionFactory = new SpecificationExecutorFactory();
             this.executionFactory.RegisterContext<IQueryable<Fish>>(() => this.context);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            SpecificationExecutorFactory.ClearExecutors();
         }
 
         [Test]

@@ -79,7 +79,6 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\NHibernate\ISessionExtensions.cs" />
-    <Compile Include="Specifications\DefaultSpecificationExecutorInitializer.cs" />
     <Compile Include="Specifications\ISpecificationExecutorInitializer.cs" />
     <Compile Include="Specifications\ISpecificationExecutor`2.cs" />
     <Compile Include="Specifications\NHibernate\NHibernateSpecificationExecutor.cs" />
@@ -105,7 +104,7 @@
     <Compile Include="Specifications\NHibernate\DefaultNHibernateCriteriaSpecification`1.cs" />
     <Compile Include="Specifications\Specification.cs" />
     <Compile Include="Specifications\SpecificationExecutorBase`3.cs" />
-    <Compile Include="Specifications\SpecificationExecutorInitializerExtensions.cs" />
+    <Compile Include="Specifications\InitializeExpressionExtensions.cs" />
     <Compile Include="Specifications\SpecificationInterceptors.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

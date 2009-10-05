@@ -35,14 +35,12 @@ namespace Lix.Commons.Tests.Repositories
         [SetUp]
         public virtual void SetUp()
         {
-            SpecificationExecutorFactory.Initialize();
             this.Repository = this.CreateRepository();
         }
 
         [TearDown]
         public virtual void TearDown()
         {
-            SpecificationExecutorFactory.ClearExecutors();
             this.unitOfWork = null;
         }
     }

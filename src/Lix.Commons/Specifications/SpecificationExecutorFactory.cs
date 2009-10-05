@@ -6,46 +6,22 @@ namespace Lix.Commons.Specifications
 {
     public class SpecificationExecutorFactory
     {
-        private static readonly IDictionary<Type, Type> SpecificationExecutors = new Dictionary<Type, Type>();
         private readonly IDictionary<Type, Func<object>> contexts = new Dictionary<Type, Func<object>>();
-
-        public static ISpecificationExecutorInitializer Initialize()
-        {
-            return new DefaultSpecificationExecutorInitializer();
-        }
-
-        public static void RegisterSpecificationExecutor(Type specificationType, Type specificationExecutorType)
-        {
-            if (!specificationType.GetInterfaces().Contains(typeof(ISpecification)))
-            {
-                throw new ArgumentException("specificationType");
-            }
-
-            if (!specificationExecutorType.GetInterfaces().Any(x => DoTypesMatch(x, typeof(ISpecificationExecutor<>))))
-            {
-                throw new ArgumentException("specificationExecutorType");
-            }
-
-            if (SpecificationExecutors.ContainsKey(specificationType))
-            {
-                SpecificationExecutors[specificationType] = specificationExecutorType;
-            }
-            else
-            {
-                SpecificationExecutors.Add(specificationType, specificationExecutorType);
-            }
-        }
-
-        public static void ClearExecutors()
-        {
-            SpecificationExecutors.Clear();
-        }
 
         public void RegisterContext<TContext>(Func<object> func)
         {
             this.contexts.Add(typeof(TContext), func);
         }
 
+        /// <summary>
+        /// Gets the <see cref="ISpecificationExecutor{TEntity}"/> used to execute the <paramref name="specification"/>.
+        /// </summary>
+        /// <param name="specification">The <see cref="ISpecification"/> to find the <see cref="ISpecificationExecutor{TEntity}"/> for.</param>
+        /// <typeparam name="TSpecification">The generic type of the <see cref="ISpecification"/>.</typeparam>
+        /// <typeparam name="TEntity">The type of the entity the <see cref="ISpecificationExecutor{TEntity}"/> has.</typeparam>
+        /// <returns>
+        /// An instance of the <see cref="ISpecificationExecutor{TEntity}"/>.
+        /// </returns>
         public ISpecificationExecutor<TEntity> GetExecutor<TSpecification, TEntity>(TSpecification specification)
             where TSpecification : ISpecification
             where TEntity : class
@@ -53,6 +29,17 @@ namespace Lix.Commons.Specifications
             return this.GetExecutor<TSpecification, TEntity>(specification, false);
         }
 
+        /// <summary>
+        /// Gets the <see cref="ISpecificationExecutor{TEntity}"/> used to execute the <paramref name="specification"/>.
+        /// </summary>
+        /// <param name="specification">The <see cref="ISpecification"/> to find the <see cref="ISpecificationExecutor{TEntity}"/> for.</param>
+        /// <param name="intercept">A boolean value indicating whether the <paramref name="specification"/> should be intercepted before the executor is found.</param>
+        /// <typeparam name="TSpecification">The generic type of the <see cref="ISpecification"/>.</typeparam>
+        /// <typeparam name="TEntity">The type of the entity the <see cref="ISpecificationExecutor{TEntity}"/> has.</typeparam>
+        /// <returns>
+        /// An instance of the <see cref="ISpecificationExecutor{TEntity}"/>.
+        /// </returns>
+        ///<exception cref="InvalidOperationException"></exception>
         public ISpecificationExecutor<TEntity> GetExecutor<TSpecification, TEntity>(TSpecification specification, bool intercept)
             where TSpecification : ISpecification
             where TEntity : class
@@ -64,56 +51,38 @@ namespace Lix.Commons.Specifications
                 interceptedSpecification = Specification.Interceptors.GetReplacement(specification);
             }
 
-            var foundExecutorType = FindExecutor(interceptedSpecification);
+            var foundExecutorType = FindExecutor<TEntity>(interceptedSpecification);
 
             if (foundExecutorType == null)
             {
                 throw new InvalidOperationException(string.Format("Executor for type {0} not found.", specification.GetType().FullName));
             }
 
-            var executor = this.CreateExecutor<ISpecification, TEntity>(foundExecutorType, interceptedSpecification);
-
-            return executor as ISpecificationExecutor<TEntity>;
+            return this.CreateExecutor(foundExecutorType, interceptedSpecification) as ISpecificationExecutor<TEntity>;
         }
 
-        private object CreateExecutor<TSpecification, TEntity>(Type executorType, TSpecification specification)
+        private object CreateExecutor<TSpecification>(Type executorTypeToCreate, TSpecification specification)
             where TSpecification : ISpecification
-            where TEntity : class
         {
-            var context = this.FindContextForExecutor(executorType);
+            var context = this.FindContextForExecutor(executorTypeToCreate);
 
             if (context == null)
             {
-                throw new InvalidOperationException(string.Format("A context could not be found for the executor {0}", executorType));
-            }
-            
-            if (executorType.ContainsGenericParameters)
-            {
-                var genericType = executorType.MakeGenericType(typeof(TEntity));
-
-                return Activator.CreateInstance(genericType, specification, context);
+                throw new InvalidOperationException(string.Format("A context could not be found for the executor {0}", executorTypeToCreate));
             }
 
-            return Activator.CreateInstance(executorType, specification, context);
+            return Activator.CreateInstance(executorTypeToCreate, specification, context);
         }
 
-        private static Type FindExecutor(ISpecification specification)
+        private static Type FindExecutor<TEntity>(ISpecification specification)
         {
             var specificationInterfaces = specification.GetType().GetInterfaces();
-            Type result = null;
 
-            foreach (var executorType in SpecificationExecutors)
-            {
-                var implementorType = executorType.Key;
+            var executor = LixObjectFactory.Container.FindTypeFor(containerType => specificationInterfaces.Any(
+                                                                   specificationInterface =>
+                                                                   LixObjectFactory.DoTypesMatch(specificationInterface, containerType)));
 
-                if (specificationInterfaces.Any(x => DoTypesMatch(x, implementorType)))
-                {
-                    result = executorType.Value;
-                    break;
-                }
-            }
-
-            return result;
+            return executor.ContainsGenericParameters ? executor.MakeGenericType(typeof(TEntity)) : executor;
         }
 
         private object FindContextForExecutor(Type executorType)
@@ -133,7 +102,7 @@ namespace Lix.Commons.Specifications
                     throw new InvalidOperationException("A constructor argument named 'context' could not be found.");
                 }
 
-                if (contextsInterfaces.Any(x => DoTypesMatch(x, contextParemeter.ParameterType)))
+                if (contextsInterfaces.Any(x => LixObjectFactory.DoTypesMatch(x, contextParemeter.ParameterType)))
                 {
                     result = contextValue;
                     break;
@@ -141,29 +110,6 @@ namespace Lix.Commons.Specifications
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Checks whether the two types match, including whether they are the same generic type.
-        /// </summary>
-        /// <param name="typeA">The first type.</param>
-        /// <param name="typeB">The second type.</param>
-        /// <returns>
-        /// true if the types match; otherwise false.
-        /// </returns>
-        private static bool DoTypesMatch(Type typeA, Type typeB)
-        {
-            if (typeA == typeB)
-            {
-                return true;
-            }
-
-            if (typeA.IsGenericType && typeB.GetGenericTypeDefinition() == typeA.GetGenericTypeDefinition())
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

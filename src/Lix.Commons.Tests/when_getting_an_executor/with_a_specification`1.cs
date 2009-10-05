@@ -20,14 +20,7 @@ namespace Lix.Commons.Tests.when_getting_an_executor
         [SetUp]
         public virtual void SetUp()
         {
-            SpecificationExecutorFactory.Initialize();
             this.SpecificationExecutorFactory = new SpecificationExecutorFactory();
-        }
-
-        [TearDown]
-        public virtual void TearDown()
-        {
-            SpecificationExecutorFactory.ClearExecutors();
         }
 
         [Test]

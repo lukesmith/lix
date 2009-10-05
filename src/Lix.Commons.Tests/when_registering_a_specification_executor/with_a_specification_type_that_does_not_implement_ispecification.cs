@@ -11,7 +11,10 @@ namespace Lix.Commons.Tests.when_registering_a_specification_executor
         [ExpectedArgumentException]
         public void should_throw()
         {
-            SpecificationExecutorFactory.RegisterSpecificationExecutor(typeof(IDontImplementISpecification), typeof(IImplementISpecificationExecutor));
+            LixObjectFactory.Initialize(
+                x =>
+                x.RegisterSpecificationExecutor(typeof (IDontImplementISpecification),
+                                                typeof (IImplementISpecificationExecutor)));
         }
     }
 }
