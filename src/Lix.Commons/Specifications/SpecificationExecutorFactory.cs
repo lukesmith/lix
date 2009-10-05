@@ -8,6 +8,11 @@ namespace Lix.Commons.Specifications
     {
         private readonly IDictionary<Type, Func<object>> contexts = new Dictionary<Type, Func<object>>();
 
+        /// <summary>
+        /// Registers a context that is used in the current instance of the <see cref="SpecificationExecutorFactory"/>.
+        /// </summary>
+        /// <param name="func">A function to be called to obtain the context.</param>
+        /// <typeparam name="TContext">The type of the context to register.</typeparam>
         public void RegisterContext<TContext>(Func<object> func)
         {
             this.contexts.Add(typeof(TContext), func);
@@ -39,7 +44,7 @@ namespace Lix.Commons.Specifications
         /// <returns>
         /// An instance of the <see cref="ISpecificationExecutor{TEntity}"/>.
         /// </returns>
-        ///<exception cref="InvalidOperationException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public ISpecificationExecutor<TEntity> GetExecutor<TSpecification, TEntity>(TSpecification specification, bool intercept)
             where TSpecification : ISpecification
             where TEntity : class
