@@ -8,7 +8,7 @@ namespace Lix.Commons.Tests.when_configuring_lix
         [SetUp]
         public void SetUp()
         {
-            LixObjectFactory.Initialize(x => x.UseDefaults());
+            LixObjectFactory.Initialize();
         }
 
         [Test]

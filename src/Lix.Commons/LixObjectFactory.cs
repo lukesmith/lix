@@ -9,16 +9,11 @@ namespace Lix.Commons
     /// </summary>
     public static class LixObjectFactory
     {
-        static LixObjectFactory()
-        {
-            SetUpContainer();
-        }
-
         private static void SetUpContainer()
         {
             Container = new Container();
-            var expression = new InitializeExpression(Container);
-            expression.UseDefaults();
+            //var expression = new InitializeExpression(Container);
+            //expression.UseDefaults();
         }
 
         /// <summary>
@@ -31,13 +26,22 @@ namespace Lix.Commons
         }
 
         /// <summary>
-        /// Resets and initializes the <see cref="LixObjectFactory"/> with the <see cref="IInitializeExpression"/> configuration settings.
+        /// Resets and initializes the <see cref="LixObjectFactory"/> with default configuration settings.
+        /// </summary>
+        public static void Initialize()
+        {
+            Initialize(x => { });
+        }
+
+        /// <summary>
+        /// Resets and initializes the <see cref="LixObjectFactory"/> with the default and configuration settings registered by the <see cref="IInitializeExpression"/>.
         /// </summary>
         /// <param name="action">The <see cref="IInitializeExpression"/> to use to configure the <see cref="LixObjectFactory"/> with.</param>
         public static void Initialize(Action<IInitializeExpression> action)
         {
             Reset();
             var expression = new InitializeExpression(Container);
+            expression.UseDefaults();
             action(expression);
         }
 
@@ -46,8 +50,12 @@ namespace Lix.Commons
         /// </summary>
         public static void Reset()
         {
-            Container.Dispose();
-            Container = null;
+            if (Container != null)
+            {
+                Container.Dispose();
+                Container = null;
+            }
+
             SetUpContainer();
         }
 

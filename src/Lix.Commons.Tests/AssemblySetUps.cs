@@ -15,7 +15,7 @@ namespace Lix.Commons.Tests
         [SetUp]
         public void TestSetUp()
         {
-            LixObjectFactory.Initialize(x => x.UseDefaults());
+            LixObjectFactory.Initialize();
         }
 
         [TearDown]
