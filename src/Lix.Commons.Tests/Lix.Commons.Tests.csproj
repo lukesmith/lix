@@ -123,6 +123,16 @@
     <Compile Include="FluentAnd.cs" />
     <Compile Include="Examples\Fish.cs" />
     <Compile Include="Examples\FakeSpecificationInterceptorToEnsureInterceptionCalled`1.cs" />
+    <Compile Include="PagedResult\when_constructing_a_paged_result.cs" />
+    <Compile Include="PagedResult\when_the_page_size_is_less_than_the_total_number_of_items.cs" />
+    <Compile Include="PagedResult\when_less_items_are_returned_than_in_the_datasource\and_the_page_size_is_exactly_half_the_total_number_of_items.cs" />
+    <Compile Include="PagedResult\when_less_items_are_returned_than_in_the_datasource\and_the_start_index_is_zero.cs" />
+    <Compile Include="PagedResult\when_the_page_size_is_equal_to_the_total_number_of_items.cs" />
+    <Compile Include="PagedResult\when_the_page_size_is_greater_than_the_total_number_of_items.cs" />
+    <Compile Include="PagedResult\when_the_page_size_is_one\and_the_total_item_count_is_10.cs" />
+    <Compile Include="PagedResult\when_the_page_size_is_zero.cs" />
+    <Compile Include="PagedResult\when_the_result_set_has_zero_items\and_the_total_items_is_ten.cs" />
+    <Compile Include="PagedResult\when_the_result_set_has_zero_items\and_the_total_items_is_zero.cs" />
     <Compile Include="Repositories\InMemory\when_listing_paged_entities_in_an_in_memory_repository.cs" />
     <Compile Include="Repositories\NHibernate\when_listing_paged_entities_in_an_nhibernate_repository.cs" />
     <Compile Include="HelperExtensions\RepositoryTestHelpers.cs" />

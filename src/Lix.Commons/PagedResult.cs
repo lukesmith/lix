@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 
 namespace Lix.Commons
 {
@@ -17,6 +18,11 @@ namespace Lix.Commons
         /// <param name="items">The items in the paged result.</param>
         public PagedResult(int startIndex, int pageSize, long totalItems, IEnumerable items)
         {
+            if (items.Cast<object>().Count() > pageSize)
+            {
+                throw new ArgumentException("Items cannot contain more items than pageSize.", "items");
+            }
+
             this.StartIndex = startIndex;
             this.PageSize = pageSize;
             this.TotalItemCount = totalItems;
@@ -66,14 +72,12 @@ namespace Lix.Commons
                     long result;
                     long a = Math.DivRem(this.TotalItemCount, this.PageSize, out result);
 
-                    if (result > 0)
+                    if (result == 0 && a != 0)
                     {
-                        return Convert.ToInt32(a) + 1;
+                        return Convert.ToInt32(a);
                     }
-                    else
-                    {
-                        return Convert.ToInt32(a) + 1;
-                    }
+                    
+                    return Convert.ToInt32(a) + 1;
                 }
                 else
                 {
@@ -92,6 +96,11 @@ namespace Lix.Commons
         {
             get
             {
+                if (this.PageSize == 0)
+                {
+                    return false;
+                }
+
                 if (this.StartIndex + this.PageSize < this.TotalItemCount)
                 {
                     return true;
@@ -120,7 +129,7 @@ namespace Lix.Commons
                 }
                 else
                 {
-                    return 0;
+                    return 1;
                 }
             }
         }
