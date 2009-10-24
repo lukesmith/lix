@@ -1,6 +1,5 @@
 ﻿using System;
 using Lix.Commons.Repositories;
-using Lix.Commons.Repositories.InMemory;
 using Lix.Commons.Tests.Repositories.Linq2Sql.Examples;
 
 namespace Lix.Commons.Tests.Repositories

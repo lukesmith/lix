@@ -1,4 +1,4 @@
-﻿using Lix.Commons.Repositories.InMemory;
+﻿using Lix.Commons.Repositories;
 using Lix.Commons.Tests.Repositories.InMemory.Examples;
 using MbUnit.Framework;
 

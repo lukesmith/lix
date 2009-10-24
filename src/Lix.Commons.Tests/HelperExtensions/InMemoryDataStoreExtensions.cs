@@ -1,4 +1,4 @@
-using Lix.Commons.Repositories.InMemory;
+using Lix.Commons.Repositories;
 
 namespace Lix.Commons.Tests.HelperExtensions
 {

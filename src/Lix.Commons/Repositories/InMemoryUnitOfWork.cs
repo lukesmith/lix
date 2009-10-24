@@ -1,6 +1,6 @@
 using System;
 
-namespace Lix.Commons.Repositories.InMemory
+namespace Lix.Commons.Repositories
 {
     /// <summary>
     /// Represents an in memory unit of work.

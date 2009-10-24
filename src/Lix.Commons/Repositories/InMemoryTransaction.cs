@@ -1,4 +1,4 @@
-﻿namespace Lix.Commons.Repositories.InMemory
+﻿namespace Lix.Commons.Repositories
 {
     public class InMemoryTransaction
     {
@@ -18,7 +18,7 @@
         public void Begin()
         {
             this.CurrentTransactionDataStore = new InMemoryDataStore();
-            this.CurrentTransactionDataStore.Merge(datastore);
+            this.CurrentTransactionDataStore.Merge(this.datastore);
         }
 
         public void Commit()

@@ -53,12 +53,12 @@
     <Compile Include="InitializeExpression.cs" />
     <Compile Include="LixObjectFactory.cs" />
     <Compile Include="Repositories\EnumerableExtensions.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryDataStore.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryTransaction.cs" />
+    <Compile Include="Repositories\InMemoryDataStore.cs" />
+    <Compile Include="Repositories\InMemoryTransaction.cs" />
     <Compile Include="PagedResult.cs" />
     <Compile Include="PagedResult`1.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryRepositoryBase.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryUnitOfWork.cs" />
+    <Compile Include="Repositories\InMemoryRepositoryBase.cs" />
+    <Compile Include="Repositories\InMemoryUnitOfWork.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Specifications\ISpecificationExecutorInitializer.cs" />

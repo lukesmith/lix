@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lix.Commons.Repositories.InMemory
+namespace Lix.Commons.Repositories
 {
     public class InMemoryDataStore : IEnumerable<KeyValuePair<Type, IList<object>>>
     {
@@ -189,7 +189,7 @@ namespace Lix.Commons.Repositories.InMemory
             /// <filterpriority>2</filterpriority>
             public void Dispose()
             {
-                inMemoryDataStore.useTransactionDataStore = false;
+                this.inMemoryDataStore.useTransactionDataStore = false;
             }
         }
     }
