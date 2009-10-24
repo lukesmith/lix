@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using Lix.Commons.Specifications;
+using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.when_getting_an_executor
@@ -11,7 +14,48 @@ namespace Lix.Commons.Tests.when_getting_an_executor
         [ExpectedException(typeof(InvalidOperationException), "A constructor argument named 'context' could not be found.")]
         public void should_throw_if_the_executor_does_not_have_a_constructor_argument_named_context()
         {
-            
+        }
+
+        [Test]
+        public void should_throw_as_specification_cannot_use_the_context()
+        {
+            var people = Enumerable.Repeat(new Person { Id = 4 }, 3).ToList().AsQueryable();
+
+            var specificationExecutorFactory = new SpecificationExecutorFactory();
+            specificationExecutorFactory.RegisterContext<IQueryable<Person>>(() => people);
+
+            Exception exception = null;
+
+            try
+            {
+                specificationExecutorFactory.GetExecutor<FindWithName, Person>(new FindWithName(string.Empty));
+            }
+            catch (InvalidOperationException ex)
+            {
+                exception = ex;
+            }
+
+            exception.Message.ShouldBeEqualTo("The specification cannot be used against the context.");
+        }
+
+        private class FindWithName : DefaultQueryableSpecification<INameable>
+        {
+            private readonly string name;
+
+            public FindWithName(string name)
+            {
+                this.name = name;
+            }
+
+            public override IQueryable<INameable> Build(IQueryable<INameable> context)
+            {
+                return context.Where(x => x.Name == this.name);
+            }
+        }
+
+        private interface INameable
+        {
+            string Name { get; set; }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Lix.Commons.Specifications
 {
@@ -76,7 +77,40 @@ namespace Lix.Commons.Specifications
                 throw new InvalidOperationException(string.Format("A context could not be found for the executor {0}", executorTypeToCreate));
             }
 
-            return Activator.CreateInstance(executorTypeToCreate, specification, context);
+            if (CanContextBeUsedBySpecification(specification, context))
+            {
+                return Activator.CreateInstance(executorTypeToCreate, specification, context);
+            }
+
+            throw new InvalidOperationException("The specification cannot be used against the context.");
+        }
+
+        private static bool CanContextBeUsedBySpecification(ISpecification specification, object context)
+        {
+            var result = true;
+            var contextType = context.GetType();
+            var specificationType = specification.GetType();
+
+            if (contextType.IsGenericType)
+            {
+                var contextGenericArguments = contextType.GetGenericArguments();
+                var d = contextGenericArguments[0];
+                result = false;
+
+                var specificationInterfaces = specificationType.GetInterfaces();
+                foreach (var specificationInterface in specificationInterfaces.Where(x => x.IsGenericType))
+                {
+                    var specificationGenericArguments = specificationInterface.GetGenericArguments();
+
+                    if (specificationGenericArguments[0].IsAssignableFrom(d))
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+
+            return result;
         }
 
         private static Type FindExecutor<TEntity>(ISpecification specification)

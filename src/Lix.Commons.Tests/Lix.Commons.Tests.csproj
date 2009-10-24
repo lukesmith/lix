@@ -117,6 +117,8 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblySetUps.cs" />
+    <Compile Include="Examples\IIdentifiable.cs" />
+    <Compile Include="Examples\Specifications\FindIdentifiable.cs" />
     <Compile Include="Examples\Person.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionSpecification.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="when_configuring_lix\and_resetting_the_factory.cs" />
     <Compile Include="when_configuring_lix\using_just_the_defaults.cs" />
     <Compile Include="when_configuring_lix\with_a_replacement_specification_interceptor.cs" />
+    <Compile Include="when_getting_an_executor\when_the_specification_works_against_an_interface_the_entity_implements.cs" />
     <Compile Include="when_finding_a_type_in_the_container\using_a_lambda.cs" />
     <Compile Include="when_registering_a_specification_executor\with_a_specification_executor_type_that_implements_ispecificationexecutor.cs" />
     <Compile Include="when_registering_a_specification_executor\Examples\IImplementISpecification.cs" />
