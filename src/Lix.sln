@@ -29,6 +29,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Futures.Tests", "Lix.Fu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Linq2Sql.Utilities", "Lix.Linq2Sql.Utilities\Lix.Linq2Sql.Utilities.csproj", "{14DD1D5E-3851-4782-8765-7CB39232AABF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{025CF06F-D9CD-4054-AC78-46C55059F31E}"
+	ProjectSection(SolutionItems) = preProject
+		..\libs\Antlr3.Runtime.dll = ..\libs\Antlr3.Runtime.dll
+		..\libs\Castle.Core.dll = ..\libs\Castle.Core.dll
+		..\libs\Castle.DynamicProxy2.dll = ..\libs\Castle.DynamicProxy2.dll
+		..\libs\FluentNHibernate.dll = ..\libs\FluentNHibernate.dll
+		..\libs\FluentNHibernate.pdb = ..\libs\FluentNHibernate.pdb
+		..\libs\FluentNHibernate.XML = ..\libs\FluentNHibernate.XML
+		..\libs\HibernatingRhinos.NHibernate.Profiler.Appender.dll = ..\libs\HibernatingRhinos.NHibernate.Profiler.Appender.dll
+		..\libs\Iesi.Collections.dll = ..\libs\Iesi.Collections.dll
+		..\libs\log4net.dll = ..\libs\log4net.dll
+		..\libs\Moq.dll = ..\libs\Moq.dll
+		..\libs\nhibernate-configuration.xsd = ..\libs\nhibernate-configuration.xsd
+		..\libs\nhibernate-mapping.xsd = ..\libs\nhibernate-mapping.xsd
+		..\libs\NHibernate.ByteCode.Castle.dll = ..\libs\NHibernate.ByteCode.Castle.dll
+		..\libs\NHibernate.dll = ..\libs\NHibernate.dll
+		..\libs\NHibernate.Linq.dll = ..\libs\NHibernate.Linq.dll
+		..\libs\System.Data.SQLite.DLL = ..\libs\System.Data.SQLite.DLL
+		..\libs\System.Data.SQLite.Linq.dll = ..\libs\System.Data.SQLite.Linq.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
