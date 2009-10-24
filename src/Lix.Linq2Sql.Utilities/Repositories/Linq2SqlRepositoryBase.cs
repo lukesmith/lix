@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
-namespace Lix.Commons.Repositories.Linq2Sql
+namespace Lix.Commons.Repositories
 {
     class Linq2SqlRepositoryBase<TEntity> : RepositoryBase<TEntity, Linq2SqlUnitOfWork>
         where TEntity : class

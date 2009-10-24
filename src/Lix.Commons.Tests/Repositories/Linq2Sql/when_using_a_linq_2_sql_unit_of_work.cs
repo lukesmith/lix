@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using Lix.Commons.Repositories.Linq2Sql;
+using Lix.Commons.Repositories;
 using Lix.Commons.Tests.Repositories.Linq2Sql.Examples;
 using MbUnit.Framework;
 

@@ -218,6 +218,10 @@
       <Project>{3DF3872A-53DB-4BFB-A2E5-E478878A99D3}</Project>
       <Name>Lix.Commons</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lix.Linq2Sql.Utilities\Lix.Linq2Sql.Utilities.csproj">
+      <Project>{14DD1D5E-3851-4782-8765-7CB39232AABF}</Project>
+      <Name>Lix.Linq2Sql.Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lix.NHibernate.Utilities\Lix.NHibernate.Utilities.csproj">
       <Project>{FF5778BE-2B67-407B-8320-641ED43AD7DC}</Project>
       <Name>Lix.NHibernate.Utilities</Name>

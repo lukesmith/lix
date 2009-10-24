@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3DF3872A-53DB-4BFB-A2E5-E478878A99D3}</ProjectGuid>
+    <ProjectGuid>{14DD1D5E-3851-4782-8765-7CB39232AABF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lix.Commons</RootNamespace>
-    <AssemblyName>Lix.Commons</AssemblyName>
+    <AssemblyName>Lix.Linq2Sql.Utilities</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,8 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -39,49 +37,30 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Container.cs" />
-    <Compile Include="IInitializeExpression.cs" />
-    <Compile Include="InitializeExpression.cs" />
-    <Compile Include="LixObjectFactory.cs" />
-    <Compile Include="Repositories\EnumerableExtensions.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryDataStore.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryTransaction.cs" />
-    <Compile Include="PagedResult.cs" />
-    <Compile Include="PagedResult`1.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryRepositoryBase.cs" />
-    <Compile Include="Repositories\InMemory\InMemoryUnitOfWork.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\IUnitOfWork.cs" />
-    <Compile Include="Specifications\ISpecificationExecutorInitializer.cs" />
-    <Compile Include="Specifications\ISpecificationExecutor`2.cs" />
-    <Compile Include="Specifications\ISpecificationExecutor`1.cs" />
-    <Compile Include="Specifications\SpecificationExecutorFactory.cs" />
-    <Compile Include="Specifications\QueryableSpecificationExecutor.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Services\ServiceBase`2.cs" />
-    <Compile Include="Services\IService`1.cs" />
-    <Compile Include="Specifications\DefaultQueryableSpecification`1.cs" />
-    <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
-    <Compile Include="Specifications\EmptySpecification`1.cs" />
-    <Compile Include="Specifications\FakeQueryableSpecification`1.cs" />
-    <Compile Include="Specifications\IQueryableSpecification`1.cs" />
-    <Compile Include="Specifications\ISpecification.cs" />
-    <Compile Include="Specifications\ISpecificationInterceptor.cs" />
-    <Compile Include="Specifications\ISpecification`2.cs" />
-    <Compile Include="Specifications\Specification.cs" />
-    <Compile Include="Specifications\SpecificationExecutorBase`3.cs" />
-    <Compile Include="Specifications\InitializeExpressionExtensions.cs" />
-    <Compile Include="Specifications\SpecificationInterceptors.cs" />
-    <Compile Include="Testing\SpecificationTestHelper.cs" />
+    <Compile Include="Repositories\Linq2SqlRepositoryBase.cs" />
+    <Compile Include="Repositories\Linq2SqlUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lix.Commons\Lix.Commons.csproj">
+      <Project>{3DF3872A-53DB-4BFB-A2E5-E478878A99D3}</Project>
+      <Name>Lix.Commons</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

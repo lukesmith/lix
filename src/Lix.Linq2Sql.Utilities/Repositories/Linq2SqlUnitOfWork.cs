@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Data.Common;
 using System.Data.Linq;
 
-namespace Lix.Commons.Repositories.Linq2Sql
+namespace Lix.Commons.Repositories
 {
     public class Linq2SqlUnitOfWork : IUnitOfWork
     {
@@ -41,7 +40,7 @@ namespace Lix.Commons.Repositories.Linq2Sql
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            if (!wasTransactionCommitted && !this.wasTransactionRolledback && this.IsActive)
+            if (!this.wasTransactionCommitted && !this.wasTransactionRolledback && this.IsActive)
             {
                 this.DataContext.Transaction.Rollback();
                 this.wasTransactionRolledback = true;
