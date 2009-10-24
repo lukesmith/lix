@@ -101,13 +101,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="AssemblySetUps.cs" />
     <Compile Include="Examples\FindFishDescriptionContainingSpecification.cs" />
     <Compile Include="Examples\FindFishDescriptionEndingWithSpecification.cs" />
     <Compile Include="Examples\FindFishDescriptionStartsWithSpecification.cs" />
     <Compile Include="InMemory\when_performing_a_like_query.cs" />
     <Compile Include="NHibernate\when_performing_a_like_query.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lix.Commons.Tests\Lix.Commons.Tests.csproj">
