@@ -14,7 +14,7 @@ namespace Lix.Commons.Tests.Testing
         [Test]
         public void should_build_the_specification()
         {
-            var specification = new Mock<FindFishDescriptionContainingSpecification>("smelly");
+            var specification = new Mock<FindFishWithIdSpecification>(1);
 
             specification.Setup(x => x.Build(It.IsAny<IQueryable<Fish>>()));
 

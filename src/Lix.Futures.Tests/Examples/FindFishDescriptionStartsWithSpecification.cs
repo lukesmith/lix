@@ -1,8 +1,9 @@
 using System.Linq;
-using Lix.Commons.Extensions;
 using Lix.Commons.Specifications;
+using Lix.Commons.Tests.Examples;
+using Lix.Futures.Extensions;
 
-namespace Lix.Commons.Tests.Examples.Specifications
+namespace Lix.Futures.Tests.Examples
 {
     public class FindFishDescriptionStartsWithSpecification : DefaultQueryableSpecification<Fish>
     {

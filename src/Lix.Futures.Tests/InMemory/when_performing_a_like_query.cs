@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Lix.Commons.Repositories.InMemory;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Examples.Specifications;
 using Lix.Commons.Tests.Repositories.InMemory.Examples;
+using Lix.Futures.Tests.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories.InMemory

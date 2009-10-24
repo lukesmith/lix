@@ -156,7 +156,6 @@
     <Compile Include="Repositories\when_checking_an_entity_exists_in_a_repository.cs" />
     <Compile Include="Repositories\when_counting_the_number_of_entities_in_a_repository.cs" />
     <Compile Include="Repositories\when_getting_an_entity_from_a_repository.cs" />
-    <Compile Include="Repositories\InMemory\when_performing_a_like_query.cs" />
     <Compile Include="Repositories\InMemory\when_saving_to_an_in_memory_repository.cs" />
     <Compile Include="Repositories\IUnitOfWorkExtensions.cs" />
     <Compile Include="Repositories\Linq2Sql\Examples\FoodDataClasses.cs">
@@ -170,13 +169,9 @@
     <Compile Include="Repositories\Linq2Sql\when_using_a_linq_2_sql_unit_of_work.cs" />
     <Compile Include="Repositories\NHibernate\Examples\FishMap.cs" />
     <Compile Include="Repositories\NHibernate\Examples\FishNHibernateRepository.cs" />
-    <Compile Include="Examples\Specifications\FindFishDescriptionEndingWithSpecification.cs" />
-    <Compile Include="Examples\Specifications\FindFishDescriptionContainingSpecification.cs" />
-    <Compile Include="Examples\Specifications\FindFishDescriptionStartsWithSpecification.cs" />
     <Compile Include="Repositories\NHibernate\nhibernate_test_setups.cs" />
     <Compile Include="Repositories\NHibernate\SessionFactoryFactory.cs" />
     <Compile Include="Repositories\NHibernate\when_doing_a_count_on_criteria.cs" />
-    <Compile Include="Repositories\NHibernate\when_performing_a_like_query.cs" />
     <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_criteria.cs" />
     <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_linq.cs" />
     <Compile Include="Repositories\NHibernate\when_using_an_nhibernate_unit_of_work.cs" />

@@ -1,4 +1,4 @@
-namespace Lix.Commons.Extensions
+namespace Lix.Futures.Extensions
 {
     public enum ComparisonType
     {

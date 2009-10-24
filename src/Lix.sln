@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Commons.Tests", "Lix.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.NHibernate.Utilities", "Lix.NHibernate.Utilities\Lix.NHibernate.Utilities.csproj", "{FF5778BE-2B67-407B-8320-641ED43AD7DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Futures", "Lix.Futures\Lix.Futures.csproj", "{A00BD5A4-CBC8-478C-A441-4B91C7C5737A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Futures.Tests", "Lix.Futures.Tests\Lix.Futures.Tests.csproj", "{D26AD103-2D13-49E1-83DD-87825E4BC45B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,14 @@ Global
 		{FF5778BE-2B67-407B-8320-641ED43AD7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF5778BE-2B67-407B-8320-641ED43AD7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF5778BE-2B67-407B-8320-641ED43AD7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00BD5A4-CBC8-478C-A441-4B91C7C5737A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00BD5A4-CBC8-478C-A441-4B91C7C5737A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00BD5A4-CBC8-478C-A441-4B91C7C5737A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00BD5A4-CBC8-478C-A441-4B91C7C5737A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26AD103-2D13-49E1-83DD-87825E4BC45B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26AD103-2D13-49E1-83DD-87825E4BC45B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26AD103-2D13-49E1-83DD-87825E4BC45B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26AD103-2D13-49E1-83DD-87825E4BC45B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

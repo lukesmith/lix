@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Lix.Commons.Extensions
+namespace Lix.Futures.Extensions
 {
     public static class QueryableExtensions
     {
@@ -14,7 +14,7 @@ namespace Lix.Commons.Extensions
 
             return
                 source.Where(Expression.Lambda<Func<T, bool>>(
-                        Expression.Call(field.Body, comparisonType.ToString(), null, Expression.Constant(searchValue)), p));
+                                 Expression.Call(field.Body, comparisonType.ToString(), null, Expression.Constant(searchValue)), p));
         }
     }
 }

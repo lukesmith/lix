@@ -53,8 +53,6 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Container.cs" />
-    <Compile Include="Extensions\ComparisonType.cs" />
-    <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="IInitializeExpression.cs" />
     <Compile Include="InitializeExpression.cs" />
     <Compile Include="LixObjectFactory.cs" />
