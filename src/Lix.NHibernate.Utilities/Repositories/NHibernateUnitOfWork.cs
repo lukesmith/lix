@@ -1,7 +1,7 @@
 using System;
 using NHibernate;
 
-namespace Lix.Commons.Repositories.NHibernate
+namespace Lix.Commons.Repositories
 {
     /// <summary>
     /// Represents an NHibernate unit of work.

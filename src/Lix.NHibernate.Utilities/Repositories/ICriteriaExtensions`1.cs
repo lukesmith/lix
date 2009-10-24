@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
 
-namespace Lix.Commons.Repositories.NHibernate
+namespace Lix.Commons.Repositories
 {
     /// <summary>
     /// Represents extensions on the <see cref="ICriteria"/> object.

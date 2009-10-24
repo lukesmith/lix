@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using Lix.Commons.Repositories;
-using Lix.Commons.Repositories.NHibernate;
 using NHibernate;
 
-namespace Lix.Commons.Specifications.NHibernate
+namespace Lix.Commons.Specifications
 {
     public class NHibernateCriteriaSpecificationExecutor<TEntity> : NHibernateSpecificationExecutor<INHibernateCriteriaSpecification, TEntity>
         where TEntity : class

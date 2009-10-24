@@ -1,4 +1,4 @@
-using Lix.Commons.Specifications.NHibernate;
+using Lix.Commons.Specifications;
 using NHibernate;
 
 namespace Lix.Commons.Tests.Examples.Specifications

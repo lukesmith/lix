@@ -1,6 +1,6 @@
 using NHibernate;
 
-namespace Lix.Commons.Specifications.NHibernate
+namespace Lix.Commons.Specifications
 {
     /// <summary>
     /// Represents a specification for building <see cref="ICriteria"/> instances.

@@ -1,5 +1,4 @@
 ﻿using Lix.Commons.Specifications;
-using Lix.Commons.Specifications.NHibernate;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
 using Lix.Commons.Tests.Repositories.NHibernate;

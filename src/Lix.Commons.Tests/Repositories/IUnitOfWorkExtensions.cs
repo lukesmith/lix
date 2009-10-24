@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Lix.Commons.Repositories;
 using Lix.Commons.Repositories.InMemory;
 using Lix.Commons.Repositories.Linq2Sql;
-using Lix.Commons.Repositories.NHibernate;
 using Lix.Commons.Tests.Repositories.Linq2Sql.Examples;
 
 namespace Lix.Commons.Tests.Repositories

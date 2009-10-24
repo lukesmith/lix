@@ -1,4 +1,4 @@
-﻿using Lix.Commons.Repositories.NHibernate;
+﻿using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using MbUnit.Framework;
 using NHibernate;

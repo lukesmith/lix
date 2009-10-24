@@ -4,7 +4,7 @@ using NHibernate.Engine;
 using NHibernate.Linq;
 using NHibernate.Linq.Visitors;
 
-namespace Lix.Commons.Repositories.NHibernate
+namespace Lix.Commons.Repositories
 {
     public static class ISessionExtensions
     {

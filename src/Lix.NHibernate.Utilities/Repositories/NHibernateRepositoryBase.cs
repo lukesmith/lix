@@ -4,7 +4,7 @@ using NHibernate;
 using NHibernate.Exceptions;
 using NHibernate.Linq;
 
-namespace Lix.Commons.Repositories.NHibernate
+namespace Lix.Commons.Repositories
 {
     public abstract class NHibernateRepositoryBase<T> : RepositoryBase<T, NHibernateUnitOfWork>
         where T : class
