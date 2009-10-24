@@ -1,6 +1,5 @@
 ﻿using Lix.Commons.Specifications;
 using MbUnit.Framework;
-using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Tests.when_registering_a_specification_executor
 {
