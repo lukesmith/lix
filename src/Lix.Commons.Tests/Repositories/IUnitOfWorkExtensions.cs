@@ -6,14 +6,9 @@ namespace Lix.Commons.Tests.Repositories
 {
     public static class IUnitOfWorkExtensions
     {
-        public static void Save(this IUnitOfWork unitOfWork, object entity)
+        public static void Save2(this IUnitOfWork unitOfWork, object entity)
         {
-            if (unitOfWork is NHibernateUnitOfWork)
-            {
-                var nhUnitOfWork = unitOfWork as NHibernateUnitOfWork;
-                nhUnitOfWork.Session.Save(entity);
-            }
-            else if (unitOfWork is InMemoryUnitOfWork)
+            if (unitOfWork is InMemoryUnitOfWork)
             {
                 var imUnitOfWork = unitOfWork as InMemoryUnitOfWork;
                 

@@ -1,8 +1,9 @@
-﻿using Lix.Commons.Repositories;
+﻿using Lix.Commons;
+using Lix.Commons.Repositories;
 using MbUnit.Framework;
 using NHibernate;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate
+namespace Lix.NHibernate.Utilities.Tests.Repositories
 {
     public abstract class nhibernate_test_setups
     {

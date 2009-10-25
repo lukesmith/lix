@@ -1,9 +1,9 @@
 ﻿using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Examples.Specifications;
+using Lix.NHibernate.Utilities.Tests.Examples;
 using MbUnit.Framework;
 
-namespace Lix.NHibernate.Utilities.Tests.when_executing_a_specification
+namespace Lix.NHibernate.Utilities.Tests.SpecificationExecutors.when_executing_a_specification
 {
     [TestFixture]
     public class using_the_default_critieria_specification_executor : using_a_nhibernate_specification_executor<DefaultNHibernateCriteriaSpecificationExecutor<Fish>, DefaultNHibernateCriteriaSpecification<Fish>>

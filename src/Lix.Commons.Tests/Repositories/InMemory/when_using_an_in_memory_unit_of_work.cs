@@ -17,6 +17,11 @@ namespace Lix.Commons.Tests.Repositories.InMemory
             this.mainDataStore = new InMemoryDataStore();
         }
 
+        protected override void SaveToUnitOfWork(InMemoryUnitOfWork unitOfWork, Fish entity)
+        {
+            unitOfWork.CurrentTransactionDataStore.Save(entity);
+        }
+
         protected override InMemoryUnitOfWork CreateUnitOfWork()
         {
             return new InMemoryUnitOfWork(this.mainDataStore);
@@ -36,12 +41,12 @@ namespace Lix.Commons.Tests.Repositories.InMemory
 
                 var fishA = new Fish {Id = 2};
                 var fishB = new Fish {Id = 5};
-                unitOfWork.Save(fishA);
-                unitOfWork.Save(fishB);
+                unitOfWork.CurrentTransactionDataStore.Save(fishA);
+                unitOfWork.CurrentTransactionDataStore.Save(fishB);
                 unitOfWork.Commit(true);
 
                 fishA.Id = 1;
-                unitOfWork.Save(fishA);
+                unitOfWork.CurrentTransactionDataStore.Save(fishA);
 
                 unitOfWork.CurrentTransactionDataStore.List<Fish>().Count().ShouldBeEqualTo(2);
             }
@@ -55,7 +60,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
                 unitOfWork.Begin();
 
                 var fishA = new Fish { Id = 2 };
-                unitOfWork.Save(fishA);
+                this.SaveToUnitOfWork(unitOfWork, fishA);
 
                 this.mainDataStore.List<Fish>().Count().ShouldBeEqualTo(0);
             }
@@ -69,7 +74,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
                 unitOfWork.Begin();
 
                 var fishA = new Fish { Id = 2 };
-                unitOfWork.Save(fishA);
+                this.SaveToUnitOfWork(unitOfWork, fishA);
                 unitOfWork.Commit();
 
                 this.mainDataStore.List<Fish>().Count().ShouldBeEqualTo(1);

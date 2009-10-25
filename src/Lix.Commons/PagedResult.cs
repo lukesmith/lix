@@ -20,7 +20,7 @@ namespace Lix.Commons
         {
             if (items.Cast<object>().Count() > pageSize)
             {
-                throw new ArgumentException("Items cannot contain more items than pageSize.", "items");
+                throw new ArgumentException("Items cannot contain more items than the pageSize.", "items");
             }
 
             this.StartIndex = startIndex;

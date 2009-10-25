@@ -46,11 +46,22 @@ namespace Lix.Commons.Tests.SpecificationExecutors.when_getting_an_executor
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException), Message = "A context could not be found for the executor Lix.Commons.Specifications.QueryableSpecificationExecutor`1[TEntity]")]
         public void should_throw_if_the_required_context_is_not_registered()
         {
             var specification = this.CreateSpecification();
-            this.SpecificationExecutorFactory.GetExecutor<TSpecification, Fish>(specification);
+
+            Exception thrownException = null;
+
+            try
+            {
+                this.SpecificationExecutorFactory.GetExecutor<TSpecification, Fish>(specification);
+            }
+            catch (Exception ex)
+            {
+                thrownException = ex;
+            }
+
+            thrownException.Message.ShouldSatisfy(x => x.StartsWith("A context could not be found for the executor"));
         }
     }
 }

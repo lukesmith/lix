@@ -1,25 +1,26 @@
 using Lix.Commons.Repositories;
+using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 using NHibernate.Criterion;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate
+namespace Lix.NHibernate.Utilities.Tests.Repositories
 {
     [TestFixture]
     public class when_doing_a_count_on_criteria : nhibernate_test_setups
     {
         protected override void PerformSetUp()
         {
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
         }
 
         [Test]

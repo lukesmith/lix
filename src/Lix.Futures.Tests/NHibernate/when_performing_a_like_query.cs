@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Repositories;
-using Lix.Commons.Tests.Repositories.NHibernate;
-using Lix.Commons.Tests.Repositories.NHibernate.Examples;
 using Lix.Futures.Tests.Examples;
+using Lix.NHibernate.Utilities.Tests.Repositories;
+using Lix.NHibernate.Utilities.Tests.Repositories.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Futures.Tests.NHibernate
@@ -16,19 +15,19 @@ namespace Lix.Futures.Tests.NHibernate
 
         protected override void PerformSetUp()
         {
-            this.UnitOfWork.Save(new Fish
+            this.UnitOfWork.Session.Save(new Fish
                                      {
                                          Description = "A fish called wanda"
                                      });
-            this.UnitOfWork.Save(new Fish
+            this.UnitOfWork.Session.Save(new Fish
                                      {
                                          Description = "Once up a time in a land called nod."
                                      });
-            this.UnitOfWork.Save(new Fish
+            this.UnitOfWork.Session.Save(new Fish
                                      {
                                          Description = "There was a giant timelord."
                                      });
-            this.UnitOfWork.Save(new Fish
+            this.UnitOfWork.Session.Save(new Fish
                                      {
                                          Description = "There was big and good travel thru time."
                                      });

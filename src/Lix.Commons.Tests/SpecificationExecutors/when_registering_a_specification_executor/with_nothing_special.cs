@@ -11,11 +11,11 @@ namespace Lix.Commons.Tests.SpecificationExecutors.when_registering_a_specificat
         {
             LixObjectFactory.Initialize(
                 x =>
-                x.RegisterSpecificationExecutor(typeof (INHibernateCriteriaSpecification),
-                                                typeof (DefaultNHibernateCriteriaSpecificationExecutor<>)));
+                x.RegisterSpecificationExecutor(typeof(IQueryableSpecification<>),
+                                                typeof(DefaultQueryableSpecificationExecutor<>)));
 
-            LixObjectFactory.Container.FindTypeFor(typeof (INHibernateCriteriaSpecification)).ShouldBeTheSameObjectAs(
-                typeof (DefaultNHibernateCriteriaSpecificationExecutor<>));
+            LixObjectFactory.Container.FindTypeFor(typeof(IQueryableSpecification<>)).ShouldBeTheSameObjectAs(
+                typeof(DefaultQueryableSpecificationExecutor<>));
         }
     }
 }

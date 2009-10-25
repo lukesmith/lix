@@ -1,18 +1,18 @@
 using FluentNHibernate.Mapping;
 using Lix.Commons.Tests.Examples;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate.Examples
+namespace Lix.NHibernate.Utilities.Tests.Repositories.Examples
 {
     public sealed class FishMap : ClassMap<Fish>
     {
         public FishMap()
         {
-            Id(x => x.Id)
+            this.Id(x => x.Id)
                 .GeneratedBy.Native();
 
-            Map(x => x.IsDeleted);
+            this.Map(x => x.IsDeleted);
 
-            Map(x => x.Description);
+            this.Map(x => x.Description);
         }
     }
 }

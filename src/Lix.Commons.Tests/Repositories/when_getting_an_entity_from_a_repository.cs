@@ -16,7 +16,7 @@ namespace Lix.Commons.Tests.Repositories
             base.SetUp();
 
             this.UnitOfWork.Begin();
-            this.UnitOfWork.Save(new Fish { Description = "Slippery Fish" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "Slippery Fish" });
             this.UnitOfWork.Commit(true);
         }
 

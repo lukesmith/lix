@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
@@ -19,9 +16,9 @@ namespace Lix.Commons.Tests.Repositories
             base.SetUp();
 
             this.UnitOfWork.Begin();
-            this.UnitOfWork.Save(new Fish { Description = "Slippery Fish" });
-            this.UnitOfWork.Save(new Fish { Description = "Slippery Fish" });
-            this.UnitOfWork.Save(new Fish { Description = "A fish called wanda" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "Slippery Fish" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "Slippery Fish" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "A fish called wanda" });
             this.UnitOfWork.Commit(true);
         }
 

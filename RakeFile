@@ -7,62 +7,60 @@ require 'rubygems'
 
 require 'zip/zip'
 require 'zip/zipfilesystem'
+require "rexml/document"
+
 
 RESULTS_DIR = "results"
-BUILD_NUMBER = "0.0.1."
+VERSION_MAJOR_MINOR_BUILD = "0.0.1"
 PRODUCT = "Lix"
 COPYRIGHT = 'Copyright 2009 Luke Smith. All rights reserved.';
 COMMON_ASSEMBLY_INFO = 'src/CommonAssemblyInfo.cs';
 CLR_VERSION = "v3.5"
+OUTPUT_PATH = "build"
+ARTIFACTS_PATH = "#{OUTPUT_PATH}/artifacts"
 
-versionNumber = ENV["BUILD_NUMBER"].nil? ? 0 : ENV["BUILD_NUMBER"]
-
-props = { :archive => "build" }
+SVN_LOG_PATH = "build/svn_log.xml"
+SVN_URL = "http://svn.abaxus.net:8080/svn/lix/trunk/"
 
 desc "Compiles, unit tests"
 task :all => [:default]
 
 desc "**Default**, compiles and runs tests"
-task :default => [:compile, :unit_test]
+task :default => [:init, :compile, :unit_test]
 
-desc "Displays a list of tasks"
-task :help do
-  taskHash = Hash[*(`rake.cmd -T`.split(/\n/).collect { |l| l.match(/rake (\S+)\s+\#\s(.+)/).to_a }.collect { |l| [l[1], l[2]] }).flatten] 
- 
-  indent = "                          "
-  
-  puts "rake #{indent}#Runs the 'default' task"
-  
-  taskHash.each_pair do |key, value|
-    if key.nil?  
-      next
-    end
-    puts "rake #{key}#{indent.slice(0, indent.length - key.length)}##{value}"
-  end
+task :init do
+  puts "Performing Initialization..."
+  puts "Creating folders..."
+
+  Dir.mkdir(OUTPUT_PATH) unless exists?(OUTPUT_PATH)
+  Dir.mkdir(ARTIFACTS_PATH) unless exists?(ARTIFACTS_PATH)
+  puts "Getting SVN revision number and saving to #{SVN_LOG_PATH}..."
+  sh "svn log --xml --revision HEAD #{SVN_URL} > \"#{SVN_LOG_PATH}\""
+  log = REXML::Document.new File.new(SVN_LOG_PATH)
+  logEntry = log.root.elements["logentry"]
+  $svn_revision = logEntry.attributes["revision"]
+  $svn_message = logEntry.elements["msg"].text
+  VERSION = "#{VERSION_MAJOR_MINOR_BUILD}.#{$svn_revision}"
+  puts "Revision #{$svn_revision} found with message: #{$svn_message}"
 end
 
 desc "Update the version information for the build"
 task :version do
-  builder = AsmInfoBuilder.new(BUILD_NUMBER, {'Product' => PRODUCT, 'Copyright' => COPYRIGHT})
-  buildNumber = builder.buildnumber
-  puts "The build number is #{buildNumber}"
-  builder.write COMMON_ASSEMBLY_INFO  
-end
-
-desc "Prepares the working directory for a new build"
-task :clean do
-	#TODO: do any other tasks required to clean/prepare the working directory
-	Dir.mkdir props[:archive] unless exists?(props[:archive])
+  builder = AsmInfoBuilder.new(VERSION, {'Product' => PRODUCT, 'Copyright' => COPYRIGHT})
+  puts "The build number is #{VERSION}"
+  builder.write COMMON_ASSEMBLY_INFO
 end
 
 desc "Compiles the app"
-task :compile => [:clean, :version] do
+task :compile => [:version] do
   MSBuildRunner.compile :compilemode => COMPILE_TARGET, :solutionfile => 'src/Lix.sln', :clrversion => CLR_VERSION
-    
-  outDir = "src/Lix.Commons/bin/#{COMPILE_TARGET}"
-    
-  Dir.glob(File.join(outDir, "*.{dll,pdb,xml}")){|file| 		
-	copy(file, props[:archive]) if File.file?(file)
+
+  Dir.glob(File.join("src/*/bin/#{COMPILE_TARGET}", "Lix.*.{dll,pdb,xml}")){|file|
+	copy(file, OUTPUT_PATH) if File.file?(file)
+  }
+
+  Dir.glob(File.join("libs/", "*.{dll,pdb,xml}")){|file|
+	copy(file, OUTPUT_PATH) if File.file?(file)
   }
 end
 
@@ -71,9 +69,17 @@ task :test => [:unit_test]
 
 desc "Runs unit tests"
 task :unit_test => :compile do
-  assembly = 'Lix.Commons.Tests'
-  runner = MbUnitRunner.new :compilemode => COMPILE_TARGET, :source => 'src', :platform => ''
-  runner.executeTests [assembly]
+  Dir.chdir("src") do
+    libdirs = File.join("**", "Lix.*.Tests")
+    runner = MbUnitRunner.new :compilemode => COMPILE_TARGET, :source => 'src'
+    
+    Dir.glob(libdirs) {|assembly|
+      puts "The build number is #{assembly}"
+      Dir.chdir("..") do
+        runner.executeTests [assembly]
+      end
+    }
+  end
 end
 
 desc "Target used for the CI server"

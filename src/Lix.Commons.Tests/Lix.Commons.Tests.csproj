@@ -47,47 +47,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=0.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\FluentNHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="Gallio, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Gallio\bin\Gallio.dll</HintPath>
-    </Reference>
-    <Reference Include="Gallio35, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Gallio\bin\Gallio35.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MbUnit, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Gallio\bin\MbUnit.dll</HintPath>
     </Reference>
-    <Reference Include="MbUnit35, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Gallio\bin\MbUnit35.dll</HintPath>
-    </Reference>
     <Reference Include="Moq, Version=3.1.416.3, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libs\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate, Version=2.0.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\NHibernate.ByteCode.Castle.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Linq, Version=1.0.0.1001, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\NHibernate.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -96,10 +69,6 @@
     </Reference>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.SQLite, Version=1.0.64.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\libs\System.Data.SQLite.DLL</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -118,7 +87,6 @@
     <Compile Include="Examples\IIdentifiable.cs" />
     <Compile Include="Examples\Specifications\FindIdentifiable.cs" />
     <Compile Include="Examples\Person.cs" />
-    <Compile Include="Examples\Specifications\FindFishWithDescriptionNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\Specifications\FindFishWithDescriptionSpecification.cs" />
     <Compile Include="FluentAnd.cs" />
     <Compile Include="Examples\Fish.cs" />
@@ -134,11 +102,9 @@
     <Compile Include="PagedResult\when_the_result_set_has_zero_items\and_the_total_items_is_ten.cs" />
     <Compile Include="PagedResult\when_the_result_set_has_zero_items\and_the_total_items_is_zero.cs" />
     <Compile Include="Repositories\InMemory\when_listing_paged_entities_in_an_in_memory_repository.cs" />
-    <Compile Include="Repositories\NHibernate\when_listing_paged_entities_in_an_nhibernate_repository.cs" />
     <Compile Include="HelperExtensions\RepositoryTestHelpers.cs" />
     <Compile Include="Repositories\when_listing_paged_entities_in_a_repository`2.cs" />
     <Compile Include="Repositories\InMemory\when_listing_entities_in_an_in_memory_repository.cs" />
-    <Compile Include="Repositories\NHibernate\when_listing_entities_in_an_nhibernate_repository.cs" />
     <Compile Include="Repositories\when_listing_entities_in_a_repository`2.cs" />
     <Compile Include="Repositories\InMemory\Examples\FishInMemoryRepository.cs" />
     <Compile Include="Examples\FishIdEqualityComparer.cs" />
@@ -146,8 +112,6 @@
     <Compile Include="Repositories\InMemory\in_memory_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_checking_an_entity_exists_in_an_in_memory_repository.cs" />
     <Compile Include="Repositories\InMemory\when_counting_the_number_of_entities_in_an_in_memory_repository.cs" />
-    <Compile Include="Repositories\NHibernate\when_counting_the_number_of_entities_in_an_nhibernate_repository.cs" />
-    <Compile Include="Repositories\NHibernate\when_getting_an_entity_from_an_nhibernate_repository.cs" />
     <Compile Include="Repositories\repository_test_setups.cs" />
     <Compile Include="Repositories\InMemory\when_checking_whether_an_in_memory_datastore_contains_an_entity.cs" />
     <Compile Include="Repositories\InMemory\when_getting_an_entity_from_an_in_memory_repository.cs" />
@@ -165,17 +129,8 @@
       <DependentUpon>FoodDataClasses.dbml</DependentUpon>
     </Compile>
     <Compile Include="Repositories\Linq2Sql\when_using_a_linq_2_sql_unit_of_work.cs" />
-    <Compile Include="Repositories\NHibernate\Examples\FishMap.cs" />
-    <Compile Include="Repositories\NHibernate\Examples\FishNHibernateRepository.cs" />
-    <Compile Include="Repositories\NHibernate\nhibernate_test_setups.cs" />
-    <Compile Include="Repositories\NHibernate\SessionFactoryFactory.cs" />
-    <Compile Include="Repositories\NHibernate\when_doing_a_count_on_criteria.cs" />
-    <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_criteria.cs" />
-    <Compile Include="Repositories\NHibernate\when_requesting_a_paged_list_using_linq.cs" />
-    <Compile Include="Repositories\NHibernate\when_using_an_nhibernate_unit_of_work.cs" />
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />
-    <Compile Include="Examples\Specifications\EmptyNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification.cs" />
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification2.cs" />
     <Compile Include="SpecificationExecutors\using_a_specification_executor.cs" />
@@ -201,7 +156,6 @@
     <Compile Include="SpecificationExecutors\when_getting_an_executor\when_getting_an_executor.cs" />
     <Compile Include="SpecificationExecutors\when_getting_an_executor\with_a_specification`1.cs" />
     <Compile Include="SpecificationExecutors\when_getting_an_executor\with_an_iqueryable_context.cs" />
-    <Compile Include="SpecificationExecutors\when_getting_an_executor\with_an_isession_context.cs" />
     <Compile Include="when_a_specification_interceptor\of_type_lamda_function_has_been_defined.cs" />
     <Compile Include="SpecificationExecutors\when_executing_a_specification\using_the_default_queryable_specification_executor.cs" />
     <Compile Include="when_a_specification_interceptor\has_not_been_defined.cs" />
@@ -218,10 +172,6 @@
     <ProjectReference Include="..\Lix.Linq2Sql.Utilities\Lix.Linq2Sql.Utilities.csproj">
       <Project>{14DD1D5E-3851-4782-8765-7CB39232AABF}</Project>
       <Name>Lix.Linq2Sql.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lix.NHibernate.Utilities\Lix.NHibernate.Utilities.csproj">
-      <Project>{FF5778BE-2B67-407B-8320-641ED43AD7DC}</Project>
-      <Name>Lix.NHibernate.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +228,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\NHibernate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

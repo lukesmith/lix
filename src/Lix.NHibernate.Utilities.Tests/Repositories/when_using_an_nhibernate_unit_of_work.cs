@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using Lix.Commons.Repositories;
+using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
+using Lix.Commons.Tests.Repositories;
 using MbUnit.Framework;
 using NHibernate;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate
+namespace Lix.NHibernate.Utilities.Tests.Repositories
 {
     [TestFixture]
     public class when_using_an_nhibernate_unit_of_work : when_using_a_unit_of_work<NHibernateUnitOfWork, Fish>
@@ -30,6 +32,11 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
         {
             this.session.Close();
             this.session.Dispose();
+        }
+
+        protected override void SaveToUnitOfWork(NHibernateUnitOfWork unitOfWork, Fish entity)
+        {
+            unitOfWork.Session.Save(entity);
         }
 
         protected override NHibernateUnitOfWork CreateUnitOfWork()

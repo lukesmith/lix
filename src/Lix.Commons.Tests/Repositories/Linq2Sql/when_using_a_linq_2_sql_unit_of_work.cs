@@ -26,6 +26,12 @@ namespace Lix.Commons.Tests.Repositories.Linq2Sql
         {
             this.dataContext.DeleteDatabase();
             this.dataContext.Dispose();
+            this.dataContext = null;
+        }
+
+        protected override void SaveToUnitOfWork(Linq2SqlUnitOfWork unitOfWork, Food entity)
+        {
+            (unitOfWork.DataContext as FoodDataClassesDataContext).Foods.InsertOnSubmit(entity);
         }
 
         protected override Linq2SqlUnitOfWork CreateUnitOfWork()

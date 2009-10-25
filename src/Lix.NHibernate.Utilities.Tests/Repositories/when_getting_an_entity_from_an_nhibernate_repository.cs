@@ -1,9 +1,11 @@
 using Lix.Commons.Repositories;
-using Lix.Commons.Tests.Repositories.NHibernate.Examples;
+using Lix.Commons.Tests.Examples;
+using Lix.Commons.Tests.Repositories;
+using Lix.NHibernate.Utilities.Tests.Repositories.Examples;
 using MbUnit.Framework;
 using NHibernate;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate
+namespace Lix.NHibernate.Utilities.Tests.Repositories
 {
     [TestFixture]
     public class when_getting_an_entity_from_an_nhibernate_repository : when_getting_an_entity_from_a_repository<NHibernateUnitOfWork, FishNHibernateRepository>
@@ -48,6 +50,11 @@ namespace Lix.Commons.Tests.Repositories.NHibernate
             this.Session = null;
 
             base.TearDown();
+        }
+
+        protected override void SaveToUnitOfWork(NHibernateUnitOfWork unitOfWork, Fish entity)
+        {
+            unitOfWork.Session.Save(entity);
         }
 
         protected override FishNHibernateRepository CreateRepository()

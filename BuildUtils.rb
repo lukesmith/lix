@@ -26,11 +26,11 @@ class MbUnitRunner
 	include FileTest
 
 	def initialize(paths)
-		@sourceDir = paths.fetch(:source, 'source')
+		@sourceDir = paths.fetch(:source, 'src')
 		@resultsDir = paths.fetch(:results, 'results')
 		@compilePlatform = paths.fetch(:platform, '')
 		@compileTarget = paths.fetch(:compilemode, 'debug')
-	
+
 		@nunitExe = File.join('tools', 'Gallio', 'bin', "Gallio.Echo#{(@compilePlatform.empty? ? '' : "-#{@compilePlatform}")}.exe").gsub('/','\\')
 	end
 	

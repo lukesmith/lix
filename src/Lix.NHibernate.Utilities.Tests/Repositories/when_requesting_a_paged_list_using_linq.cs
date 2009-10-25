@@ -1,26 +1,27 @@
 using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
+using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate
+namespace Lix.NHibernate.Utilities.Tests.Repositories
 {
     [TestFixture]
     public class when_requesting_a_paged_list_using_linq : nhibernate_test_setups
     {
         protected override void PerformSetUp()
         {
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
-            this.UnitOfWork.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
+            this.UnitOfWork.Session.Save(new Fish());
         }
 
         [Test]

@@ -6,6 +6,7 @@ using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories
 {
+    [TestFixture]
     public abstract class when_using_a_unit_of_work<TUnitOfWork, TEntity>
         where TUnitOfWork : IUnitOfWork
         where TEntity : new()
@@ -14,8 +15,10 @@ namespace Lix.Commons.Tests.Repositories
 
         protected abstract IEnumerable<TEntity> List();
 
+        protected abstract void SaveToUnitOfWork(TUnitOfWork unitOfWork, TEntity entity);
+
         [Test]
-        [ExpectedException(typeof(InvalidOperationException), Message = "Unable to commit before begin.")]
+        [ExpectedException(typeof(InvalidOperationException), Message = "Unable to commit when not active.")]
         public void should_throw_if_commit_called_and_unit_of_work_is_not_active()
         {
             var unitOfWork = this.CreateUnitOfWork();
@@ -48,7 +51,7 @@ namespace Lix.Commons.Tests.Repositories
             {
                 unitOfWork.Begin();
 
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
 
                 unitOfWork.Commit();
             }
@@ -63,12 +66,12 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
 
                 using (var unitOfWork2 = this.CreateUnitOfWork())
                 {
                     unitOfWork2.Begin();
-                    unitOfWork.Save(new TEntity());
+                    this.SaveToUnitOfWork(unitOfWork, new TEntity());
                     unitOfWork2.Commit();
                 }
 
@@ -82,7 +85,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
             }
 
             this.List().Count().ShouldBeEqualTo(0);
@@ -94,7 +97,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Rollback();
             }
 
@@ -107,7 +110,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Commit();
             }
 
@@ -120,7 +123,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Commit();
 
                 unitOfWork.IsActive.ShouldBeEqualTo(false);
@@ -133,7 +136,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Commit(true);
 
                 unitOfWork.IsActive.ShouldBeEqualTo(true);
@@ -146,10 +149,10 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Commit(true);
 
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
             }
 
             this.List().Count().ShouldBeEqualTo(1);
@@ -172,7 +175,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Commit();
             }
 
@@ -181,7 +184,7 @@ namespace Lix.Commons.Tests.Repositories
             using (var unitOfWork = this.CreateUnitOfWork())
             {
                 unitOfWork.Begin();
-                unitOfWork.Save(new TEntity());
+                this.SaveToUnitOfWork(unitOfWork, new TEntity());
                 unitOfWork.Commit();
             }
 

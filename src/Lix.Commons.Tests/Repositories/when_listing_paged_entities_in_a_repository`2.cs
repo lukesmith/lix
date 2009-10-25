@@ -17,10 +17,10 @@ namespace Lix.Commons.Tests.Repositories
             base.SetUp();
 
             this.UnitOfWork.Begin();
-            this.UnitOfWork.Save(new Fish { Description = "Slippery Fish" });
-            this.UnitOfWork.Save(new Fish { Description = "Wet Fish" });
-            this.UnitOfWork.Save(new Fish { Description = "A fish called wanda" });
-            this.UnitOfWork.Save(new Fish { Description = "A smelly fish" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "Slippery Fish" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "Wet Fish" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "A fish called wanda" });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Description = "A smelly fish" });
             this.UnitOfWork.Commit(true);
         }
 

@@ -1,7 +1,7 @@
 using Lix.Commons.Repositories;
 using Lix.Commons.Tests.Examples;
 
-namespace Lix.Commons.Tests.Repositories.NHibernate.Examples
+namespace Lix.NHibernate.Utilities.Tests.Repositories.Examples
 {
     public class FishNHibernateRepository : NHibernateRepositoryBase<Fish>
     {

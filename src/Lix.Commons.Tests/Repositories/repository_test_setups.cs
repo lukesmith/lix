@@ -1,5 +1,4 @@
 using Lix.Commons.Repositories;
-using Lix.Commons.Specifications;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories
@@ -26,6 +25,8 @@ namespace Lix.Commons.Tests.Repositories
                 return this.unitOfWork;
             }
         }
+
+        protected abstract void SaveToUnitOfWork(TUnitOfWork unitOfWork, TEntity entity);
 
         protected TRepository Repository
         {

@@ -1,9 +1,11 @@
-using Lix.Commons.Tests.Examples.Specifications;
-using Lix.Commons.Tests.Repositories.NHibernate;
+using Lix.Commons;
+using Lix.Commons.Tests.SpecificationExecutors.when_getting_an_executor;
+using Lix.NHibernate.Utilities.Tests.Examples;
+using Lix.NHibernate.Utilities.Tests.Repositories;
 using MbUnit.Framework;
 using NHibernate;
 
-namespace Lix.Commons.Tests.SpecificationExecutors.when_getting_an_executor
+namespace Lix.NHibernate.Utilities.Tests.SpecificationExecutors.when_getting_an_executor
 {
     [TestFixture]
     public class with_an_isession_context : with_a_specification<EmptyNHibernateCriteriaSpecification>

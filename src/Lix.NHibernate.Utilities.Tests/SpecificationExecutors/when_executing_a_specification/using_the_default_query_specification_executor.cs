@@ -3,7 +3,7 @@ using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
 using NHibernate;
 
-namespace Lix.NHibernate.Utilities.Tests.when_executing_a_specification
+namespace Lix.NHibernate.Utilities.Tests.SpecificationExecutors.when_executing_a_specification
 {
     [TestFixture]
     public class using_the_default_query_specification_executor : using_a_nhibernate_specification_executor<DefaultNHibernateQuerySpecificationExecutor<Fish>, DefaultNHibernateQuerySpecification>
