@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{025CF06F-D
 		..\libs\System.Data.SQLite.Linq.dll = ..\libs\System.Data.SQLite.Linq.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.NHibernate.Utilities.Tests", "Lix.NHibernate.Utilities.Tests\Lix.NHibernate.Utilities.Tests.csproj", "{F2B4D297-E820-45C3-9023-39F14F93517A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{14DD1D5E-3851-4782-8765-7CB39232AABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14DD1D5E-3851-4782-8765-7CB39232AABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14DD1D5E-3851-4782-8765-7CB39232AABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2B4D297-E820-45C3-9023-39F14F93517A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2B4D297-E820-45C3-9023-39F14F93517A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2B4D297-E820-45C3-9023-39F14F93517A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2B4D297-E820-45C3-9023-39F14F93517A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

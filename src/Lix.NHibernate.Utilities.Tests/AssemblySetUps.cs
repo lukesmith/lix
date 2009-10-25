@@ -1,7 +1,7 @@
 ﻿using Lix.Commons;
 using MbUnit.Framework;
 
-namespace Lix.Futures.Tests
+namespace Lix.NHibernate.Utilities.Tests
 {
     [AssemblyFixture]
     public class AssemblySetUps
@@ -9,7 +9,7 @@ namespace Lix.Futures.Tests
         [SetUp]
         public void TestSetUp()
         {
-            LixObjectFactory.Initialize();
+            LixObjectFactory.Initialize(x => x.WithDefaultNHibernateExecutors());
         }
 
         [TearDown]

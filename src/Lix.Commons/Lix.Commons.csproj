@@ -65,7 +65,7 @@
     <Compile Include="Specifications\ISpecificationExecutor`2.cs" />
     <Compile Include="Specifications\ISpecificationExecutor`1.cs" />
     <Compile Include="Specifications\SpecificationExecutorFactory.cs" />
-    <Compile Include="Specifications\QueryableSpecificationExecutor.cs" />
+    <Compile Include="Specifications\DefaultQueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Services\ServiceBase`2.cs" />
     <Compile Include="Services\IService`1.cs" />
