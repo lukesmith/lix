@@ -1,26 +1,19 @@
 COMPILE_TARGET = "debug"
 require "BuildUtils.rb"
 
-include FileTest
 
 require 'rubygems'
 
 require 'zip/zip'
 require 'zip/zipfilesystem'
-require "rexml/document"
-
 
 RESULTS_DIR = "results"
-VERSION_MAJOR_MINOR_BUILD = "0.0.1"
 PRODUCT = "Lix"
 COPYRIGHT = 'Copyright 2009 Luke Smith. All rights reserved.';
 COMMON_ASSEMBLY_INFO = 'src/CommonAssemblyInfo.cs';
 CLR_VERSION = "v3.5"
 OUTPUT_PATH = "build"
 ARTIFACTS_PATH = "#{OUTPUT_PATH}/artifacts"
-
-SVN_LOG_PATH = "build/svn_log.xml"
-SVN_URL = "http://svn.abaxus.net:8080/svn/lix/trunk/"
 
 desc "Compiles, unit tests"
 task :all => [:default]
@@ -31,25 +24,20 @@ task :default => [:init, :compile, :unit_test]
 task :init do
   puts "Performing Initialization..."
   puts "Creating folders..."
-
-  Dir.mkdir(OUTPUT_PATH) unless exists?(OUTPUT_PATH)
-  Dir.mkdir(ARTIFACTS_PATH) unless exists?(ARTIFACTS_PATH)
-  puts "Getting SVN revision number and saving to #{SVN_LOG_PATH}..."
-  sh "svn log --xml --revision HEAD #{SVN_URL} > \"#{SVN_LOG_PATH}\""
-  log = REXML::Document.new File.new(SVN_LOG_PATH)
-  logEntry = log.root.elements["logentry"]
-  $svn_revision = logEntry.attributes["revision"]
-  $svn_message = logEntry.elements["msg"].text
-  VERSION = "#{VERSION_MAJOR_MINOR_BUILD}.#{$svn_revision}"
-  puts "Revision #{$svn_revision} found with message: #{$svn_message}"
 end
 
 desc "Update the version information for the build"
 task :version do
-  builder = AsmInfoBuilder.new(VERSION, {'Product' => PRODUCT, 'Copyright' => COPYRIGHT})
-  puts "The build number is #{VERSION}"
+  builder = AsmInfoBuilder.new(get_version(), {'Product' => PRODUCT, 'Copyright' => COPYRIGHT})
+  buildNumber = builder.buildnumber
+  puts "The build number is #{buildNumber}"
   builder.write COMMON_ASSEMBLY_INFO
 end
+
+def get_version
+  return ENV['BUILD_NUMBER'].to_s unless ENV['BUILD_NUMBER'].nil?
+  return "1.0.0.0"
+end 
 
 desc "Compiles the app"
 task :compile => [:version] do
