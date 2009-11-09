@@ -1,0 +1,7 @@
+build/
+_*
+.idea/
+bin/
+obj/
+*.sln.cache
+*.suo
