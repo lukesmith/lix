@@ -1,4 +1,5 @@
-using System.Linq;
+using System;
+using System.Linq.Expressions;
 using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Tests.Examples.Specifications
@@ -12,16 +13,12 @@ namespace Lix.Commons.Tests.Examples.Specifications
             this.id = id;
         }
 
-        /// <summary>
-        /// Builds the specification for the <typeparamref name="TEntity"/>.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns>
-        /// An object representing the built specification.
-        /// </returns>
-        public override IQueryable<Fish> Build(IQueryable<Fish> context)
+        protected override Expression<Func<Fish, bool>> Predicate
         {
-            return context.Where(x => x.Id == this.id);
+            get
+            {
+                return x => x.Id == this.id;
+            }
         }
     }
 }

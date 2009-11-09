@@ -1,4 +1,5 @@
-using System.Linq;
+using System;
+using System.Linq.Expressions;
 
 namespace Lix.Commons.Specifications
 {
@@ -6,23 +7,14 @@ namespace Lix.Commons.Specifications
     /// Represents an empty specification.
     /// </summary>
     /// <typeparam name="TEntity">Type type of the entity to build the specification for.</typeparam>
-    public class EmptySpecification<TEntity> : IQueryableSpecification<TEntity>
+    public class EmptySpecification<TEntity> : DefaultQueryableSpecification<TEntity>
     {
-        public object Build(object context)
+        protected override Expression<Func<TEntity, bool>> Predicate
         {
-            return this.Build(context as IQueryable<object>);
-        }
-
-        /// <summary>
-        /// Builds the specification for an <see cref="IQueryable{TEntity}"/>.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns>
-        /// An object representing the built specification.
-        /// </returns>
-        public IQueryable<TEntity> Build(IQueryable<TEntity> context)
-        {
-            return context;
+            get
+            {
+                return x => true;
+            }
         }
     }
 }

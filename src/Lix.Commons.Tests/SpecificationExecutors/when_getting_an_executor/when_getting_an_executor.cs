@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
@@ -47,9 +48,12 @@ namespace Lix.Commons.Tests.SpecificationExecutors.when_getting_an_executor
                 this.name = name;
             }
 
-            public override IQueryable<INameable> Build(IQueryable<INameable> context)
+            protected override Expression<Func<INameable, bool>> Predicate
             {
-                return context.Where(x => x.Name == this.name);
+                get
+                {
+                    return x => x.Name.CompareTo(this.name) == 0;
+                }
             }
         }
 

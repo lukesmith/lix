@@ -60,7 +60,7 @@ namespace Lix.Futures.Tests.InMemory
         [Test]
         public void should_find_results_including_search_term_within_text()
         {
-            var result = this.Repository.List(new FindFishDescriptionContainingSpecification("time"));
+            var result = this.Repository.List(new FindFishContainingDescription("time"));
 
             result.Count().ShouldBeEqualTo(3);
         }
@@ -68,7 +68,7 @@ namespace Lix.Futures.Tests.InMemory
         [Test]
         public void should_find_results_ending_with_search_term()
         {
-            var result = this.Repository.List(new FindFishDescriptionEndingWithSpecification("nod."));
+            var result = this.Repository.List(new FindFishEndingWithDescription("nod."));
 
             result.Count().ShouldBeEqualTo(1);
         }
@@ -76,7 +76,7 @@ namespace Lix.Futures.Tests.InMemory
         [Test]
         public void should_find_results_beginning_with_search_term()
         {
-            var result = this.Repository.List(new FindFishDescriptionStartsWithSpecification("There"));
+            var result = this.Repository.List(new FindFishStartingWithDescription("There"));
 
             result.Count().ShouldBeEqualTo(2);
         }

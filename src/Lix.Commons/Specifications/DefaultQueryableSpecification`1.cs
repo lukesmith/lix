@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Lix.Commons.Specifications
 {
@@ -15,7 +17,10 @@ namespace Lix.Commons.Specifications
         /// <returns>
         /// An object representing the built specification.
         /// </returns>
-        public abstract IQueryable<TEntity> Build(IQueryable<TEntity> context);
+        public virtual IQueryable<TEntity> Build(IQueryable<TEntity> context)
+        {
+            return context.Where(this.Predicate);
+        }
 
         /// <summary>
         /// Builds the specification for the <typeparamref name="TEntity"/>.
@@ -26,7 +31,23 @@ namespace Lix.Commons.Specifications
         /// </returns>
         public object Build(object context)
         {
-            return this.Build(context as IQueryable<object>);
+            return this.Build(context as IQueryable<TEntity>);
+        }
+
+        /// <summary>
+        /// Determines whether the specification satisfies the entity.
+        /// </summary>
+        /// <returns>
+        /// Returns true if the <param name="entity"></param> satisfies the specification.
+        /// </returns>
+        public bool IsSatisfiedBy(TEntity entity)
+        {
+            return this.Predicate.Compile()(entity);
+        }
+
+        protected abstract Expression<Func<TEntity, bool>> Predicate
+        {
+            get;
         }
     }
 }

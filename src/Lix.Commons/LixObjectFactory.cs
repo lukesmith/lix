@@ -12,8 +12,6 @@ namespace Lix.Commons
         private static void SetUpContainer()
         {
             Container = new Container();
-            //var expression = new InitializeExpression(Container);
-            //expression.UseDefaults();
         }
 
         /// <summary>

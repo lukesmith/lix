@@ -15,7 +15,7 @@ namespace Lix.Commons.Specifications
         public void With<TEntity>(Func<IQueryable<TEntity>> func)
             where TEntity : class
         {
-            this.interceptBySpecification = new FakeQueryableSpecification<TEntity>(func());
+            this.interceptBySpecification = new InterceptionQueryableSpecification<TEntity>(func());
         }
 
         public ISpecification InterceptedBy()

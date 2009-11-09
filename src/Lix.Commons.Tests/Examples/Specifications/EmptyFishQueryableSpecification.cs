@@ -1,13 +1,17 @@
-using System.Linq;
+using System;
+using System.Linq.Expressions;
 using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Tests.Examples.Specifications
 {
     public class EmptyFishQueryableSpecification : DefaultQueryableSpecification<Fish>
     {
-        public override IQueryable<Fish> Build(IQueryable<Fish> context)
+        protected override Expression<Func<Fish, bool>> Predicate
         {
-            return context;
+            get
+            {
+                return x => true;
+            }
         }
     }
 }

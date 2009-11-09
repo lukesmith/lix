@@ -39,6 +39,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +50,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Container.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="IInitializeExpression.cs" />
     <Compile Include="InitializeExpression.cs" />
     <Compile Include="LixObjectFactory.cs" />
@@ -67,12 +69,12 @@
     <Compile Include="Specifications\SpecificationExecutorFactory.cs" />
     <Compile Include="Specifications\DefaultQueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Services\ServiceBase`2.cs" />
+    <Compile Include="Services\ServiceBase`1.cs" />
     <Compile Include="Services\IService`1.cs" />
     <Compile Include="Specifications\DefaultQueryableSpecification`1.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
     <Compile Include="Specifications\EmptySpecification`1.cs" />
-    <Compile Include="Specifications\FakeQueryableSpecification`1.cs" />
+    <Compile Include="Specifications\InterceptionQueryableSpecification.cs" />
     <Compile Include="Specifications\IQueryableSpecification`1.cs" />
     <Compile Include="Specifications\ISpecification.cs" />
     <Compile Include="Specifications\ISpecificationInterceptor.cs" />

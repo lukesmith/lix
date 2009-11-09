@@ -16,6 +16,8 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
                 .Configure()
                 .Database(SQLiteConfiguration.Standard.InMemory().ShowSql())
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SessionFactoryFactory>())
+                .ExposeConfiguration(c => c.SetProperty(Environment.GenerateStatistics, "true"))
+                .ExposeConfiguration(c => c.SetProperty(Environment.ShowSql, "true"))
                 .ExposeConfiguration(c => SavedConfig = c)
                 .BuildSessionFactory();
         }

@@ -3,7 +3,6 @@ using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using Lix.Futures.Tests.Examples;
 using Lix.NHibernate.Utilities.Tests.Repositories;
-using Lix.NHibernate.Utilities.Tests.Repositories.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Futures.Tests.NHibernate
@@ -11,7 +10,7 @@ namespace Lix.Futures.Tests.NHibernate
     [TestFixture]
     public class when_performing_a_like_query : nhibernate_test_setups
     {
-        private FishNHibernateRepository fishRepository;
+        private FutureFishNHibernateRepository fishRepository;
 
         protected override void PerformSetUp()
         {
@@ -34,13 +33,13 @@ namespace Lix.Futures.Tests.NHibernate
 
             this.UnitOfWork.Commit(true);
 
-            this.fishRepository = new FishNHibernateRepository(this.UnitOfWork);
+            this.fishRepository = new FutureFishNHibernateRepository(this.UnitOfWork);
         }
 
         [Test]
         public void should_find_results_including_search_term_within_text()
         {
-            var result = this.fishRepository.List(new FindFishDescriptionContainingSpecification("time"));
+            var result = this.fishRepository.List(new FindFishContainingDescription("time"));
 
             result.Count().ShouldBeEqualTo(3);
         }
@@ -48,7 +47,7 @@ namespace Lix.Futures.Tests.NHibernate
         [Test]
         public void should_find_results_ending_with_search_term()
         {
-            var result = this.fishRepository.List(new FindFishDescriptionEndingWithSpecification("nod."));
+            var result = this.fishRepository.List(new FindFishEndingWithDescription("nod."));
 
             result.Count().ShouldBeEqualTo(1);
         }
@@ -56,7 +55,7 @@ namespace Lix.Futures.Tests.NHibernate
         [Test]
         public void should_find_results_beginning_with_search_term()
         {
-            var result = this.fishRepository.List(new FindFishDescriptionStartsWithSpecification("There"));
+            var result = this.fishRepository.List(new FindFishStartingWithDescription("There"));
 
             result.Count().ShouldBeEqualTo(2);
         }
