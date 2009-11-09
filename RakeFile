@@ -24,6 +24,8 @@ task :default => [:init, :compile, :unit_test]
 task :init do
   puts "Performing Initialization..."
   puts "Creating folders..."
+  
+  Dir.mkdir("#{OUTPUT_PATH}") unless File.directory?("#{OUTPUT_PATH}")
 end
 
 desc "Update the version information for the build"
