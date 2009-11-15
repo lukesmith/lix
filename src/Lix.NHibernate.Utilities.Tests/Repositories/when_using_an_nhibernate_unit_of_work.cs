@@ -70,5 +70,17 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
 
             unitOfWork.Transaction.WasRolledBack.ShouldBeEqualTo(true);
         }
+
+        [Test]
+        public void should_not_fail_resuing_the_same_unit_of_work()
+        {
+            using (var unitOfWork = new NHibernateUnitOfWork(this.session))
+            {
+                unitOfWork.Begin();
+                unitOfWork.Commit();
+
+                unitOfWork.Begin();
+            }
+        }
     }
 }

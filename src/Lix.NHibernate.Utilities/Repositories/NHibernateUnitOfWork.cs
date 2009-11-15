@@ -88,6 +88,11 @@ namespace Lix.Commons.Repositories
                 throw new InvalidOperationException("A unit of work has already begun for this session.");
             }
 
+            if (this.Transaction.WasCommitted || this.Transaction.WasRolledBack)
+            {
+                this.Transaction = this.Session.BeginTransaction();
+            }
+
             this.Transaction.Begin();
         }
 
