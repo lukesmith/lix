@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 
@@ -9,6 +10,7 @@ namespace Lix.Commons.Services
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <typeparam name="TRepository">The type of the repository.</typeparam>
+    [Obsolete]
     public abstract class ServiceBase<TEntity, TRepository> : IService<TEntity>
         where TRepository : class, IRepository<TEntity>
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lix.Commons.Services
 {
@@ -6,6 +7,7 @@ namespace Lix.Commons.Services
     /// Represents a generic service.
     /// </summary>
     /// <typeparam name="TEntity">Type of the entity this service is for.</typeparam>
+    [Obsolete]
     public interface IService<TEntity>
     {
         /// <summary>
