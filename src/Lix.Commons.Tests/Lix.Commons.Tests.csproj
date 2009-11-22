@@ -153,6 +153,7 @@
     <Compile Include="SpecificationExecutors\when_registering_a_specification_executor\with_a_specification_type_that_implements_ispecification.cs" />
     <Compile Include="SpecificationExecutors\when_registering_a_specification_executor\with_a_specification_type_that_does_not_implement_ispecification.cs" />
     <Compile Include="SpecificationExecutors\when_registering_a_specification_executor\with_nothing_special.cs" />
+    <Compile Include="when_registering_types_in_the_container\and_the_type_is_null.cs" />
     <Compile Include="when_using_an_in_memory_datastore\and_beginning_a_transaction.cs" />
     <Compile Include="HelperExtensions\InMemoryDataStoreExtensions.cs" />
     <Compile Include="SpecificationExecutors\when_getting_an_executor\when_getting_an_executor.cs" />

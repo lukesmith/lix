@@ -15,19 +15,21 @@ namespace Lix.Commons
 
         public void Register(Type type)
         {
-            if (!this.innerContainer.ContainsKey(type))
-            {
-                this.innerContainer.Add(type, new List<Type>());
-            }
-
-            if (!this.innerContainer[type].Contains(type))
-            {
-                this.innerContainer[type].Add(type);
-            }
+            this.RegisterForType(type, type);
         }
 
         public void RegisterForType(Type forType, Type type)
         {
+            if (forType == null)
+            {
+                throw new ArgumentNullException("forType");
+            }
+
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
             if (!this.innerContainer.ContainsKey(forType))
             {
                 this.innerContainer.Add(forType, new List<Type>());
