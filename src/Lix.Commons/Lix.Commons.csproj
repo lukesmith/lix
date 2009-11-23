@@ -77,7 +77,7 @@
     <Compile Include="Services\IService`1.cs" />
     <Compile Include="Specifications\DefaultQueryableSpecification`1.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
-    <Compile Include="Specifications\EmptySpecification`1.cs" />
+    <Compile Include="Specifications\FindAll.cs" />
     <Compile Include="Specifications\InterceptionQueryableSpecification.cs" />
     <Compile Include="Specifications\IQueryableSpecification`1.cs" />
     <Compile Include="Specifications\ISpecification.cs" />

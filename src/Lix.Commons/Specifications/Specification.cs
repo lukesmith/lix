@@ -14,7 +14,7 @@
         /// </returns>
         public static IQueryableSpecification<TEntity> Empty<TEntity>()
         {
-            return new EmptySpecification<TEntity>();
+            return new FindAll<TEntity>();
         }
 
         public static ISpecificationInterceptor Intercept<TSpecification>()
