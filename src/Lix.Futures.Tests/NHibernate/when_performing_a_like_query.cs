@@ -1,9 +1,14 @@
 ﻿using System.Linq;
+using Lix.Commons;
+using Lix.Commons.Repositories;
+using Lix.Commons.Specifications;
 using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using Lix.Futures.Tests.Examples;
 using Lix.NHibernate.Utilities.Tests.Repositories;
+using Lix.StructureMapAdapter;
 using MbUnit.Framework;
+using Moq;
 
 namespace Lix.Futures.Tests.NHibernate
 {
@@ -33,7 +38,23 @@ namespace Lix.Futures.Tests.NHibernate
 
             this.UnitOfWork.Commit(true);
 
-            this.fishRepository = new FutureFishNHibernateRepository(this.UnitOfWork);
+            var container = new StructureMap.Container();
+            container.Configure(x => x.Scan(cfg =>
+                                                {
+                                                    cfg.TheCallingAssembly();
+                                                    cfg.AssemblyContainingType<Fish>();
+                                                    cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
+                                                    cfg.WithDefaultConventions();
+                                                }));
+            this.fishRepository = new FutureFishNHibernateRepository(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));
+
+        }
+
+        public override void TearDown()
+        {
+            LixObjectFactory.SetSpecificationExecutionFactory(null);
+
+            base.TearDown();
         }
 
         [Test]

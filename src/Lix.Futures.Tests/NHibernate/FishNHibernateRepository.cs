@@ -1,22 +1,20 @@
 using System.Linq;
 using Lix.Commons.Repositories;
+using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 
 namespace Lix.Futures.Tests.NHibernate
 {
-    public class FutureFishNHibernateRepository : NHibernateRepositoryBase<Fish>
+    public class FutureFishNHibernateRepository : NHibernateRepository<Fish>
     {
-        public FutureFishNHibernateRepository(NHibernateUnitOfWork unitOfWork)
-            : base(unitOfWork)
+        public FutureFishNHibernateRepository(NHibernateUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
+            : base(unitOfWork, specificationExecutorFactory)
         {
         }
 
-        protected override IQueryable<Fish> RepositoryQuery
+        protected override IQueryable<Fish> GetRepositoryQuery()
         {
-            get
-            {
-                return LixNHibernateExtensions.Linq<Fish>(this.UnitOfWork.Session);
-            }
+            return LixNHibernateExtensions.Linq<Fish>(this.UnitOfWork.Session);
         }
     }
 }

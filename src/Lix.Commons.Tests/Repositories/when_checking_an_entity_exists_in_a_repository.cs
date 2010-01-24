@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
@@ -12,16 +9,16 @@ namespace Lix.Commons.Tests.Repositories
 {
     public abstract class when_checking_an_entity_exists_in_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
         where TUnitOfWork : class, IUnitOfWork
-        where TRepository : IRepository<Fish>
+        where TRepository : IQueryRepository<Fish>
     {
         public override void SetUp()
         {
             base.SetUp();
 
             this.UnitOfWork.Begin();
-            this.Repository.Save(new Fish { Id = 2 });
-            this.Repository.Save(new Fish { Id = 5 });
-            this.Repository.Save(new Fish { Id = 9 });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Id = 2 });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Id = 5 });
+            this.SaveToUnitOfWork(this.UnitOfWork, new Fish { Id = 9 });
             this.UnitOfWork.Commit(true);
         }
 
@@ -37,14 +34,6 @@ namespace Lix.Commons.Tests.Repositories
         {
             RepositoryTestHelpers.TestRepositoryMethodInterceptsTheSpecification
                 <TRepository, Fish, EmptyFishQueryableSpecification>(this.Repository, (x, y) => x.Exists(y));
-        }
-
-        [Test]
-        public void should_find_the_entity()
-        {
-            var result = this.Repository.Exists(new FindFishWithIdSpecification(2));
-
-            result.ShouldBeEqualTo(true);
         }
     }
 }

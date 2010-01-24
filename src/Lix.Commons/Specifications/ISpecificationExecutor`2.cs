@@ -1,8 +1,10 @@
 namespace Lix.Commons.Specifications
 {
     public interface ISpecificationExecutor<TSpecification, TEntity> : ISpecificationExecutor<TEntity>
+        where TSpecification : ISpecification
+        where TEntity : class
     {
-        new TSpecification Specification
+        TSpecification Specification
         {
             get;
         }

@@ -26,7 +26,7 @@ namespace Lix.Commons
         public void UseDefaults()
         {
             this.UseSpecificationInterceptor<DefaultSpecificationInterceptor>();
-            this.RegisterSpecificationExecutor(typeof(IQueryableSpecification<>), typeof(DefaultQueryableSpecificationExecutor<>));
+            //this.RegisterSpecificationExecutor(typeof(IQueryableSpecification<>), typeof(DefaultQueryableSpecificationExecutor<>));
         }
     }
 }

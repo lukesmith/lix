@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Lix.Commons
 {
+    [Obsolete("Change so third party container has to be used.")]
     public class Container : IDisposable
     {
         private readonly IDictionary<Type, IList<Type>> innerContainer;

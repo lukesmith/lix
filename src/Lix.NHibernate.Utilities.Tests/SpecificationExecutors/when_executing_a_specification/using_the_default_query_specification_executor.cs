@@ -1,3 +1,4 @@
+using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using MbUnit.Framework;
@@ -6,19 +7,21 @@ using NHibernate;
 namespace Lix.NHibernate.Utilities.Tests.SpecificationExecutors.when_executing_a_specification
 {
     [TestFixture]
-    public class using_the_default_query_specification_executor : using_a_nhibernate_specification_executor<DefaultNHibernateQuerySpecificationExecutor<Fish>, DefaultNHibernateQuerySpecification>
+    public class using_the_default_query_specification_executor : using_a_nhibernate_specification_executor<ISpecificationExecutor<INHibernateQuerySpecification, Fish>, INHibernateQuerySpecification, IQuery>
     {
-        protected override DefaultNHibernateQuerySpecificationExecutor<Fish> GetExecutor(DefaultNHibernateQuerySpecification specification)
+        protected override ISpecificationExecutor<INHibernateQuerySpecification, Fish> GetExecutor(INHibernateQuerySpecification specification)
         {
-            return new DefaultNHibernateQuerySpecificationExecutor<Fish>(specification, this.Session);
+            var repository = new Moq.Mock<INHibernateRepository<Fish>>();
+            repository.Setup(x => x.CurrentSession).Returns(this.Session);
+            return new DefaultNHibernateQuerySpecificationExecutor<Fish>(specification, repository.Object);
         }
 
-        protected override DefaultNHibernateQuerySpecification GetSpecificationForUniqueResult(string description)
+        protected override INHibernateQuerySpecification GetSpecificationForUniqueResult(string description)
         {
             return new FindFishWithDescriptionNHibernateQuerySpecification(description);
         }
 
-        protected override DefaultNHibernateQuerySpecification GetSpecificationForMultipleUniqueResult()
+        protected override INHibernateQuerySpecification GetSpecificationForMultipleUniqueResult()
         {
             return new EmptyFishNHibernateQuerySpecification();
         }

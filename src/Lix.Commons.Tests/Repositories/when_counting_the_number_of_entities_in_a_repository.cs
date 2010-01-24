@@ -9,7 +9,7 @@ namespace Lix.Commons.Tests.Repositories
 {
     public abstract class when_counting_the_number_of_entities_in_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
         where TUnitOfWork : class, IUnitOfWork
-        where TRepository : IRepository<Fish>
+        where TRepository : IQueryRepository<Fish>
     {
         public override void SetUp()
         {
@@ -34,14 +34,6 @@ namespace Lix.Commons.Tests.Repositories
         {
             RepositoryTestHelpers.TestRepositoryMethodInterceptsTheSpecification
                 <TRepository, Fish, EmptyFishQueryableSpecification>(this.Repository, (x, y) => x.Count(y));
-        }
-
-        [Test]
-        public void should_get_the_number_of_entities()
-        {
-            var result = this.Repository.Count(new FindFishWithDescriptionSpecification("Slippery Fish"));
-
-            result.ShouldBeEqualTo(2);
         }
     }
 }

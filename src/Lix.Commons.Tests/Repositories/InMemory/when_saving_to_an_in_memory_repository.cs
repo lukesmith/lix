@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using Lix.Commons.Repositories;
 using Lix.Commons.Tests.Examples;
-using Lix.Commons.Tests.Repositories.InMemory.Examples;
 using MbUnit.Framework;
 
 namespace Lix.Commons.Tests.Repositories.InMemory
@@ -13,7 +13,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         {
             this.UnitOfWork.Begin();
 
-            var fishInMemoryRepository = new FishInMemoryRepository(this.UnitOfWork);
+            var fishInMemoryRepository = new InMemoryRepository<Fish>(this.UnitOfWork, null);
 
             var fish = new Fish();
             fishInMemoryRepository.Save(fish);
@@ -30,7 +30,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
         {
             this.UnitOfWork.Begin();
 
-            var fishInMemoryRepository = new FishInMemoryRepository(this.UnitOfWork);
+            var fishInMemoryRepository = new InMemoryRepository<Fish>(this.UnitOfWork, null);
 
             var fish = new Fish();
             var savedFish = fishInMemoryRepository.Save(fish);

@@ -3,7 +3,8 @@ using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Repositories
 {
-    public interface IQueryRepository<TEntity>
+    public interface IQueryRepository<TEntity> : ILinqRepository<TEntity>
+        where TEntity : class
     {
         /// <summary>
         /// Gets a single <typeparamref name="TEntity"/> that matches the specified specification.
@@ -22,7 +23,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// An enumerable collection of <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        IEnumerable<TEntity> List(ISpecification specification);
+        IEnumerable<TEntity> List<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification;
 
         /// <summary>
         /// Lists all the <typeparamref name="TEntity"/> that match the specified specification.
@@ -33,7 +35,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <see cref="PagedResult{TEntity}"/> collection of <typeparamref name="TEntity"/> items that matched the specification.
         /// </returns>
-        PagedResult<TEntity> List(ISpecification specification, int startIndex, int pageSize);
+        PagedResult<TEntity> List<TSpecification>(TSpecification specification, int startIndex, int pageSize)
+            where TSpecification : class, ISpecification;
 
         /// <summary>
         /// Checks whether a <typeparamref name="TEntity"/> exists in the repository that matches the specification.
@@ -42,7 +45,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
         /// </returns>
-        bool Exists(ISpecification specification);
+        bool Exists<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification;
 
         /// <summary>
         /// Determines how many <typeparamref name="TEntity"/> matching the <paramref name="specification"/> are contained within the repository.
@@ -51,7 +55,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// The number of <typeparamref name="TEntity"/> matching the specification.
         /// </returns>
-        long Count(ISpecification specification);
+        long Count<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification;
 
         /// <summary>
         /// Gets the unit of work.

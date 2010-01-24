@@ -64,8 +64,9 @@
     </Compile>
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Repositories\CriteriaExtensions.cs" />
+    <Compile Include="Repositories\INHibernateRepository.cs" />
     <Compile Include="Repositories\ISessionExtensions.cs" />
-    <Compile Include="Repositories\NHibernateRepositoryBase.cs" />
+    <Compile Include="Repositories\NHibernateRepository.cs" />
     <Compile Include="Repositories\NHibernateUnitOfWork.cs" />
     <Compile Include="Repositories\QueryExtensions.cs" />
     <Compile Include="Specifications\DefaultNHibernateCriteriaSpecification`1.cs" />

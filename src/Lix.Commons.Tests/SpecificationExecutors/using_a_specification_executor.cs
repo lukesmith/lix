@@ -8,7 +8,7 @@ namespace Lix.Commons.Tests.SpecificationExecutors
 {
     [TestFixture]
     public abstract class using_a_specification_executor<TExecutor, TSpecification>
-        where TExecutor : ISpecificationExecutor<Fish>
+        where TExecutor : ISpecificationExecutor<TSpecification, Fish>
         where TSpecification : ISpecification
     {
         protected IEnumerable<Fish> CreateDefaults()

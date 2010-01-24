@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
@@ -9,7 +8,7 @@ using MbUnit.Framework;
 namespace Lix.Commons.Tests.SpecificationExecutors.when_executing_a_specification
 {
     [TestFixture]
-    public class using_the_default_queryable_specification_executor : using_a_specification_executor<DefaultQueryableSpecificationExecutor<Fish>, DefaultQueryableSpecification<Fish>>
+    public class using_the_default_queryable_specification_executor : using_a_specification_executor<ISpecificationExecutor<IQueryableSpecification<Fish>, Fish>, IQueryableSpecification<Fish>>
     {
         private IQueryable<Fish> context;
 
@@ -18,17 +17,19 @@ namespace Lix.Commons.Tests.SpecificationExecutors.when_executing_a_specificatio
             this.context = this.CreateDefaults().AsQueryable();
         }
 
-        protected override DefaultQueryableSpecificationExecutor<Fish> GetExecutor(DefaultQueryableSpecification<Fish> specification)
+        protected override ISpecificationExecutor<IQueryableSpecification<Fish>, Fish> GetExecutor(IQueryableSpecification<Fish> specification)
         {
-            return new DefaultQueryableSpecificationExecutor<Fish>(specification, this.context);
+            var repository = new Moq.Mock<IQueryRepository<Fish>>();
+            repository.Setup(x => x.RepositoryQuery).Returns(this.context);
+            return new QueryableSpecificationExecutor<Fish>(specification, repository.Object);
         }
 
-        protected override DefaultQueryableSpecification<Fish> GetSpecificationForMultipleUniqueResult()
+        protected override IQueryableSpecification<Fish> GetSpecificationForMultipleUniqueResult()
         {
             return new EmptyFishQueryableSpecification();
         }
 
-        protected override DefaultQueryableSpecification<Fish> GetSpecificationForUniqueResult(string description)
+        protected override IQueryableSpecification<Fish> GetSpecificationForUniqueResult(string description)
         {
             return new FindFishWithDescriptionSpecification(description);
         }

@@ -1,14 +1,13 @@
 using Lix.Commons.Repositories;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Repositories;
-using Lix.NHibernate.Utilities.Tests.Repositories.Examples;
 using MbUnit.Framework;
 using NHibernate;
 
 namespace Lix.NHibernate.Utilities.Tests.Repositories
 {
     [TestFixture]
-    public class when_getting_an_entity_from_an_nhibernate_repository : when_getting_an_entity_from_a_repository<NHibernateUnitOfWork, FishNHibernateRepository>
+    public class when_getting_an_entity_from_an_nhibernate_repository : when_getting_an_entity_from_a_repository<NHibernateUnitOfWork, NHibernateRepository<Fish>>
     {
         public ISessionFactory SessionFactory
         {
@@ -57,9 +56,9 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
             unitOfWork.Session.Save(entity);
         }
 
-        protected override FishNHibernateRepository CreateRepository()
+        protected override NHibernateRepository<Fish> CreateRepository()
         {
-            return new FishNHibernateRepository(this.UnitOfWork);
+            return new NHibernateRepository<Fish>(this.UnitOfWork, null);
         }
 
         protected override NHibernateUnitOfWork CreateUnitOfWork()

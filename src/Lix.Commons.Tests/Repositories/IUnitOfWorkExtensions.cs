@@ -6,6 +6,7 @@ namespace Lix.Commons.Tests.Repositories
 {
     public static class IUnitOfWorkExtensions
     {
+        [Obsolete]
         public static void Save2(this IUnitOfWork unitOfWork, object entity)
         {
             if (unitOfWork is InMemoryUnitOfWork)

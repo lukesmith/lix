@@ -119,7 +119,6 @@
     <Compile Include="Examples\EmptyNHibernateCriteriaSpecification.cs" />
     <Compile Include="Examples\FindFishWithDescriptionNHibernateCriteriaSpecification.cs" />
     <Compile Include="Repositories\Examples\FishMap.cs" />
-    <Compile Include="Repositories\Examples\FishNHibernateRepository.cs" />
     <Compile Include="Repositories\nhibernate_test_setups.cs" />
     <Compile Include="Repositories\SessionFactoryFactory.cs" />
     <Compile Include="Repositories\when_counting_the_number_of_entities_in_an_nhibernate_repository.cs" />
@@ -130,14 +129,16 @@
     <Compile Include="Repositories\when_requesting_a_paged_list_using_criteria.cs" />
     <Compile Include="Repositories\when_requesting_a_paged_list_using_linq.cs" />
     <Compile Include="Repositories\when_using_an_nhibernate_unit_of_work.cs" />
-    <Compile Include="SpecificationExecutors\when_getting_an_executor\of_type_default_nhibernate_criteria_specification_executor.cs" />
-    <Compile Include="SpecificationExecutors\when_getting_an_executor\of_type_default_nhibernate_query_specification_executor.cs" />
-    <Compile Include="SpecificationExecutors\when_getting_an_executor\with_an_isession_context.cs" />
+    <Compile Include="Temp\Class1.cs" />
     <Compile Include="using_a_nhibernate_specification_executor.cs" />
     <Compile Include="SpecificationExecutors\when_executing_a_specification\using_the_default_critieria_specification_executor.cs" />
     <Compile Include="SpecificationExecutors\when_executing_a_specification\using_the_default_query_specification_executor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adapters\Lix.StructureMapAdapter\Lix.StructureMapAdapter.csproj">
+      <Project>{83253EE0-B8EE-4D15-857C-8AAE4380D6BE}</Project>
+      <Name>Lix.StructureMapAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lix.Commons.Tests\Lix.Commons.Tests.csproj">
       <Project>{BAF74050-9ECD-4B73-BA2C-068622AD2743}</Project>
       <Name>Lix.Commons.Tests</Name>

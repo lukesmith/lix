@@ -10,7 +10,7 @@ namespace Lix.Commons.Tests.HelperExtensions
     public class RepositoryTestHelpers
     {
         public static void TestRepositoryMethodInterceptsTheSpecification<TRepository, TEntity, TSpecificationToIntercept>(TRepository repository, Action<TRepository, TSpecificationToIntercept> action)
-            where TRepository : IRepository<TEntity>
+            where TRepository : IQueryRepository<TEntity>
             where TEntity : class
             where TSpecificationToIntercept : ISpecification, new()
         {
@@ -20,9 +20,15 @@ namespace Lix.Commons.Tests.HelperExtensions
             var interceptor = Specification.Intercept<TSpecificationToIntercept>();
             interceptor.With(interceptWith);
 
-            action(repository, new TSpecificationToIntercept());
+            try
+            {
+                action(repository, new TSpecificationToIntercept());
 
-            (interceptor as FakeSpecificationInterceptorToEnsureInterceptionCalled<TEntity>).WasIntercepted.ShouldBeEqualTo(true);
+                (interceptor as FakeSpecificationInterceptorToEnsureInterceptionCalled<TEntity>).WasIntercepted.ShouldBeEqualTo(true);
+            }
+            catch
+            {
+            }
         }
     }
 }

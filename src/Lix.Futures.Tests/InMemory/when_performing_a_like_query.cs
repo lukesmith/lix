@@ -1,16 +1,17 @@
 ﻿using System.Linq;
+using Lix.Commons;
 using Lix.Commons.Repositories;
 using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Repositories;
-using Lix.Commons.Tests.Repositories.InMemory.Examples;
 using Lix.Futures.Tests.Examples;
+using Lix.StructureMapAdapter;
 using MbUnit.Framework;
 
 namespace Lix.Futures.Tests.InMemory
 {
     [TestFixture]
-    public class when_performing_a_like_query : repository_test_setups<InMemoryUnitOfWork, FishInMemoryRepository, Fish>
+    public class when_performing_a_like_query2 : repository_test_setups<InMemoryUnitOfWork, InMemoryRepository<Fish>, Fish>
     {
         protected override InMemoryUnitOfWork CreateUnitOfWork()
         {
@@ -18,9 +19,27 @@ namespace Lix.Futures.Tests.InMemory
             return new InMemoryUnitOfWork(dataStore);
         }
 
-        protected override FishInMemoryRepository CreateRepository()
+        protected override InMemoryRepository<Fish> CreateRepository()
         {
-            return new FishInMemoryRepository(this.UnitOfWork);
+            var container = new StructureMap.Container();
+            container.Configure(x =>
+                                    {
+                                        x.Scan(cfg =>
+                                                   {
+                                                       cfg.TheCallingAssembly();
+                                                       cfg.AssemblyContainingType<Fish>();
+                                                       cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
+                                                   });
+                                    });
+            //    x.Scan(cfg =>
+            //{
+            //    cfg.TheCallingAssembly();
+            //    cfg.AssemblyContainingType<Fish>();
+            //    cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
+            //    cfg.WithDefaultConventions();
+            //})});
+
+            return new InMemoryRepository<Fish>(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));
         }
 
         protected override void SaveToUnitOfWork(InMemoryUnitOfWork unitOfWork, Fish entity)
@@ -30,6 +49,8 @@ namespace Lix.Futures.Tests.InMemory
 
         public override void SetUp()
         {
+            
+
             base.SetUp();
 
             this.UnitOfWork.Begin();

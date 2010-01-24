@@ -1,4 +1,3 @@
-using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
@@ -10,7 +9,7 @@ namespace Lix.Commons.Tests.Repositories
 {
     public abstract class when_listing_entities_in_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
         where TUnitOfWork : class, IUnitOfWork
-        where TRepository : IRepository<Fish>
+        where TRepository : IQueryRepository<Fish>
     {
         public override void SetUp()
         {
@@ -36,14 +35,6 @@ namespace Lix.Commons.Tests.Repositories
         {
             RepositoryTestHelpers.TestRepositoryMethodInterceptsTheSpecification
                 <TRepository, Fish, EmptyFishQueryableSpecification>(this.Repository, (x, y) => x.List(y));
-        }
-
-        [Test]
-        public void should_list_the_entities()
-        {
-            var result = this.Repository.List(new FindFishWithDescriptionSpecification("Slippery Fish"));
-
-            result.Count().ShouldBeEqualTo(1);
         }
     }
 }

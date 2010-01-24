@@ -91,6 +91,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\libs\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap, Version=2.5.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\libs\StructureMap\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -126,6 +130,10 @@
     <Compile Include="NHibernate\when_performing_a_like_query.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adapters\Lix.StructureMapAdapter\Lix.StructureMapAdapter.csproj">
+      <Project>{83253EE0-B8EE-4D15-857C-8AAE4380D6BE}</Project>
+      <Name>Lix.StructureMapAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lix.Commons.Tests\Lix.Commons.Tests.csproj">
       <Project>{BAF74050-9ECD-4B73-BA2C-068622AD2743}</Project>
       <Name>Lix.Commons.Tests</Name>

@@ -1,17 +1,16 @@
-using System;
 using System.Collections.Generic;
 
 namespace Lix.Commons.Specifications
 {
-    public abstract class SpecificationExecutorBase<TSpecification, TEntity, TContext> : ISpecificationExecutor<TSpecification, TEntity>
+    public abstract class SpecificationExecutorBase<TSpecification, TEntity, TDataSource> : ISpecificationExecutor<TSpecification, TEntity>
         where TSpecification : class, ISpecification
         where TEntity : class
-        where TContext : class
+        where TDataSource : class
     {
-        protected SpecificationExecutorBase(TSpecification specification, TContext context)
+        protected SpecificationExecutorBase(TSpecification specification, TDataSource dataSource)
         {
             this.Specification = specification;
-            this.Context = context;
+            this.DataSource = dataSource;
         }
 
         public TSpecification Specification
@@ -20,7 +19,7 @@ namespace Lix.Commons.Specifications
             private set;
         }
 
-        public TContext Context
+        public TDataSource DataSource
         {
             get;
             private set;
@@ -35,33 +34,5 @@ namespace Lix.Commons.Specifications
         public abstract long Count();
 
         public abstract bool Exists();
-
-        object ISpecificationExecutor<TEntity>.Specification
-        {
-            get
-            {
-                return this.Specification;
-            }
-        }
-
-        IEnumerable<TEntity> ISpecificationExecutor<TEntity>.List()
-        {
-            return this.List();
-        }
-
-        PagedResult<TEntity> ISpecificationExecutor<TEntity>.List(int startIndex, int pageSize)
-        {
-            return this.List(startIndex, pageSize);
-        }
-
-        long ISpecificationExecutor<TEntity>.Count()
-        {
-            return this.Count();
-        }
-
-        bool ISpecificationExecutor<TEntity>.Exists()
-        {
-            return this.Exists();
-        }
     }
 }

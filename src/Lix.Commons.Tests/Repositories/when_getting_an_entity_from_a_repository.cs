@@ -9,7 +9,7 @@ namespace Lix.Commons.Tests.Repositories
 {
     public abstract class when_getting_an_entity_from_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
         where TUnitOfWork : class, IUnitOfWork
-        where TRepository : IRepository<Fish>
+        where TRepository : IQueryRepository<Fish>
     {
         public override void SetUp()
         {
@@ -32,14 +32,6 @@ namespace Lix.Commons.Tests.Repositories
         {
             RepositoryTestHelpers.TestRepositoryMethodInterceptsTheSpecification
                 <TRepository, Fish, EmptyFishQueryableSpecification>(this.Repository, (x, y) => x.Get(y));
-        }
-
-        [Test]
-        public void should_get_the_entity()
-        {
-            var fish = this.Repository.Get(new FindFishWithDescriptionSpecification("Slippery Fish"));
-
-            fish.Description.ShouldBeEqualTo("Slippery Fish");
         }
     }
 }

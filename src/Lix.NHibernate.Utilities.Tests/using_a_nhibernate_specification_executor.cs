@@ -9,9 +9,9 @@ using NHibernate;
 namespace Lix.NHibernate.Utilities.Tests
 {
     [TestFixture]
-    public abstract class using_a_nhibernate_specification_executor<TExecutor, TSpecification> : using_a_specification_executor<TExecutor, TSpecification>
-        where TExecutor : ISpecificationExecutor<Fish>
-        where TSpecification : ISpecification
+    public abstract class using_a_nhibernate_specification_executor<TExecutor, TSpecification, TResult> : using_a_specification_executor<TExecutor, TSpecification>
+        where TExecutor : ISpecificationExecutor<TSpecification, Fish>
+        where TSpecification : INHibernateSpecification<TResult>
     {
         public ISessionFactory SessionFactory
         {

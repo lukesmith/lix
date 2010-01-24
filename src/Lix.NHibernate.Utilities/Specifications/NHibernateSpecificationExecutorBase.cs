@@ -1,3 +1,4 @@
+using Lix.Commons.Repositories;
 using NHibernate;
 
 namespace Lix.Commons.Specifications
@@ -6,8 +7,8 @@ namespace Lix.Commons.Specifications
         where TSpecification : class, ISpecification
         where TEntity : class
     {
-        protected NHibernateSpecificationExecutorBase(TSpecification specification, ISession context)
-            : base(specification, context)
+        protected NHibernateSpecificationExecutorBase(TSpecification specification, INHibernateRepository<TEntity> repository)
+            : base(specification, repository.CurrentSession)
         {
         }
     }

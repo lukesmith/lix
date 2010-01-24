@@ -5,7 +5,8 @@ namespace Lix.Commons.Tests.Repositories
 {
     public abstract class repository_test_setups<TUnitOfWork, TRepository, TEntity>
         where TUnitOfWork : class, IUnitOfWork
-        where TRepository : IRepository<TEntity>
+        where TRepository : IQueryRepository<TEntity>
+        where TEntity : class
     {
         private TUnitOfWork unitOfWork;
 

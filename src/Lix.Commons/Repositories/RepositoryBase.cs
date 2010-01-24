@@ -9,7 +9,7 @@ namespace Lix.Commons.Repositories
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <typeparam name="TUnitOfWork">The type of the unit of work.</typeparam>
-    public abstract class RepositoryBase<TEntity, TUnitOfWork> : IRepository<TEntity>
+    public abstract class RepositoryBase<TEntity, TUnitOfWork> : IQueryRepository<TEntity>
         where TEntity : class
         where TUnitOfWork : IUnitOfWork
     {
@@ -17,17 +17,10 @@ namespace Lix.Commons.Repositories
         /// Initializes a new instance of the <see cref="RepositoryBase{TEntity, TUnitOfWork}"/> class.
         /// </summary>
         /// <param name="unitOfWork">The unit of work.</param>
-        protected RepositoryBase(TUnitOfWork unitOfWork)
+        protected RepositoryBase(TUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
         {
             this.UnitOfWork = unitOfWork;
-
-            this.SpecificationExecutorFactory = new SpecificationExecutorFactory();
-            this.RegisterContext();
-        }
-
-        private void RegisterContext()
-        {
-            this.SpecificationExecutorFactory.RegisterContext<IQueryable<TEntity>>(() => this.RepositoryQuery);
+            this.SpecificationExecutorFactory = specificationExecutorFactory;
         }
 
         /// <summary>
@@ -40,19 +33,10 @@ namespace Lix.Commons.Repositories
             private set;
         }
 
-        protected SpecificationExecutorFactory SpecificationExecutorFactory
+        protected ISpecificationExecutorFactory SpecificationExecutorFactory
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets the repository query.
-        /// </summary>
-        /// <value>The repository query.</value>
-        protected abstract IQueryable<TEntity> RepositoryQuery
-        {
-            get;
         }
 
         /// <summary>
@@ -73,7 +57,10 @@ namespace Lix.Commons.Repositories
         private ISpecificationExecutor<TEntity> GetExecutor<TSpecification>(TSpecification specification)
             where TSpecification : class, ISpecification
         {
-            return this.SpecificationExecutorFactory.GetExecutor<TSpecification, TEntity>(specification, true);
+            var interceptedSpecification = Specification.Interceptors.GetReplacement(specification);
+
+            return this.SpecificationExecutorFactory.CreateExecutor<ISpecification, TEntity, IQueryRepository<TEntity>>(
+                interceptedSpecification, this);
         }
 
         /// <summary>
@@ -96,7 +83,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// An enumerable collection of <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        public IEnumerable<TEntity> List(ISpecification specification)
+        public IEnumerable<TEntity> List<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification
         {
             return this.GetExecutor(specification).List();
         }
@@ -110,7 +98,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <see cref="PagedResult{TEntity}"/> collection of <typeparamref name="TEntity"/> items that matched the specification.
         /// </returns>
-        public PagedResult<TEntity> List(ISpecification specification, int startIndex, int pageSize)
+        public PagedResult<TEntity> List<TSpecification>(TSpecification specification, int startIndex, int pageSize)
+            where TSpecification : class, ISpecification
         {
             return this.GetExecutor(specification).List(startIndex, pageSize);
         }
@@ -122,7 +111,8 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
         /// </returns>
-        public bool Exists(ISpecification specification)
+        public bool Exists<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification
         {
             return this.GetExecutor(specification).Exists();
         }
@@ -134,9 +124,24 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// The number of <typeparamref name="TEntity"/> matching the specification.
         /// </returns>
-        public long Count(ISpecification specification)
+        public long Count<TSpecification>(TSpecification specification)
+            where TSpecification : class, ISpecification
         {
             return this.GetExecutor(specification).Count();
         }
+
+        IQueryable<TEntity> ILinqRepository<TEntity>.RepositoryQuery
+        {
+            get
+            {
+                return this.GetRepositoryQuery();
+            }
+        }
+
+        /// <summary>
+        /// Gets the repository query.
+        /// </summary>
+        /// <value>The repository query.</value>
+        protected abstract IQueryable<TEntity> GetRepositoryQuery();
     }
 }

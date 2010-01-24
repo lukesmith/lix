@@ -1,12 +1,13 @@
 ﻿using System.Linq;
+using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Repositories
 {
     class Linq2SqlRepositoryBase<TEntity> : RepositoryBase<TEntity, Linq2SqlUnitOfWork>
         where TEntity : class
     {
-        protected Linq2SqlRepositoryBase(Linq2SqlUnitOfWork unitOfWork)
-            : base(unitOfWork)
+        protected Linq2SqlRepositoryBase(Linq2SqlUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
+            : base(unitOfWork, specificationExecutorFactory)
         {
         }
 
@@ -22,9 +23,9 @@ namespace Lix.Commons.Repositories
         /// Gets the repository query.
         /// </summary>
         /// <value>The repository query.</value>
-        protected override IQueryable<TEntity> RepositoryQuery
+        protected override IQueryable<TEntity> GetRepositoryQuery()
         {
-            get { return this.UnitOfWork.DataContext.GetTable<TEntity>(); }
+            return this.UnitOfWork.DataContext.GetTable<TEntity>();
         }
 
         /// <summary>

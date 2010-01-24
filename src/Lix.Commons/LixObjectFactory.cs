@@ -116,27 +116,15 @@ namespace Lix.Commons
             return CreateInstance(type) as ISpecificationInterceptor;
         }
 
-        /// <summary>
-        /// Checks whether the two types match, including whether they are the same generic type.
-        /// </summary>
-        /// <param name="typeA">The first type.</param>
-        /// <param name="typeB">The second type.</param>
-        /// <returns>
-        /// true if the types match; otherwise false.
-        /// </returns>
-        internal static bool DoTypesMatch(Type typeA, Type typeB)
+        public static ISpecificationExecutorFactory GetSpecificationExecutionFactory()
         {
-            if (typeA == typeB)
-            {
-                return true;
-            }
+            return _specificationExecutorFactory;
+        }
 
-            if (typeA.IsGenericType && typeB.IsGenericType && typeB.GetGenericTypeDefinition() == typeA.GetGenericTypeDefinition())
-            {
-                return true;
-            }
-
-            return false;
+        private static ISpecificationExecutorFactory _specificationExecutorFactory;
+        public static void SetSpecificationExecutionFactory(ISpecificationExecutorFactory specificationExecutorFactory)
+        {
+            _specificationExecutorFactory = specificationExecutorFactory;
         }
     }
 }
