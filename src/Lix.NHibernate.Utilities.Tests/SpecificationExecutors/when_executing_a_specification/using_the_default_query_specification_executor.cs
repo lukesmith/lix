@@ -13,7 +13,7 @@ namespace Lix.NHibernate.Utilities.Tests.SpecificationExecutors.when_executing_a
         {
             var repository = new Moq.Mock<INHibernateRepository<Fish>>();
             repository.Setup(x => x.CurrentSession).Returns(this.Session);
-            return new DefaultNHibernateQuerySpecificationExecutor<Fish>(specification, repository.Object);
+            return new NHibernateQuerySpecificationExecutor<Fish>(specification, repository.Object);
         }
 
         protected override INHibernateQuerySpecification GetSpecificationForUniqueResult(string description)

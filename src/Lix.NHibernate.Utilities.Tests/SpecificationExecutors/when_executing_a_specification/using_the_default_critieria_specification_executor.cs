@@ -14,7 +14,7 @@ namespace Lix.NHibernate.Utilities.Tests.SpecificationExecutors.when_executing_a
         {
             var repository = new Moq.Mock<INHibernateRepository<Fish>>();
             repository.Setup(x => x.CurrentSession).Returns(this.Session);
-            return new DefaultNHibernateCriteriaSpecificationExecutor<Fish>(specification, repository.Object);
+            return new NHibernateCriteriaSpecificationExecutor<Fish>(specification, repository.Object);
         }
 
         protected override INHibernateCriteriaSpecification<Fish> GetSpecificationForUniqueResult(string description)

@@ -8,14 +8,6 @@ using StructureMap.Pipeline;
 
 namespace Lix.StructureMapAdapter
 {
-    public static class ConfigurationExpressionExtensions
-    {
-        public static void RegisterLixDefaults(this ConfigurationExpression configurationExpression)
-        {
-            configurationExpression.For(typeof (IQueryableSpecification<>)).Use(typeof (DefaultQueryableSpecification<>));
-        }
-    }
-
     public class StructureMapSpecificationExecutorFactory : ISpecificationExecutorFactory
     {
         private static readonly Type ClosedSpecificationInterfaceType = typeof(ISpecification);
@@ -42,7 +34,7 @@ namespace Lix.StructureMapAdapter
         }
 
         /// <summary>
-        /// Determines whether the type is an <see cref="ISpecification"/> that has a single generic argument accepting <typeparamref name="TEntity"/>.
+        /// Determines whether the type implements <see cref="ISpecification"/> but is not itself an <see cref="ISpecification"/>.
         /// </summary>
         /// <typeparam name="TEntity">The type the specification must accept.</typeparam>
         /// <param name="type">The type to determine whether it is a <see cref="ISpecification"/>.</param>
@@ -50,13 +42,7 @@ namespace Lix.StructureMapAdapter
         private static bool IsSpecificationExecutorInterface<TEntity>(Type type)
             where TEntity : class
         {
-            if (ClosedSpecificationInterfaceType.IsAssignableFrom(type) && type != ClosedSpecificationInterfaceType)
-            {
-                var genericArguments = type.GetGenericArguments();
-                return genericArguments.Length == 1 && genericArguments.Contains(typeof(TEntity));
-            }
-
-            return false;
+            return ClosedSpecificationInterfaceType.IsAssignableFrom(type) && type != ClosedSpecificationInterfaceType;
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Lix.Futures.Tests.NHibernate
                                                 {
                                                     cfg.TheCallingAssembly();
                                                     cfg.AssemblyContainingType<Fish>();
-                                                    cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
+                                                    cfg.With(new QueryableSpecificationExecutorRegistrationConvention(typeof(Fish)));
                                                     cfg.WithDefaultConventions();
                                                 }));
             this.fishRepository = new FutureFishNHibernateRepository(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));

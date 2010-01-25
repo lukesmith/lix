@@ -58,7 +58,7 @@
     <Compile Include="LixObjectFactory.cs" />
     <Compile Include="Repositories\EnumerableExtensions.cs" />
     <Compile Include="Repositories\ICommandRepository.cs" />
-    <Compile Include="Repositories\ILinqRepository.cs" />
+    <Compile Include="Repositories\ILinqEnabledRepository.cs" />
     <Compile Include="Repositories\InMemoryDataStore.cs" />
     <Compile Include="Repositories\InMemoryTransaction.cs" />
     <Compile Include="PagedResult.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Specifications\ISpecificationExecutor`2.cs" />
     <Compile Include="Specifications\QueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Specifications\DefaultQueryableSpecification`1.cs" />
+    <Compile Include="Specifications\DefaultQueryableSpecification.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
     <Compile Include="Specifications\FindAll.cs" />
     <Compile Include="Specifications\InterceptionQueryableSpecification.cs" />

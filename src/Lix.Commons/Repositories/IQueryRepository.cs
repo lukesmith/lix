@@ -3,7 +3,7 @@ using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Repositories
 {
-    public interface IQueryRepository<TEntity> : ILinqRepository<TEntity>
+    public interface IQueryRepository<TEntity> : ILinqEnabledRepository<TEntity>
         where TEntity : class
     {
         /// <summary>

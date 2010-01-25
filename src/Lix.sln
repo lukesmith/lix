@@ -31,21 +31,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Linq2Sql.Utilities", "L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{025CF06F-D9CD-4054-AC78-46C55059F31E}"
 	ProjectSection(SolutionItems) = preProject
-		..\libs\Antlr3.Runtime.dll = ..\libs\Antlr3.Runtime.dll
-		..\libs\Castle.Core.dll = ..\libs\Castle.Core.dll
-		..\libs\Castle.DynamicProxy2.dll = ..\libs\Castle.DynamicProxy2.dll
 		..\libs\FluentNHibernate.dll = ..\libs\FluentNHibernate.dll
 		..\libs\FluentNHibernate.pdb = ..\libs\FluentNHibernate.pdb
 		..\libs\FluentNHibernate.XML = ..\libs\FluentNHibernate.XML
 		..\libs\HibernatingRhinos.NHibernate.Profiler.Appender.dll = ..\libs\HibernatingRhinos.NHibernate.Profiler.Appender.dll
-		..\libs\Iesi.Collections.dll = ..\libs\Iesi.Collections.dll
-		..\libs\log4net.dll = ..\libs\log4net.dll
 		..\libs\Moq.dll = ..\libs\Moq.dll
-		..\libs\nhibernate-configuration.xsd = ..\libs\nhibernate-configuration.xsd
-		..\libs\nhibernate-mapping.xsd = ..\libs\nhibernate-mapping.xsd
-		..\libs\NHibernate.ByteCode.Castle.dll = ..\libs\NHibernate.ByteCode.Castle.dll
-		..\libs\NHibernate.dll = ..\libs\NHibernate.dll
-		..\libs\NHibernate.Linq.dll = ..\libs\NHibernate.Linq.dll
 		..\libs\System.Data.SQLite.DLL = ..\libs\System.Data.SQLite.DLL
 		..\libs\System.Data.SQLite.Linq.dll = ..\libs\System.Data.SQLite.Linq.dll
 	EndProjectSection
@@ -61,6 +51,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.StructureMapAdapter", "Adapters\Lix.StructureMapAdapter\Lix.StructureMapAdapter.csproj", "{83253EE0-B8EE-4D15-857C-8AAE4380D6BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.StructureMapAdapter.Tests", "Adapters\Lix.StructureMapAdapter.Tests\Lix.StructureMapAdapter.Tests.csproj", "{D9E85EAC-FC2C-4317-B848-29C325C149E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.NHibernate.Utilities.StructureMapAdapter", "Adapters\Lix.NHibernate.Utilities.StructureMapAdapter\Lix.NHibernate.Utilities.StructureMapAdapter.csproj", "{FE0F8183-15B4-4426-B2AA-405248A507A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +104,10 @@ Global
 		{D9E85EAC-FC2C-4317-B848-29C325C149E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E85EAC-FC2C-4317-B848-29C325C149E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E85EAC-FC2C-4317-B848-29C325C149E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,5 +115,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{83253EE0-B8EE-4D15-857C-8AAE4380D6BE} = {5CA19B9D-0D70-4256-AD00-C0988CBBD445}
 		{D9E85EAC-FC2C-4317-B848-29C325C149E5} = {5CA19B9D-0D70-4256-AD00-C0988CBBD445}
+		{FE0F8183-15B4-4426-B2AA-405248A507A4} = {5CA19B9D-0D70-4256-AD00-C0988CBBD445}
 	EndGlobalSection
 EndGlobal

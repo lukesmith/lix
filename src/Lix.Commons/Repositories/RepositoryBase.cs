@@ -130,7 +130,7 @@ namespace Lix.Commons.Repositories
             return this.GetExecutor(specification).Count();
         }
 
-        IQueryable<TEntity> ILinqRepository<TEntity>.RepositoryQuery
+        IQueryable<TEntity> ILinqEnabledRepository<TEntity>.RepositoryQuery
         {
             get
             {

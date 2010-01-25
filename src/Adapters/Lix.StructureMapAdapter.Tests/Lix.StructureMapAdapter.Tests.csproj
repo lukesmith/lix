@@ -58,13 +58,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="when_processing_a_struct_with_the_queryable_specification_executor_registration_convention.cs" />
-    <Compile Include="when_the_factory_creates_an_executor.cs" />
+    <Compile Include="when_the_factory_creates_a_nhibernate_query_specification_executor.cs" />
+    <Compile Include="when_the_factory_creates_a_queryable_specification_executor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="when_the_factory_creates_a_nhibernate_criteria_specification_executor.cs" />
+    <Compile Include="when_the_queryable_specification_executor_registration_convention_has_been_used.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lix.Commons\Lix.Commons.csproj">
       <Project>{3DF3872A-53DB-4BFB-A2E5-E478878A99D3}</Project>
       <Name>Lix.Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lix.NHibernate.Utilities\Lix.NHibernate.Utilities.csproj">
+      <Project>{FF5778BE-2B67-407B-8320-641ED43AD7DC}</Project>
+      <Name>Lix.NHibernate.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lix.StructureMapAdapter\Lix.StructureMapAdapter.csproj">
       <Project>{83253EE0-B8EE-4D15-857C-8AAE4380D6BE}</Project>

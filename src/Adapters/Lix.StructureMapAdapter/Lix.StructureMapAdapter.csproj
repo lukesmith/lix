@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="LixRegistry.cs" />
     <Compile Include="QueryableSpecificationExecutorRegistrationConvention.cs" />
+    <Compile Include="SpecificationExecutorRegistrationConventionBase.cs" />
     <Compile Include="StructureMapSpecificationExecutorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

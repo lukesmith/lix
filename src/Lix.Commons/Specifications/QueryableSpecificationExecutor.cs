@@ -7,7 +7,7 @@ namespace Lix.Commons.Specifications
     public class QueryableSpecificationExecutor<TEntity> : SpecificationExecutorBase<IQueryableSpecification<TEntity>, TEntity, IQueryable<TEntity>>, IQueryableSpecificationExecutor<TEntity>
         where TEntity : class
     {
-        public QueryableSpecificationExecutor(IQueryableSpecification<TEntity> specification, IQueryRepository<TEntity> repository)
+        public QueryableSpecificationExecutor(IQueryableSpecification<TEntity> specification, ILinqEnabledRepository<TEntity> repository)
             : base(specification, repository.RepositoryQuery)
         {
         }

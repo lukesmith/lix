@@ -28,16 +28,9 @@ namespace Lix.Futures.Tests.InMemory
                                                    {
                                                        cfg.TheCallingAssembly();
                                                        cfg.AssemblyContainingType<Fish>();
-                                                       cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
+                                                       cfg.With(new QueryableSpecificationExecutorRegistrationConvention(typeof(Fish)));
                                                    });
                                     });
-            //    x.Scan(cfg =>
-            //{
-            //    cfg.TheCallingAssembly();
-            //    cfg.AssemblyContainingType<Fish>();
-            //    cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
-            //    cfg.WithDefaultConventions();
-            //})});
 
             return new InMemoryRepository<Fish>(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));
         }
