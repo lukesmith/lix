@@ -1,4 +1,4 @@
-using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using Machine.Specifications;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;

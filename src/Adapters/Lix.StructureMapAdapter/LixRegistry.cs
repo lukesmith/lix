@@ -1,4 +1,4 @@
-using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using StructureMap.Configuration.DSL;
 
 namespace Lix.StructureMapAdapter

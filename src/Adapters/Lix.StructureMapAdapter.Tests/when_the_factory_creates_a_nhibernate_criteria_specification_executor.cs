@@ -1,5 +1,6 @@
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using Machine.Specifications;
 using Moq;
 using Container=StructureMap.Container;

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
 {

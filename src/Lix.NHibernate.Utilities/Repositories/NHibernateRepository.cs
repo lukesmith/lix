@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Linq;
-using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using NHibernate;
 using NHibernate.Exceptions;
 using NHibernate.Linq;

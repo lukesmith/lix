@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public abstract class SpecificationExecutorBase<TSpecification, TEntity, TDataSource> : ISpecificationExecutor<TSpecification, TEntity>
         where TSpecification : class, ISpecification

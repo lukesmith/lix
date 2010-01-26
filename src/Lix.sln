@@ -54,6 +54,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.StructureMapAdapter.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.NHibernate.Utilities.StructureMapAdapter", "Adapters\Lix.NHibernate.Utilities.StructureMapAdapter\Lix.NHibernate.Utilities.StructureMapAdapter.csproj", "{FE0F8183-15B4-4426-B2AA-405248A507A4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{54090CC0-67D1-4200-A6B8-CF0FC100479F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lix.Examples.Configuration", "Examples\Lix.Examples.Configuration\Lix.Examples.Configuration.csproj", "{F6EB28B4-7140-4F87-89EF-E3924F06DD13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +112,10 @@ Global
 		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE0F8183-15B4-4426-B2AA-405248A507A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6EB28B4-7140-4F87-89EF-E3924F06DD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EB28B4-7140-4F87-89EF-E3924F06DD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EB28B4-7140-4F87-89EF-E3924F06DD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EB28B4-7140-4F87-89EF-E3924F06DD13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,5 +124,6 @@ Global
 		{83253EE0-B8EE-4D15-857C-8AAE4380D6BE} = {5CA19B9D-0D70-4256-AD00-C0988CBBD445}
 		{D9E85EAC-FC2C-4317-B848-29C325C149E5} = {5CA19B9D-0D70-4256-AD00-C0988CBBD445}
 		{FE0F8183-15B4-4426-B2AA-405248A507A4} = {5CA19B9D-0D70-4256-AD00-C0988CBBD445}
+		{F6EB28B4-7140-4F87-89EF-E3924F06DD13} = {54090CC0-67D1-4200-A6B8-CF0FC100479F}
 	EndGlobalSection
 EndGlobal

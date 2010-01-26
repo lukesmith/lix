@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons
 {
@@ -114,17 +115,6 @@ namespace Lix.Commons
             var type = Container.FindTypeFor(x => x.GetInterfaces().Contains(typeof (ISpecificationInterceptor)));
 
             return CreateInstance(type) as ISpecificationInterceptor;
-        }
-
-        public static ISpecificationExecutorFactory GetSpecificationExecutionFactory()
-        {
-            return _specificationExecutorFactory;
-        }
-
-        private static ISpecificationExecutorFactory _specificationExecutorFactory;
-        public static void SetSpecificationExecutionFactory(ISpecificationExecutorFactory specificationExecutorFactory)
-        {
-            _specificationExecutorFactory = specificationExecutorFactory;
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Linq;
 using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
 using MbUnit.Framework;

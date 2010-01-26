@@ -1,6 +1,6 @@
 using Lix.Commons.Repositories;
 
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public interface ISpecificationExecutorFactory
     {

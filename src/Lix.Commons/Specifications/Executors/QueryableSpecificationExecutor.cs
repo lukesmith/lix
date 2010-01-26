@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Lix.Commons.Repositories;
 
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public class QueryableSpecificationExecutor<TEntity> : SpecificationExecutorBase<IQueryableSpecification<TEntity>, TEntity, IQueryable<TEntity>>, IQueryableSpecificationExecutor<TEntity>
         where TEntity : class

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 

@@ -1,14 +1,10 @@
 ﻿using System.Linq;
-using Lix.Commons;
-using Lix.Commons.Repositories;
-using Lix.Commons.Specifications;
 using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using Lix.Futures.Tests.Examples;
 using Lix.NHibernate.Utilities.Tests.Repositories;
 using Lix.StructureMapAdapter;
 using MbUnit.Framework;
-using Moq;
 
 namespace Lix.Futures.Tests.NHibernate
 {
@@ -48,13 +44,6 @@ namespace Lix.Futures.Tests.NHibernate
                                                 }));
             this.fishRepository = new FutureFishNHibernateRepository(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));
 
-        }
-
-        public override void TearDown()
-        {
-            LixObjectFactory.SetSpecificationExecutionFactory(null);
-
-            base.TearDown();
         }
 
         [Test]

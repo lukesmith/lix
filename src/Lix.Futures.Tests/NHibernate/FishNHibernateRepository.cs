@@ -1,6 +1,6 @@
 using System.Linq;
 using Lix.Commons.Repositories;
-using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using Lix.Commons.Tests.Examples;
 
 namespace Lix.Futures.Tests.NHibernate

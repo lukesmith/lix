@@ -1,5 +1,6 @@
 using System.Linq;
 using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.SpecificationExecutors;
 using Lix.NHibernate.Utilities.Tests.Repositories;

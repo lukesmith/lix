@@ -1,5 +1,6 @@
 ﻿using Lix.Commons.Repositories;
 using Lix.Commons.Specifications;
+using Lix.Commons.Specifications.Executors;
 using Lix.Commons.Tests.Examples;
 using Lix.NHibernate.Utilities.Tests.Examples;
 using MbUnit.Framework;

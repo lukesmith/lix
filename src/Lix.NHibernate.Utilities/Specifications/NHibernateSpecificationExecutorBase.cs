@@ -1,4 +1,5 @@
 using Lix.Commons.Repositories;
+using Lix.Commons.Specifications.Executors;
 using NHibernate;
 
 namespace Lix.Commons.Specifications

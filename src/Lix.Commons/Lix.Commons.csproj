@@ -68,12 +68,11 @@
     <Compile Include="Repositories\IQueryRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
-    <Compile Include="Specifications\IQueryableSpecificationExecutor.cs" />
-    <Compile Include="Specifications\ISpecificationExecutor.cs" />
-    <Compile Include="Specifications\ISpecificationExecutorFactory.cs" />
-    <Compile Include="Specifications\ISpecificationExecutorInitializer.cs" />
-    <Compile Include="Specifications\ISpecificationExecutor`2.cs" />
-    <Compile Include="Specifications\QueryableSpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\IQueryableSpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\ISpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\ISpecificationExecutorFactory.cs" />
+    <Compile Include="Specifications\Executors\ISpecificationExecutor`2.cs" />
+    <Compile Include="Specifications\Executors\QueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Specifications\DefaultQueryableSpecification.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
@@ -84,8 +83,7 @@
     <Compile Include="Specifications\ISpecificationInterceptor.cs" />
     <Compile Include="Specifications\ISpecification`2.cs" />
     <Compile Include="Specifications\Specification.cs" />
-    <Compile Include="Specifications\SpecificationExecutorBase`3.cs" />
-    <Compile Include="Specifications\InitializeExpressionExtensions.cs" />
+    <Compile Include="Specifications\Executors\SpecificationExecutorBase`3.cs" />
     <Compile Include="Specifications\SpecificationInterceptors.cs" />
     <Compile Include="Testing\SpecificationTestHelper.cs" />
   </ItemGroup>

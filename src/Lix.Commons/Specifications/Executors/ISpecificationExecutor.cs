@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public interface ISpecificationExecutor<TEntity>
         where TEntity : class
