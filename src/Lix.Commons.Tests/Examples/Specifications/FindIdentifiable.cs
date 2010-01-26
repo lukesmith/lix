@@ -1,5 +1,4 @@
-using System;
-using System.Linq.Expressions;
+using System.Linq;
 using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Tests.Examples.Specifications
@@ -13,12 +12,9 @@ namespace Lix.Commons.Tests.Examples.Specifications
             this.id = id;
         }
 
-        protected override Expression<Func<IIdentifiable, bool>> Predicate
+        public override IQueryable<IIdentifiable> Build(IQueryable<IIdentifiable> context)
         {
-            get
-            {
-                return x => x.Id == this.id;
-            }
+            return context.Where(x => x.Id == this.id);
         }
     }
 }

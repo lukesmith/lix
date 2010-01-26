@@ -8,9 +8,17 @@ namespace Lix.Commons.Specifications
         where TSpecification : class, ISpecification
         where TEntity : class
     {
+        private readonly INHibernateRepository<TEntity> repository;
+
         protected NHibernateSpecificationExecutorBase(TSpecification specification, INHibernateRepository<TEntity> repository)
-            : base(specification, repository.CurrentSession)
+            : base(specification)
         {
+            this.repository = repository;
+        }
+
+        protected override ISession DataSource
+        {
+            get { return this.repository.CurrentSession; }
         }
     }
 }

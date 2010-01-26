@@ -10,7 +10,7 @@ namespace Lix.Commons.Repositories
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <typeparam name="TUnitOfWork">The type of the unit of work.</typeparam>
-    public abstract class RepositoryBase<TEntity, TUnitOfWork> : IQueryRepository<TEntity>
+    public abstract class RepositoryBase<TEntity, TUnitOfWork> : IQueryRepository<TEntity>, ICommandRepository<TEntity>
         where TEntity : class
         where TUnitOfWork : IUnitOfWork
     {

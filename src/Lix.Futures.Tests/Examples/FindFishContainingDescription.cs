@@ -1,5 +1,4 @@
-using System;
-using System.Linq.Expressions;
+using System.Linq;
 using Lix.Commons.Specifications;
 using Lix.Commons.Tests.Examples;
 using Lix.Futures.Extensions;
@@ -15,12 +14,9 @@ namespace Lix.Futures.Tests.Examples
             this.description = description;
         }
 
-        protected override Expression<Func<Fish, bool>> Predicate
+        public override IQueryable<Fish> Build(IQueryable<Fish> context)
         {
-            get
-            {
-                return x => x.Description.Like(this.description, ComparisonType.Contains);
-            }
+            return context.Where(x => x.Description.Like(this.description, ComparisonType.Contains));
         }
     }
 }

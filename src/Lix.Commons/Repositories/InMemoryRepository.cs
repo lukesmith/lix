@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories

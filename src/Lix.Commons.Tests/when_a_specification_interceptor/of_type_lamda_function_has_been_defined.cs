@@ -21,10 +21,10 @@ namespace Lix.Commons.Tests.when_a_specification_interceptor
         public void should_get_the_replacement_lambda_function_specification()
         {
             var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish>().AsQueryable());
-            Specification.Intercept<EmptyFishQueryableSpecification>().With(interceptWith);
+            Specification.Intercept<FindAll<Fish>>().With(interceptWith);
 
-            var interceptBy = Specification.Interceptors.GetReplacement(new EmptyFishQueryableSpecification());
-            interceptBy.ShouldSatisfy(x => x.GetType() != typeof (EmptyFishQueryableSpecification));
+            var interceptBy = Specification.Interceptors.GetReplacement(new FindAll<Fish>());
+            interceptBy.ShouldSatisfy(x => x.GetType() != typeof (EmptyFishQueryableSpecification2));
         }
 
         [Test]
@@ -32,9 +32,9 @@ namespace Lix.Commons.Tests.when_a_specification_interceptor
         {
             var fish = new Fish();
             var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish> { fish }.AsQueryable());
-            Specification.Intercept<EmptyFishQueryableSpecification>().With(interceptWith);
+            Specification.Intercept<FindAll<Fish>>().With(interceptWith);
 
-            var interceptBy = Specification.Interceptors.GetReplacement(new EmptyFishQueryableSpecification());
+            var interceptBy = Specification.Interceptors.GetReplacement(new FindAll<Fish>());
             var result = interceptBy.Build(fish) as IQueryable;
             result.Cast<Fish>().Contains(fish).ShouldBeEqualTo(true);
         }

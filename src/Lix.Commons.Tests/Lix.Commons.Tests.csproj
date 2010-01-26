@@ -136,7 +136,6 @@
     <Compile Include="Repositories\Linq2Sql\when_using_a_linq_2_sql_unit_of_work.cs" />
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />
-    <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification.cs" />
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification2.cs" />
     <Compile Include="SpecificationExecutors\using_a_specification_executor.cs" />
     <Compile Include="Testing\SpecificationTestHelperTests.cs" />

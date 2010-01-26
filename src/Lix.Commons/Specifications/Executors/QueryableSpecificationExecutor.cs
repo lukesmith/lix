@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Lix.Commons.Repositories;
@@ -7,9 +8,17 @@ namespace Lix.Commons.Specifications.Executors
     public class QueryableSpecificationExecutor<TEntity> : SpecificationExecutorBase<IQueryableSpecification<TEntity>, TEntity, IQueryable<TEntity>>, IQueryableSpecificationExecutor<TEntity>
         where TEntity : class
     {
-        public QueryableSpecificationExecutor(IQueryableSpecification<TEntity> specification, ILinqEnabledRepository<TEntity> repository)
-            : base(specification, repository.RepositoryQuery)
+        private readonly IQueryRepository<TEntity> repository;
+
+        public QueryableSpecificationExecutor(IQueryableSpecification<TEntity> specification, IQueryRepository<TEntity> repository)
+            : base(specification)
         {
+            this.repository = repository;
+        }
+
+        protected override IQueryable<TEntity> DataSource
+        {
+            get { return this.repository.RepositoryQuery; }
         }
 
         public override TEntity Get()

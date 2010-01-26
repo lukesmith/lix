@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Lix.Commons.Specifications
 {
@@ -12,14 +10,6 @@ namespace Lix.Commons.Specifications
         public InterceptionQueryableSpecification(IQueryable<TEntity> data)
         {
             this.data = data;
-        }
-
-        protected override Expression<Func<TEntity, bool>> Predicate
-        {
-            get
-            {
-                return x => true;
-            }
         }
 
         public override IQueryable<TEntity> Build(IQueryable<TEntity> context)

@@ -33,7 +33,7 @@ namespace Lix.Commons.Tests.Repositories
         public void should_intercept_the_specification()
         {
             RepositoryTestHelpers.TestRepositoryMethodInterceptsTheSpecification
-                <TRepository, Fish, EmptyFishQueryableSpecification>(this.Repository, (x, y) => x.Count(y));
+                <TRepository, Fish, FindAll<Fish>>(this.Repository, (x, y) => x.Count(y));
         }
     }
 }

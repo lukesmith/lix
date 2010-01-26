@@ -27,7 +27,7 @@ namespace Lix.Commons.Tests.SpecificationExecutors.when_executing_a_specificatio
 
         protected override IQueryableSpecification<Fish> GetSpecificationForMultipleUniqueResult()
         {
-            return new EmptyFishQueryableSpecification();
+            return new FindAll<Fish>();
         }
 
         protected override IQueryableSpecification<Fish> GetSpecificationForUniqueResult(string description)

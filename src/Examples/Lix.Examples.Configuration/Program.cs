@@ -1,4 +1,5 @@
-﻿using Lix.StructureMapAdapter;
+﻿using Lix.Commons.Repositories;
+using Lix.StructureMapAdapter;
 using StructureMap;
 
 namespace Lix.Examples.Configuration
@@ -18,10 +19,13 @@ namespace Lix.Examples.Configuration
                        {
                            cfg.TheCallingAssembly();
 
-                           // Register the queryable specification executor convention
-                           cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
-                           // Register the nhibernate specification executor convention for types in the same namespace as the type Person
-                           cfg.With(new NHibernateCriteriaSpecificationExecutorRegistrationConvention(typeof (Person)));
+                           x.For(typeof(IQueryRepository<>)).Use(typeof(InMemoryRepository<>));
+
+                           // Register the queryable specification executor convention for types in the same namespace as the type Person
+                           cfg.With(new QueryableSpecificationExecutorRegistrationConvention(typeof(Person)));
+                           
+                           //// Register the nhibernate specification executor convention for types in the same namespace as the type Person
+                           //cfg.With(new NHibernateCriteriaSpecificationExecutorRegistrationConvention(typeof(Person)));
 
                            cfg.WithDefaultConventions();
                        });

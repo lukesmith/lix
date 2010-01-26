@@ -7,10 +7,9 @@ namespace Lix.Commons.Specifications.Executors
         where TEntity : class
         where TDataSource : class
     {
-        protected SpecificationExecutorBase(TSpecification specification, TDataSource dataSource)
+        protected SpecificationExecutorBase(TSpecification specification)
         {
             this.Specification = specification;
-            this.DataSource = dataSource;
         }
 
         public TSpecification Specification
@@ -19,11 +18,7 @@ namespace Lix.Commons.Specifications.Executors
             private set;
         }
 
-        public TDataSource DataSource
-        {
-            get;
-            private set;
-        }
+        protected abstract TDataSource DataSource { get; }
 
         public abstract TEntity Get();
 

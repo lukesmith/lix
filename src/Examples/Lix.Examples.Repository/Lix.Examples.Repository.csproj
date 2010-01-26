@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F6EB28B4-7140-4F87-89EF-E3924F06DD13}</ProjectGuid>
+    <ProjectGuid>{51E46177-559A-44F8-977C-0E87E5CB32C7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lix.Examples.Configuration</RootNamespace>
-    <AssemblyName>Lix.Examples.Configuration</AssemblyName>
+    <RootNamespace>Lix.Examples.Repository</RootNamespace>
+    <AssemblyName>Lix.Examples.Repository</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,15 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="FindPeopleWithDuplicateNames.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Adapters\Lix.NHibernate.Utilities.StructureMapAdapter\Lix.NHibernate.Utilities.StructureMapAdapter.csproj">
-      <Project>{FE0F8183-15B4-4426-B2AA-405248A507A4}</Project>
-      <Name>Lix.NHibernate.Utilities.StructureMapAdapter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Adapters\Lix.StructureMapAdapter\Lix.StructureMapAdapter.csproj">
       <Project>{83253EE0-B8EE-4D15-857C-8AAE4380D6BE}</Project>
       <Name>Lix.StructureMapAdapter</Name>

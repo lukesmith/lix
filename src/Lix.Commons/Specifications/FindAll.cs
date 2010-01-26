@@ -1,5 +1,4 @@
-using System;
-using System.Linq.Expressions;
+using System.Linq;
 
 namespace Lix.Commons.Specifications
 {
@@ -9,12 +8,9 @@ namespace Lix.Commons.Specifications
     /// <typeparam name="TEntity">Type type of the entity to build the specification for.</typeparam>
     public class FindAll<TEntity> : DefaultQueryableSpecification<TEntity>
     {
-        protected override Expression<Func<TEntity, bool>> Predicate
+        public override IQueryable<TEntity> Build(IQueryable<TEntity> context)
         {
-            get
-            {
-                return x => true;
-            }
+            return context;
         }
     }
 }
