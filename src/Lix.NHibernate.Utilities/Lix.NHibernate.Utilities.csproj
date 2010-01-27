@@ -67,17 +67,18 @@
     <Compile Include="Repositories\NHibernateRepository.cs" />
     <Compile Include="Repositories\NHibernateUnitOfWork.cs" />
     <Compile Include="Repositories\QueryExtensions.cs" />
+    <Compile Include="Specifications\DefaultCriteriaFindAll.cs" />
     <Compile Include="Specifications\DefaultNHibernateCriteriaSpecification.cs" />
     <Compile Include="Specifications\DefaultNHibernateQuerySpecification.cs" />
     <Compile Include="Specifications\INHibernateCriteriaSpecification.cs" />
-    <Compile Include="Specifications\INHibernateCriteriaSpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\INHibernateCriteriaSpecificationExecutor.cs" />
     <Compile Include="Specifications\INHibernateQuerySpecification.cs" />
-    <Compile Include="Specifications\INHibernateQuerySpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\INHibernateQuerySpecificationExecutor.cs" />
     <Compile Include="Specifications\INHibernateSpecification.cs" />
     <Compile Include="InitializeExpressionExtensions.cs" />
-    <Compile Include="Specifications\NHibernateCriteriaSpecificationExecutor.cs" />
-    <Compile Include="Specifications\NHibernateQuerySpecificationExecutor.cs" />
-    <Compile Include="Specifications\NHibernateSpecificationExecutorBase.cs" />
+    <Compile Include="Specifications\Executors\NHibernateCriteriaSpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\NHibernateQuerySpecificationExecutor.cs" />
+    <Compile Include="Specifications\Executors\NHibernateSpecificationExecutorBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lix.Commons\Lix.Commons.csproj">

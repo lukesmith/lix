@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
@@ -8,7 +7,7 @@ namespace Lix.Commons.Repositories
     /// Represents an in memory repository.
     /// </summary>
     /// <typeparam name="TEntity">Type type of the entity contained within the repository.</typeparam>
-    public class InMemoryRepository<TEntity> : RepositoryBase<TEntity, InMemoryUnitOfWork>
+    public class InMemoryRepository<TEntity> : RepositoryBase<TEntity>
         where TEntity : class
     {
         /// <summary>
@@ -16,16 +15,14 @@ namespace Lix.Commons.Repositories
         /// </summary>
         /// <param name="unitOfWork">The unit of work.</param>
         public InMemoryRepository(InMemoryUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(unitOfWork, specificationExecutorFactory)
+            : base(specificationExecutorFactory)
         {
+            this.UnitOfWork = unitOfWork;
         }
 
-        public new InMemoryUnitOfWork UnitOfWork
+        protected InMemoryUnitOfWork UnitOfWork
         {
-            get
-            {
-                return base.UnitOfWork as InMemoryUnitOfWork;
-            }
+            get; private set;
         }
 
         /// <summary>
@@ -50,13 +47,13 @@ namespace Lix.Commons.Repositories
         }
 
         /// <summary>
-        /// Saves the specified entity.
+        /// Adds the specified entity.
         /// </summary>
-        /// <param name="entity">The entity to save.</param>
+        /// <param name="entity">The entity to add.</param>
         /// <returns>
-        /// The <typeparamref name="TEntity"/> that was saved.
+        /// The <typeparamref name="TEntity"/> that was added.
         /// </returns>
-        public override TEntity Save(TEntity entity)
+        public override TEntity Add(TEntity entity)
         {
             this.DataStore.Save(entity);
 

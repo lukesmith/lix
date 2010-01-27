@@ -21,12 +21,6 @@ namespace Lix.Examples.Configuration
 
                            x.For(typeof(IQueryRepository<>)).Use(typeof(InMemoryRepository<>));
 
-                           // Register the queryable specification executor convention for types in the same namespace as the type Person
-                           cfg.With(new QueryableSpecificationExecutorRegistrationConvention(typeof(Person)));
-                           
-                           //// Register the nhibernate specification executor convention for types in the same namespace as the type Person
-                           //cfg.With(new NHibernateCriteriaSpecificationExecutorRegistrationConvention(typeof(Person)));
-
                            cfg.WithDefaultConventions();
                        });
 

@@ -1,8 +1,7 @@
 using Lix.Commons.Repositories;
-using Lix.Commons.Specifications.Executors;
 using NHibernate;
 
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public abstract class NHibernateSpecificationExecutorBase<TSpecification, TEntity> : SpecificationExecutorBase<TSpecification, TEntity, ISession>
         where TSpecification : class, ISpecification

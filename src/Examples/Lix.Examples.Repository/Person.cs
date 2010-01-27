@@ -2,12 +2,17 @@ namespace Lix.Examples.Repository
 {
     public class Person
     {
-        public int Id
+        public virtual int Id
         {
             get; set;
         }
 
-        public string Name
+        public virtual string Name
+        {
+            get; set;
+        }
+
+        public virtual int Age
         {
             get; set;
         }

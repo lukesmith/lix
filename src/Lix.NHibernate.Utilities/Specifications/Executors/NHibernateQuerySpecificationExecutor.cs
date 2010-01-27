@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Lix.Commons.Repositories;
 
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public class NHibernateQuerySpecificationExecutor<TEntity> : NHibernateSpecificationExecutorBase<INHibernateQuerySpecification, TEntity>, INHibernateQuerySpecificationExecutor<TEntity>
         where TEntity : class

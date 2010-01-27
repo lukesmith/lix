@@ -3,20 +3,18 @@ using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
 {
-    class Linq2SqlRepositoryBase<TEntity> : RepositoryBase<TEntity, Linq2SqlUnitOfWork>
+    class Linq2SqlRepositoryBase<TEntity> : RepositoryBase<TEntity>
         where TEntity : class
     {
         protected Linq2SqlRepositoryBase(Linq2SqlUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(unitOfWork, specificationExecutorFactory)
+            : base(specificationExecutorFactory)
         {
+            this.UnitOfWork = unitOfWork;
         }
 
-        public new Linq2SqlUnitOfWork UnitOfWork
+        protected Linq2SqlUnitOfWork UnitOfWork
         {
-            get
-            {
-                return base.UnitOfWork as Linq2SqlUnitOfWork;
-            }
+            get; private set;
         }
 
         /// <summary>
@@ -29,13 +27,13 @@ namespace Lix.Commons.Repositories
         }
 
         /// <summary>
-        /// Saves the specified entity.
+        /// Adds the specified entity.
         /// </summary>
-        /// <param name="entity">The entity to save.</param>
+        /// <param name="entity">The entity to add.</param>
         /// <returns>
-        /// The <typeparamref name="TEntity"/> that was saved.
+        /// The <typeparamref name="TEntity"/> that was added.
         /// </returns>
-        public override TEntity Save(TEntity entity)
+        public override TEntity Add(TEntity entity)
         {
             var table = this.UnitOfWork.DataContext.GetTable<TEntity>();
 

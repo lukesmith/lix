@@ -58,13 +58,6 @@ namespace Lix.Commons.Repositories
         long Count<TSpecification>(TSpecification specification)
             where TSpecification : class, ISpecification;
 
-        /// <summary>
-        /// Gets the unit of work.
-        /// </summary>
-        /// <value>The unit of work.</value>
-        IUnitOfWork UnitOfWork
-        {
-            get;
-        }
+        
     }
 }

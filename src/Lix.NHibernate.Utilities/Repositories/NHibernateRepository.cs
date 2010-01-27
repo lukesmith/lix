@@ -1,26 +1,22 @@
-﻿using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Linq;
 using Lix.Commons.Specifications.Executors;
 using NHibernate;
-using NHibernate.Exceptions;
 using NHibernate.Linq;
 
 namespace Lix.Commons.Repositories
 {
-    public class NHibernateRepository<TEntity> : RepositoryBase<TEntity, NHibernateUnitOfWork>, INHibernateRepository<TEntity>
+    public class NHibernateRepository<TEntity> : RepositoryBase<TEntity>, INHibernateRepository<TEntity>
         where TEntity : class
     {
         public NHibernateRepository(NHibernateUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(unitOfWork, specificationExecutorFactory)
+            : base(specificationExecutorFactory)
         {
+            this.UnitOfWork = unitOfWork;
         }
 
-        public new NHibernateUnitOfWork UnitOfWork
+        protected NHibernateUnitOfWork UnitOfWork
         {
-            get
-            {
-                return base.UnitOfWork as NHibernateUnitOfWork;
-            }
+            get; private set;
         }
 
         protected override IQueryable<TEntity> GetRepositoryQuery()
@@ -28,24 +24,10 @@ namespace Lix.Commons.Repositories
             return this.UnitOfWork.Session.Linq<TEntity>();
         }
 
-        public override TEntity Save(TEntity entity)
+        public override TEntity Add(TEntity entity)
         {
-            try
-            {
-                this.UnitOfWork.Session.SaveOrUpdate(entity);
-                return entity;
-            }
-            catch (GenericADOException ex)
-            {
-                var sqlEx = ex.InnerException as SqlException;
-
-                if (sqlEx != null && sqlEx.Number == 2627)
-                {
-                    throw new GenericADOException("A value must be unique.", ex);
-                }
-                
-                throw;
-            }
+            this.UnitOfWork.Session.SaveOrUpdate(entity);
+            return entity;
         }
 
         public override void Remove(TEntity entity)

@@ -9,29 +9,15 @@ namespace Lix.Commons.Repositories
     /// Represents an implementation of <see cref="IRepository{TEntity}"/>.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    /// <typeparam name="TUnitOfWork">The type of the unit of work.</typeparam>
-    public abstract class RepositoryBase<TEntity, TUnitOfWork> : IQueryRepository<TEntity>, ICommandRepository<TEntity>
+    public abstract class RepositoryBase<TEntity> : IQueryRepository<TEntity>, ICommandRepository<TEntity>
         where TEntity : class
-        where TUnitOfWork : IUnitOfWork
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RepositoryBase{TEntity, TUnitOfWork}"/> class.
+        /// Initializes a new instance of the <see cref="RepositoryBase{TEntity}"/> class.
         /// </summary>
-        /// <param name="unitOfWork">The unit of work.</param>
-        protected RepositoryBase(TUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
+        protected RepositoryBase(ISpecificationExecutorFactory specificationExecutorFactory)
         {
-            this.UnitOfWork = unitOfWork;
             this.SpecificationExecutorFactory = specificationExecutorFactory;
-        }
-
-        /// <summary>
-        /// Gets the unit of work.
-        /// </summary>
-        /// <value>The unit of work.</value>
-        public virtual IUnitOfWork UnitOfWork
-        {
-            get;
-            private set;
         }
 
         protected ISpecificationExecutorFactory SpecificationExecutorFactory
@@ -47,7 +33,19 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// The <typeparamref name="TEntity"/> that was saved.
         /// </returns>
-        public abstract TEntity Save(TEntity entity);
+        public TEntity Save(TEntity entity)
+        {
+            return this.Add(entity);
+        }
+
+        /// <summary>
+        /// Adds the specified entity.
+        /// </summary>
+        /// <param name="entity">The entity to add.</param>
+        /// <returns>
+        /// The <typeparamref name="TEntity"/> that was added.
+        /// </returns>
+        public abstract TEntity Add(TEntity entity);
 
         /// <summary>
         /// Removes the specified entity.

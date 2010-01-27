@@ -1,3 +1,5 @@
+using System;
+
 namespace Lix.Commons.Repositories
 {
     public interface ICommandRepository<TEntity>
@@ -9,21 +11,22 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// The <typeparamref name="TEntity"/> that was saved.
         /// </returns>
+        [Obsolete("Use the Add method.")]
         TEntity Save(TEntity entity);
+
+        /// <summary>
+        /// Adds the specified entity to the repository.
+        /// </summary>
+        /// <param name="entity">The entity to add.</param>
+        /// <returns>
+        /// The <typeparamref name="TEntity"/> that was added.
+        /// </returns>
+        TEntity Add(TEntity entity);
 
         /// <summary>
         /// Removes the specified entity.
         /// </summary>
         /// <param name="entity">The entity to remove.</param>
         void Remove(TEntity entity);
-
-        /// <summary>
-        /// Gets the unit of work.
-        /// </summary>
-        /// <value>The unit of work.</value>
-        IUnitOfWork UnitOfWork
-        {
-            get;
-        }
     }
 }

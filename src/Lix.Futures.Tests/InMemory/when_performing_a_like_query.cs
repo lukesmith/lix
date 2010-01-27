@@ -22,15 +22,12 @@ namespace Lix.Futures.Tests.InMemory
         protected override InMemoryRepository<Fish> CreateRepository()
         {
             var container = new StructureMap.Container();
-            container.Configure(x =>
-                                    {
-                                        x.Scan(cfg =>
-                                                   {
-                                                       cfg.TheCallingAssembly();
-                                                       cfg.AssemblyContainingType<Fish>();
-                                                       cfg.With(new QueryableSpecificationExecutorRegistrationConvention(typeof(Fish)));
-                                                   });
-                                    });
+            container.Configure(x => x.Scan(cfg =>
+                                                {
+                                                    cfg.TheCallingAssembly();
+                                                    cfg.AssemblyContainingType<Fish>();
+                                                    cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
+                                                }));
 
             return new InMemoryRepository<Fish>(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));
         }

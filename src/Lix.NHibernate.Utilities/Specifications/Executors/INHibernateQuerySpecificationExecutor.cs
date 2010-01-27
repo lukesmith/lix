@@ -1,6 +1,4 @@
-using Lix.Commons.Specifications.Executors;
-
-namespace Lix.Commons.Specifications
+namespace Lix.Commons.Specifications.Executors
 {
     public interface INHibernateQuerySpecificationExecutor<TEntity> : ISpecificationExecutor<INHibernateQuerySpecification, TEntity>
         where TEntity : class

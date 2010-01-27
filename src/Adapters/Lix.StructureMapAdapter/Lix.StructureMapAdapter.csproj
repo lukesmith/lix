@@ -54,6 +54,7 @@
     <Compile Include="SpecificationExecutorRegistrationConventionBase.cs" />
     <Compile Include="StructureMapSpecificationExecutorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWorkScope.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lix.Commons\Lix.Commons.csproj">
