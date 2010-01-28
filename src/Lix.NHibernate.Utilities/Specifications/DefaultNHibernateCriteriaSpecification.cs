@@ -22,7 +22,7 @@ namespace Lix.Commons.Specifications
         /// </returns>
         public ICriteria Build(ISession context)
         {
-            var criteria = context.CreateCriteria(typeof(TEntity));
+            var criteria = context.CreateCriteria(typeof(TEntity), typeof(TEntity).Name.ToLower());
 
             return this.Build(criteria);
         }
