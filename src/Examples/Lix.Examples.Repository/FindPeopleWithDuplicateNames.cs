@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 
 namespace Lix.Examples.Repository
 {
-    public class FindPeopleWithDuplicateNames2 : DefaultQueryableSpecification<Person>
+    public class FindPeopleWithDuplicateNames : DefaultQueryableSpecification<Person>
     {
         public override IQueryable<Person> Build(IQueryable<Person> context)
         {
@@ -15,12 +15,15 @@ namespace Lix.Examples.Repository
         }
     }
 
-    public class FindPeopleWithDuplicateNames : DefaultNHibernateCriteriaSpecification<Person>
+    public class FindPeopleWithDuplicateNames2 : DefaultNHibernateCriteriaSpecification<Person>
     {
         protected override ICriteria Build(ICriteria criteria)
         {
-            criteria.Add(Expression.Sql("ID = 3"));
-            return criteria;
+            var dCriteria = DetachedCriteria.For<Person>("pItem")
+                .SetProjection(Projections.Count("Name"))
+                .Add(Restrictions.EqProperty("pItem.Name", "person.Name"));
+
+            return criteria.Add(Subqueries.Lt(1, dCriteria));
         }
     }
 }

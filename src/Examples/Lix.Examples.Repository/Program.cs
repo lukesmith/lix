@@ -17,8 +17,8 @@ namespace Lix.Examples.Repository
     {
         static void Main(string[] args)
         {
-            ObjectFactory.Container.Configure(OnConfigureNHibernate);
-            //ObjectFactory.Container.Configure(OnConfigureInMemory);
+            //ObjectFactory.Container.Configure(OnConfigureNHibernate);
+            ObjectFactory.Container.Configure(OnConfigureInMemory);
 
             ObjectFactory.AssertConfigurationIsValid();
 
@@ -53,10 +53,10 @@ namespace Lix.Examples.Repository
                                                     });
 
             // Configure our IoC container for a nhibernaterepository
-            cfg.IncludeRegistry(new LixNHibernateRegistry());
+            cfg.AddRegistry(new LixNHibernateRegistry());
 
             // include the LixRegistry
-            cfg.IncludeRegistry(new LixRegistry());
+            cfg.AddRegistry(new LixRegistry());
 
             cfg.Scan(s =>
                          {
@@ -106,6 +106,7 @@ namespace Lix.Examples.Repository
                 commandRepository.Add(new Person { Age = 2, Name = "John" });
                 commandRepository.Add(new Person { Age = 5, Name = "Simon" });
                 commandRepository.Add(new Person { Age = 65, Name = "Sandie" });
+                commandRepository.Add(new Person { Age = 88, Name = "Simon" });
                 commandRepository.Add(new Person { Age = 23, Name = "Joan" });
                 commandRepository.Add(new Person { Age = 3, Name = "Mary" });
                 commandRepository.Add(new Person { Age = 33, Name = "Simon" });
