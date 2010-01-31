@@ -34,8 +34,6 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
         [SetUp(Order = 0)]
         public void SetUp()
         {
-            LixObjectFactory.Initialize(x => x.WithDefaultNHibernateExecutors());
-
             this.Session = this.SessionFactory.OpenSession();
 
             using (var tx = this.Session.BeginTransaction())

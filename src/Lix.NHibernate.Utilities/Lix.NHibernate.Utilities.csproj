@@ -75,7 +75,6 @@
     <Compile Include="Specifications\INHibernateQuerySpecification.cs" />
     <Compile Include="Specifications\Executors\INHibernateQuerySpecificationExecutor.cs" />
     <Compile Include="Specifications\INHibernateSpecification.cs" />
-    <Compile Include="InitializeExpressionExtensions.cs" />
     <Compile Include="Specifications\Executors\NHibernateCriteriaSpecificationExecutor.cs" />
     <Compile Include="Specifications\Executors\NHibernateQuerySpecificationExecutor.cs" />
     <Compile Include="Specifications\Executors\NHibernateSpecificationExecutorBase.cs" />
