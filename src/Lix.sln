@@ -6,7 +6,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{08B90B26-83F3-4C2E-9031-A17F5AEC35A8}"
 	ProjectSection(SolutionItems) = preProject
 		..\build.bat = ..\build.bat
-		..\BuildUtils.rb = ..\BuildUtils.rb
 		..\installgems.bat = ..\installgems.bat
 		..\Ruby_Not_Installed.txt = ..\Ruby_Not_Installed.txt
 	EndProjectSection
