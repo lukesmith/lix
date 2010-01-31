@@ -8,7 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{08B90B26
 		..\build.bat = ..\build.bat
 		..\BuildUtils.rb = ..\BuildUtils.rb
 		..\installgems.bat = ..\installgems.bat
-		..\RakeFile = ..\RakeFile
 		..\Ruby_Not_Installed.txt = ..\Ruby_Not_Installed.txt
 	EndProjectSection
 EndProject

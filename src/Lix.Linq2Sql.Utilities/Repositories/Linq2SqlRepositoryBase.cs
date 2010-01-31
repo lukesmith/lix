@@ -3,7 +3,7 @@ using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
 {
-    class Linq2SqlRepositoryBase<TEntity> : RepositoryBase<TEntity>
+    class Linq2SqlRepositoryBase<TEntity> : LinqRepositoryBase<TEntity>
         where TEntity : class
     {
         protected Linq2SqlRepositoryBase(Linq2SqlUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)

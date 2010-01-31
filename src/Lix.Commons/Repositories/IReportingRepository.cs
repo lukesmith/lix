@@ -3,7 +3,7 @@ using Lix.Commons.Specifications;
 
 namespace Lix.Commons.Repositories
 {
-    public interface IQueryRepository<TEntity> : ILinqEnabledRepository<TEntity>
+    public interface IReportingRepository<TEntity>
         where TEntity : class
     {
         /// <summary>
@@ -57,7 +57,5 @@ namespace Lix.Commons.Repositories
         /// </returns>
         long Count<TSpecification>(TSpecification specification)
             where TSpecification : class, ISpecification;
-
-        
     }
 }

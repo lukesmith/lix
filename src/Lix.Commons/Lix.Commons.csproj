@@ -57,7 +57,7 @@
     <Compile Include="InitializeExpression.cs" />
     <Compile Include="LixObjectFactory.cs" />
     <Compile Include="Repositories\EnumerableExtensions.cs" />
-    <Compile Include="Repositories\ICommandRepository.cs" />
+    <Compile Include="Repositories\IDomainRepository.cs" />
     <Compile Include="Repositories\ILinqEnabledRepository.cs" />
     <Compile Include="Repositories\InMemoryDataStore.cs" />
     <Compile Include="Repositories\InMemoryTransaction.cs" />
@@ -65,9 +65,10 @@
     <Compile Include="PagedResult`1.cs" />
     <Compile Include="Repositories\InMemoryRepository.cs" />
     <Compile Include="Repositories\InMemoryUnitOfWork.cs" />
-    <Compile Include="Repositories\IQueryRepository.cs" />
+    <Compile Include="Repositories\IReportingRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\LinqRepositoryBase.cs" />
     <Compile Include="Specifications\Executors\IQueryableSpecificationExecutor.cs" />
     <Compile Include="Specifications\Executors\ISpecificationExecutor.cs" />
     <Compile Include="Specifications\Executors\ISpecificationExecutorFactory.cs" />

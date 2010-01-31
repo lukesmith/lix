@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Lix.Commons.Specifications;
 using Lix.Commons.Specifications.Executors;
 
@@ -9,7 +8,7 @@ namespace Lix.Commons.Repositories
     /// Represents an implementation of <see cref="IRepository{TEntity}"/>.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public abstract class RepositoryBase<TEntity> : IQueryRepository<TEntity>, ICommandRepository<TEntity>
+    public abstract class RepositoryBase<TEntity> : IReportingRepository<TEntity>, IDomainRepository<TEntity>
         where TEntity : class
     {
         /// <summary>
@@ -24,18 +23,6 @@ namespace Lix.Commons.Repositories
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Saves the specified entity.
-        /// </summary>
-        /// <param name="entity">The entity to save.</param>
-        /// <returns>
-        /// The <typeparamref name="TEntity"/> that was saved.
-        /// </returns>
-        public TEntity Save(TEntity entity)
-        {
-            return this.Add(entity);
         }
 
         /// <summary>
@@ -58,7 +45,7 @@ namespace Lix.Commons.Repositories
         {
             var interceptedSpecification = Specification.Interceptors.GetReplacement(specification);
 
-            return this.SpecificationExecutorFactory.CreateExecutor<ISpecification, TEntity, IQueryRepository<TEntity>>(
+            return this.SpecificationExecutorFactory.CreateExecutor<ISpecification, TEntity, IReportingRepository<TEntity>>(
                 interceptedSpecification, this);
         }
 
@@ -69,8 +56,7 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
-        public TEntity Get<TSpecification>(TSpecification specification)
-            where TSpecification : class, ISpecification
+        TEntity IReportingRepository<TEntity>.Get<TSpecification>(TSpecification specification)
         {
             return this.GetExecutor(specification).Get();
         }
@@ -128,19 +114,5 @@ namespace Lix.Commons.Repositories
         {
             return this.GetExecutor(specification).Count();
         }
-
-        IQueryable<TEntity> ILinqEnabledRepository<TEntity>.RepositoryQuery
-        {
-            get
-            {
-                return this.GetRepositoryQuery();
-            }
-        }
-
-        /// <summary>
-        /// Gets the repository query.
-        /// </summary>
-        /// <value>The repository query.</value>
-        protected abstract IQueryable<TEntity> GetRepositoryQuery();
     }
 }

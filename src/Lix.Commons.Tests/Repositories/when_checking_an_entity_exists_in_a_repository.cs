@@ -9,7 +9,7 @@ namespace Lix.Commons.Tests.Repositories
 {
     public abstract class when_checking_an_entity_exists_in_a_repository<TUnitOfWork, TRepository> : repository_test_setups<TUnitOfWork, TRepository, Fish>
         where TUnitOfWork : class, IUnitOfWork
-        where TRepository : IQueryRepository<Fish>
+        where TRepository : IReportingRepository<Fish>
     {
         public override void SetUp()
         {

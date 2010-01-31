@@ -8,9 +8,9 @@ namespace Lix.Commons.Specifications.Executors
     public class QueryableSpecificationExecutor<TEntity> : SpecificationExecutorBase<IQueryableSpecification<TEntity>, TEntity, IQueryable<TEntity>>, IQueryableSpecificationExecutor<TEntity>
         where TEntity : class
     {
-        private readonly IQueryRepository<TEntity> repository;
+        private readonly ILinqEnabledRepository<TEntity> repository;
 
-        public QueryableSpecificationExecutor(IQueryableSpecification<TEntity> specification, IQueryRepository<TEntity> repository)
+        public QueryableSpecificationExecutor(IQueryableSpecification<TEntity> specification, ILinqEnabledRepository<TEntity> repository)
             : base(specification)
         {
             this.repository = repository;

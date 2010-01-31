@@ -98,6 +98,7 @@
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Adapters\Lix.NHibernate.Utilities.StructureMapAdapter\Lix.NHibernate.Utilities.StructureMapAdapter.csproj">

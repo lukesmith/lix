@@ -5,7 +5,7 @@ using NHibernate.Linq;
 
 namespace Lix.Commons.Repositories
 {
-    public class NHibernateRepository<TEntity> : RepositoryBase<TEntity>, INHibernateRepository<TEntity>
+    public class NHibernateRepository<TEntity> : LinqRepositoryBase<TEntity>, INHibernateRepository<TEntity>
         where TEntity : class
     {
         public NHibernateRepository(NHibernateUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)

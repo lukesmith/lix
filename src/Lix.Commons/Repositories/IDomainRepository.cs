@@ -1,19 +1,7 @@
-using System;
-
 namespace Lix.Commons.Repositories
 {
-    public interface ICommandRepository<TEntity>
+    public interface IDomainRepository<TEntity>
     {
-        /// <summary>
-        /// Saves the specified entity.
-        /// </summary>
-        /// <param name="entity">The entity to save.</param>
-        /// <returns>
-        /// The <typeparamref name="TEntity"/> that was saved.
-        /// </returns>
-        [Obsolete("Use the Add method.")]
-        TEntity Save(TEntity entity);
-
         /// <summary>
         /// Adds the specified entity to the repository.
         /// </summary>

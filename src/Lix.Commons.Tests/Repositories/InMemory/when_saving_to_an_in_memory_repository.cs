@@ -16,7 +16,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
             var fishInMemoryRepository = new InMemoryRepository<Fish>(this.UnitOfWork, null);
 
             var fish = new Fish();
-            fishInMemoryRepository.Save(fish);
+            fishInMemoryRepository.Add(fish);
 
             this.UnitOfWork.CurrentTransactionDataStore.Count().ShouldBeEqualTo(1);
         }
@@ -33,7 +33,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
             var fishInMemoryRepository = new InMemoryRepository<Fish>(this.UnitOfWork, null);
 
             var fish = new Fish();
-            var savedFish = fishInMemoryRepository.Save(fish);
+            var savedFish = fishInMemoryRepository.Add(fish);
 
             this.UnitOfWork.CurrentTransactionDataStore.Count().ShouldBeEqualTo(1);
 

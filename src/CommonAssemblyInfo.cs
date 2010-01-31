@@ -1,10 +1,9 @@
-
-using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCopyrightAttribute("Copyright 2009 Luke Smith. All rights reserved.")]
-[assembly: AssemblyVersionAttribute("1.0.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("1.0.0.0")]
-[assembly: AssemblyProductAttribute("Lix")]
-		
+[assembly: AssemblyTitle("Lix")]
+[assembly: AssemblyCompany("Lix")]
+[assembly: AssemblyProduct("Lix")]
+[assembly: AssemblyCopyright("copyright 2010, Luke Smith")]
+[assembly: AssemblyVersion("0.0.0.2")]
+

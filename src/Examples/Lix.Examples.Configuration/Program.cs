@@ -19,7 +19,7 @@ namespace Lix.Examples.Configuration
                        {
                            cfg.TheCallingAssembly();
 
-                           x.For(typeof(IQueryRepository<>)).Use(typeof(InMemoryRepository<>));
+                           x.For(typeof(IReportingRepository<>)).Use(typeof(InMemoryRepository<>));
 
                            cfg.WithDefaultConventions();
                        });

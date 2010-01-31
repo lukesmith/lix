@@ -10,7 +10,7 @@ namespace Lix.Commons.Tests.HelperExtensions
     public class RepositoryTestHelpers
     {
         public static void TestRepositoryMethodInterceptsTheSpecification<TRepository, TEntity, TSpecificationToIntercept>(TRepository repository, Action<TRepository, TSpecificationToIntercept> action)
-            where TRepository : IQueryRepository<TEntity>
+            where TRepository : IReportingRepository<TEntity>
             where TEntity : class
             where TSpecificationToIntercept : ISpecification, new()
         {

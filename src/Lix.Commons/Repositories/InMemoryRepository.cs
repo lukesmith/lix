@@ -7,7 +7,7 @@ namespace Lix.Commons.Repositories
     /// Represents an in memory repository.
     /// </summary>
     /// <typeparam name="TEntity">Type type of the entity contained within the repository.</typeparam>
-    public class InMemoryRepository<TEntity> : RepositoryBase<TEntity>
+    public class InMemoryRepository<TEntity> : LinqRepositoryBase<TEntity>
         where TEntity : class
     {
         /// <summary>

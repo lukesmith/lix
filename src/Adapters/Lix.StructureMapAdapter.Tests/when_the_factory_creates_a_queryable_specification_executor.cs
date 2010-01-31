@@ -21,7 +21,7 @@ namespace Lix.StructureMapAdapter.Tests
             _specificationExecutorFactory = new StructureMapSpecificationExecutorFactory(container);
         };
 
-        private Because of = () => _executorInstance = _specificationExecutorFactory.CreateExecutor<IQueryableSpecification<object>, object, IQueryRepository<object>>(new Mock<IQueryableSpecification<object>>().Object, new Mock<IQueryRepository<object>>().Object);
+        private Because of = () => _executorInstance = _specificationExecutorFactory.CreateExecutor<IQueryableSpecification<object>, object, ILinqEnabledRepository<object>>(new Mock<IQueryableSpecification<object>>().Object, new Mock<ILinqEnabledRepository<object>>().Object);
 
         private It should_not_be_null = () => _executorInstance.ShouldNotBeNull();
 

@@ -20,7 +20,7 @@ namespace Lix.Commons.Tests.SpecificationExecutors.when_executing_a_specificatio
 
         protected override ISpecificationExecutor<IQueryableSpecification<Fish>, Fish> GetExecutor(IQueryableSpecification<Fish> specification)
         {
-            var repository = new Moq.Mock<IQueryRepository<Fish>>();
+            var repository = new Moq.Mock<ILinqEnabledRepository<Fish>>();
             repository.Setup(x => x.RepositoryQuery).Returns(this.context);
             return new QueryableSpecificationExecutor<Fish>(specification, repository.Object);
         }

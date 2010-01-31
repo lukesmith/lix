@@ -7,7 +7,7 @@ namespace Lix.Commons.Repositories
     /// </summary>
     /// <typeparam name="TEntity">Type of the entity the repository is for.</typeparam>
     [Obsolete("Use specific repository, either ICommandRepository<> or IQueryRepository<>")]
-    public interface IRepository<TEntity> : ICommandRepository<TEntity>, IQueryRepository<TEntity>
+    public interface IRepository<TEntity> : IDomainRepository<TEntity>, IReportingRepository<TEntity>
         where TEntity : class
     {
     }

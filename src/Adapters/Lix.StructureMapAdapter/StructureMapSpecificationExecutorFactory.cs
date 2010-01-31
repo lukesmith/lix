@@ -22,7 +22,7 @@ namespace Lix.StructureMapAdapter
 
         public ISpecificationExecutor<TEntity> CreateExecutor<TSpecification, TEntity, TRepository>(TSpecification specification, TRepository repository)
             where TSpecification : ISpecification
-            where TRepository : IQueryRepository<TEntity>
+            where TRepository : IReportingRepository<TEntity>
             where TEntity : class
         {
             var specificationsInterfaces = specification.GetType().GetInterfaces();
