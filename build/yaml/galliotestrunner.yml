@@ -1,0 +1,2 @@
+path_to_command: "../tools/Gallio/bin/Gallio.echo.exe"
+assemblies: ["working/tests/BookUpon.Core.Tests.dll"]

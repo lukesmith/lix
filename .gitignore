@@ -1,4 +1,5 @@
-build/
+build/results
+build/working
 _*
 .idea/
 bin/

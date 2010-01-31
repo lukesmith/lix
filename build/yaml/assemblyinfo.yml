@@ -1,0 +1,7 @@
+version: "0.0.0.1"
+company_name: "Lix"
+product_name: "Lix"
+title: "Lix"
+description: "this is the assembly description"
+copyright: "copyright 2009, Luke Smith"
+output_file: "../src/CommonAssemblyInfo.cs"

@@ -1,0 +1,74 @@
+# Command line parameters
+
+require 'albacore'
+require "BuildUtils.rb"
+require 'FileUtils'
+require 'rake/clean'
+require 'rexml/document'
+include REXML
+
+Albacore::yaml_config_folder = "yaml/"
+Albacore::log_level = :verbose
+
+
+CLEAN.include('working/**/*', 'working')
+CLOBBER.include('results/**/*', 'results')
+
+file 'working' do
+  Dir.mkdir 'working'
+end
+
+file 'results' do
+  FileUtils.rm_rf 'results' if File.directory?("results")
+  Dir.mkdir 'results'
+end
+
+file 'tests' do
+  FileUtils.rm_rf 'working/tests' if File.directory?("working/tests")
+  FileUtils.rm_rf 'results/tests' if File.directory?("results/tests")
+  Dir.mkdir 'working/tests'
+  Dir.mkdir 'results/tests'
+end
+
+desc "Initialize the build"
+task :init => ["working", "results"] do
+end
+
+mspec :mspec
+#galliotask :rungallio
+#assemblyinfo :assemblyinfo
+msbuild :build
+
+assemblyinfo :assemblyinfo do |asm|
+  asm.version = "0.0.0.2"
+  asm.company_name = "Lix"
+  asm.product_name = "Lix"
+  asm.title = "Lix"
+  asm.copyright = "copyright 2010, Luke Smith"
+  asm.output_file = "../src/CommonAssemblyInfo.cs"
+end
+
+
+task :runtests => [:inittests, :mspec] do
+end
+
+task :inittests => 'tests' do
+  Dir.glob(File.join("../src/**/*.Tests/**/*.{dll,pdb,xml}")){|file|
+	copy(file, 'working/tests') if File.file?(file)
+  }
+end
+
+task :generateresults do
+  FileUtils.rm_rf 'results/bin' if File.directory?("results/bin")
+  Dir.mkdir 'results/bin'
+  Dir.glob(File.join("../src/**/Lix.*.{dll,pdb,xml}")){|file|
+	copy(file, 'results/bin') if File.file?(file)
+  }
+end
+
+task :default => [:init, :assemblyinfo, :build, :runtests, :generateresults]
+task :localbuild => [:default, :clean]
+
+task :cibuild => [:default, :installerbuild, :install, :clean] do
+  puts "##teamcity[publishArtifacts 'results']"
+end

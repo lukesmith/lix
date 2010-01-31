@@ -1,0 +1,3 @@
+targets: [:Clean, :Build]
+solution: "../src/Lix.sln"
+configuration: :Release
