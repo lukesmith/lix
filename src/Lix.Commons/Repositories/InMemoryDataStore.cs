@@ -57,27 +57,6 @@ namespace Lix.Commons.Repositories
             this.SaveToInternalStore(entity);
         }
 
-        private void SaveToInternalStore(object entity)
-        {
-            var type = entity.GetType();
-
-            if (!this.internalStore.ContainsKey(type))
-            {
-                this.internalStore.Add(type, new List<object>());
-            }
-
-            var list = this.internalStore[type];
-            if (!list.Contains(entity))
-            {
-                list.Add(entity);
-            }
-            else
-            {
-                var index = list.IndexOf(entity);
-                list[index] = entity;
-            }
-        }
-
         public void Remove<T>(T entity)
         {
             if (this.useTransactionDataStore)
@@ -125,11 +104,9 @@ namespace Lix.Commons.Repositories
                 return this.Transaction.CurrentTransactionDataStore.List<T>();
             }
 
-            var type = typeof(T);
-
-            if (this.internalStore.ContainsKey(type))
+            if (this.internalStore.ContainsKeyImplementing<T>())
             {
-                return this.internalStore[type].Cast<T>();
+                return this.internalStore.GetInstancesImplementing<T>();
             }
             else
             {
@@ -146,17 +123,6 @@ namespace Lix.Commons.Repositories
             }
 
             this.internalStore.Clear();
-        }
-
-        internal void Merge(InMemoryDataStore dataStore)
-        {
-            foreach (var store in dataStore.internalStore)
-            {
-                foreach (var d in store.Value)
-                {
-                    this.SaveToInternalStore(d);
-                }
-            }
         }
 
         public IEnumerator<KeyValuePair<Type, IList<object>>> GetEnumerator()
@@ -190,6 +156,38 @@ namespace Lix.Commons.Repositories
             public void Dispose()
             {
                 this.inMemoryDataStore.useTransactionDataStore = false;
+            }
+        }
+
+        private void SaveToInternalStore(object entity)
+        {
+            var type = entity.GetType();
+
+            if (!this.internalStore.ContainsKey(type))
+            {
+                this.internalStore.Add(type, new List<object>());
+            }
+
+            var list = this.internalStore[type];
+            if (!list.Contains(entity))
+            {
+                list.Add(entity);
+            }
+            else
+            {
+                var index = list.IndexOf(entity);
+                list[index] = entity;
+            }
+        }
+
+        internal void Merge(InMemoryDataStore dataStore)
+        {
+            foreach (var store in dataStore.internalStore)
+            {
+                foreach (var d in store.Value)
+                {
+                    this.SaveToInternalStore(d);
+                }
             }
         }
     }

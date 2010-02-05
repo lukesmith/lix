@@ -1,7 +1,11 @@
-﻿namespace Lix.Commons.Repositories
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Lix.Commons.Repositories
 {
     public class InMemoryTransaction
     {
+        [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented",
+            Justification = "Reviewed. Suppression is OK here.")]
         private readonly InMemoryDataStore datastore;
 
         internal InMemoryTransaction(InMemoryDataStore datastore)
@@ -9,11 +13,7 @@
             this.datastore = datastore;
         }
 
-        public InMemoryDataStore CurrentTransactionDataStore
-        {
-            get;
-            private set;
-        }
+        public InMemoryDataStore CurrentTransactionDataStore { get; private set; }
 
         public void Begin()
         {

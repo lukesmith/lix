@@ -13,7 +13,12 @@ namespace Lix.Commons.Repositories
         /// <summary>
         /// Initializes a new instance of the <see cref="InMemoryRepository{TEntity}"/> class.
         /// </summary>
-        /// <param name="unitOfWork">The unit of work.</param>
+        /// <param name="unitOfWork">
+        /// The unit of work.
+        /// </param>
+        /// <param name="specificationExecutorFactory">
+        /// The <see cref="ISpecificationExecutorFactory"/>.
+        /// </param>
         public InMemoryRepository(InMemoryUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
             : base(specificationExecutorFactory)
         {
@@ -38,15 +43,6 @@ namespace Lix.Commons.Repositories
         }
 
         /// <summary>
-        /// Gets the repository query.
-        /// </summary>
-        /// <value>The repository query.</value>
-        protected override IQueryable<TEntity> GetRepositoryQuery()
-        {
-            return this.DataStore.List<TEntity>().AsQueryable();
-        }
-
-        /// <summary>
         /// Adds the specified entity.
         /// </summary>
         /// <param name="entity">The entity to add.</param>
@@ -67,6 +63,20 @@ namespace Lix.Commons.Repositories
         public override void Remove(TEntity entity)
         {
             this.DataStore.Remove(entity);
+        }
+
+        /// <summary>
+        /// Gets the repository query.
+        /// </summary>
+        /// <value>
+        /// The repository query.
+        /// </value>
+        /// <returns>
+        /// An <see cref="IQueryable{T}"/> representing the query.
+        /// </returns>
+        protected override IQueryable<TEntity> GetRepositoryQuery()
+        {
+            return this.DataStore.List<TEntity>().AsQueryable();
         }
     }
 }

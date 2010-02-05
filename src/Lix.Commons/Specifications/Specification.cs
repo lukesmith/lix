@@ -5,17 +5,7 @@
     /// </summary>
     public class Specification
     {
-        /// <summary>
-        /// Creates an <see cref="FindAll{TEntity}"/>.
-        /// </summary>
-        /// <typeparam name="TEntity">The type of the entity to create the specification for.</typeparam>
-        /// <returns>
-        /// An <see cref="FindAll{TEntity}"/> object.
-        /// </returns>
-        public static IQueryableSpecification<TEntity> Empty<TEntity>()
-        {
-            return new FindAll<TEntity>();
-        }
+        private static SpecificationInterceptors interceptors;
 
         public static ISpecificationInterceptor Intercept<TSpecification>()
             where TSpecification : ISpecification
@@ -27,18 +17,29 @@
             return interceptor;
         }
 
-        private static SpecificationInterceptors _interceptors;
         public static SpecificationInterceptors Interceptors
         {
             get
             {
-                if (_interceptors == null)
+                if (interceptors == null)
                 {
-                    _interceptors = new SpecificationInterceptors();
+                    interceptors = new SpecificationInterceptors();
                 }
 
-                return _interceptors;
+                return interceptors;
             }
+        }
+
+        /// <summary>
+        /// Creates an <see cref="FindAll{TEntity}"/>.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity to create the specification for.</typeparam>
+        /// <returns>
+        /// An <see cref="FindAll{TEntity}"/> object.
+        /// </returns>
+        public static IQueryableSpecification<TEntity> Empty<TEntity>()
+        {
+            return new FindAll<TEntity>();
         }
     }
 }

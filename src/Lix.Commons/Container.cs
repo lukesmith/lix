@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Lix.Commons
 {
-    [Obsolete("Change so third party container has to be used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented",
+        Justification = "Reviewed. Suppression is OK here."),
+     Obsolete("Change so third party container has to be used.")]
     public class Container : IDisposable
     {
         private readonly IDictionary<Type, IList<Type>> innerContainer;
@@ -44,7 +47,7 @@ namespace Lix.Commons
 
         public Type FindTypeFor<T>()
         {
-            return this.FindTypeFor(typeof (T));
+            return this.FindTypeFor(typeof(T));
         }
 
         public Type FindTypeFor(Type type)

@@ -33,12 +33,13 @@ namespace Lix.Commons.Specifications
         /// <summary>
         /// Determines whether the specification satisfies the entity.
         /// </summary>
+        /// <param name="entity">The <typeparamref name="TEntity"/> to check the specification against.</param>
         /// <returns>
-        /// Returns true if the <param name="entity"></param> satisfies the specification.
+        /// Returns true if the <paramref name="entity"/> satisfies the specification.
         /// </returns>
         public bool IsSatisfiedBy(TEntity entity)
         {
-            var data = new List<TEntity> {entity};
+            var data = new List<TEntity> { entity };
             return this.Build(data.AsQueryable()).Any();
         }
     }

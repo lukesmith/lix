@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Lix.Commons.Specifications;
-using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons
 {
@@ -16,7 +15,7 @@ namespace Lix.Commons
         }
 
         /// <summary>
-        /// The IoC container instance the <see cref="LixObjectFactory"/> uses.
+        /// Gets the IoC container instance the <see cref="LixObjectFactory"/> uses.
         /// </summary>
         public static Container Container
         {
@@ -112,7 +111,7 @@ namespace Lix.Commons
         /// </returns>
         public static ISpecificationInterceptor CreateSpecificationInterceptor()
         {
-            var type = Container.FindTypeFor(x => x.GetInterfaces().Contains(typeof (ISpecificationInterceptor)));
+            var type = Container.FindTypeFor(x => x.GetInterfaces().Contains(typeof(ISpecificationInterceptor)));
 
             return CreateInstance(type) as ISpecificationInterceptor;
         }

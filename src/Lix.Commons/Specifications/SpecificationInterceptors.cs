@@ -6,6 +6,7 @@ namespace Lix.Commons.Specifications
     public class SpecificationInterceptors
     {
         private IDictionary<Type, ISpecificationInterceptor> interceptors;
+        
         private IDictionary<Type, ISpecificationInterceptor> Interceptors
         {
             get
@@ -28,7 +29,7 @@ namespace Lix.Commons.Specifications
         }
 
         public void Add<TSpecification>(ISpecificationInterceptor interceptor)
-            where  TSpecification : ISpecification
+            where TSpecification : ISpecification
         {
             this.Interceptors.Add(typeof(TSpecification), interceptor);
         }

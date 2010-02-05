@@ -14,11 +14,15 @@ namespace Lix.Commons.Repositories
         /// <summary>
         /// Initializes a new instance of the <see cref="RepositoryBase{TEntity}"/> class.
         /// </summary>
+        /// <param name="specificationExecutorFactory">The <see cref="ISpecificationExecutorFactory"/> to use.</param>
         protected RepositoryBase(ISpecificationExecutorFactory specificationExecutorFactory)
         {
             this.SpecificationExecutorFactory = specificationExecutorFactory;
         }
 
+        /// <summary>
+        /// Gets an instance of the <see cref="ISpecificationExecutorFactory"/>.
+        /// </summary>
         protected ISpecificationExecutorFactory SpecificationExecutorFactory
         {
             get;

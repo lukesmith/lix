@@ -38,7 +38,8 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <NoWarn>618</NoWarn>
+    <NoWarn>618, 1591</NoWarn>
+    <DocumentationFile>bin\Debug\Lix.Commons.Tests.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,7 +50,8 @@
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>x86</PlatformTarget>
-    <NoWarn>618</NoWarn>
+    <NoWarn>618, 1591</NoWarn>
+    <DocumentationFile>bin\Release\Lix.Commons.Tests.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gallio, Version=3.0.6.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
@@ -107,6 +109,7 @@
     <Compile Include="PagedResult\when_the_page_size_is_zero.cs" />
     <Compile Include="PagedResult\when_the_result_set_has_zero_items\and_the_total_items_is_ten.cs" />
     <Compile Include="PagedResult\when_the_result_set_has_zero_items\and_the_total_items_is_zero.cs" />
+    <Compile Include="Repositories\InMemory\when_getting_a_list_of_items_in_an_in_memory_datastore_that_implements_an_interface.cs" />
     <Compile Include="Repositories\InMemory\when_listing_paged_entities_in_an_in_memory_repository.cs" />
     <Compile Include="HelperExtensions\RepositoryTestHelpers.cs" />
     <Compile Include="Repositories\when_listing_paged_entities_in_a_repository`2.cs" />
@@ -225,6 +228,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\..\Tools\StyleCop\v4.3\Microsoft.SourceAnalysis.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

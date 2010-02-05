@@ -12,12 +12,6 @@ namespace Lix.Commons.Repositories
             this.DataStore = dataStore;
         }
 
-        private InMemoryDataStore DataStore
-        {
-            get;
-            set;
-        }
-
         public InMemoryDataStore CurrentTransactionDataStore
         {
             get
@@ -41,6 +35,12 @@ namespace Lix.Commons.Repositories
             {
                 return this.DataStore.Transaction != null;
             }
+        }
+
+        private InMemoryDataStore DataStore
+        {
+            get;
+            set;
         }
 
         /// <summary>

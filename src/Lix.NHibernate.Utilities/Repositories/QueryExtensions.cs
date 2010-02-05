@@ -17,6 +17,7 @@ namespace Lix.Commons.Repositories
         /// </summary>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <param name="query">The query.</param>
+        /// <param name="countQuery">The count Query.</param>
         /// <param name="startIndex">The start index.</param>
         /// <param name="pageSize">Size of the page.</param>
         /// <returns>
