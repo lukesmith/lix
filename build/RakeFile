@@ -10,7 +10,6 @@ include REXML
 Albacore::yaml_config_folder = "yaml/"
 Albacore::log_level = :verbose
 
-
 CLEAN.include('working/**/*', 'working')
 CLOBBER.include('results/**/*', 'results')
 
@@ -36,17 +35,8 @@ end
 
 mspec :mspec
 #galliotask :rungallio
-#assemblyinfo :assemblyinfo
+assemblyinfo :assemblyinfo
 msbuild :build
-
-assemblyinfo :assemblyinfo do |asm|
-  asm.version = "0.0.0.2"
-  asm.company_name = "Lix"
-  asm.product_name = "Lix"
-  asm.title = "Lix"
-  asm.copyright = "copyright 2010, Luke Smith"
-  asm.output_file = "../src/CommonAssemblyInfo.cs"
-end
 
 
 task :runtests => [:inittests, :mspec] do

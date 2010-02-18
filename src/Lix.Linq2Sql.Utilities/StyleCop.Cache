@@ -1,14 +1,5 @@
 <stylecopresultscache>
   <version>10</version>
-  <sourcecode name="CommonAssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/05/2010 00:25:04</timestamp>
-      <milliseconds>891</milliseconds>
-    </settings>
-    <timestamp>02/01/2010 22:58:05</timestamp>
-    <milliseconds>759</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="Linq2SqlRepositoryBase.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/05/2010 00:25:04</timestamp>
@@ -83,6 +74,15 @@
         <warning>False</warning>
       </violation>
     </violations>
+  </sourcecode>
+  <sourcecode name="CommonAssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/05/2010 00:25:04</timestamp>
+      <milliseconds>891</milliseconds>
+    </settings>
+    <timestamp>02/18/2010 00:03:37</timestamp>
+    <milliseconds>595</milliseconds>
+    <violations />
   </sourcecode>
   <project key="-1086038387">
     <configuration>DEBUG;TRACE</configuration>

@@ -1,3 +1,4 @@
 targets: [:Clean, :Build]
-solution: "../src/Lix.sln"
+solution: "../Lix.sln"
 configuration: :Release
+parameters: ["/p:RakeBuild=true"]
