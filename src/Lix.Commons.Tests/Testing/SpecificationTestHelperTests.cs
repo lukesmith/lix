@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lix.Commons.Specifications;
 using Lix.Commons.Testing;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Examples.Specifications;
@@ -16,7 +17,7 @@ namespace Lix.Commons.Tests.Testing
         {
             var specification = new Mock<FindFishWithIdSpecification>(1);
 
-            specification.Setup(x => x.Build(It.IsAny<IQueryable<Fish>>()));
+            specification.Setup(x => ((ISpecification<IQueryable<Fish>, IQueryable<Fish>>) x).Build());
 
             SpecificationTestHelper.Test(specification.Object, new List<Fish>());
 

@@ -74,12 +74,15 @@
     <Compile Include="Repositories\IReportingRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\IUnitOfWorkFactory.cs" />
+    <Compile Include="Repositories\IUnitOfWorkProvider.cs" />
     <Compile Include="Repositories\LinqRepositoryBase.cs" />
-    <Compile Include="Specifications\Executors\IQueryableSpecificationExecutor.cs" />
+    <Compile Include="Specifications\AbstractSpecification.cs" />
+    <Compile Include="Specifications\Executors\IExecuteCount.cs" />
+    <Compile Include="Specifications\Executors\IExecuteExists.cs" />
+    <Compile Include="Specifications\Executors\IExecuteGet.cs" />
+    <Compile Include="Specifications\Executors\IExecuteList.cs" />
     <Compile Include="Specifications\Executors\ISpecificationExecutor.cs" />
-    <Compile Include="Specifications\Executors\ISpecificationExecutorFactory.cs" />
-    <Compile Include="Specifications\Executors\ISpecificationExecutor`2.cs" />
-    <Compile Include="Specifications\Executors\QueryableSpecificationExecutor.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Specifications\DefaultQueryableSpecification.cs" />
     <Compile Include="Specifications\DefaultSpecificationInterceptor.cs" />
@@ -90,7 +93,6 @@
     <Compile Include="Specifications\ISpecificationInterceptor.cs" />
     <Compile Include="Specifications\ISpecification`2.cs" />
     <Compile Include="Specifications\Specification.cs" />
-    <Compile Include="Specifications\Executors\SpecificationExecutorBase`3.cs" />
     <Compile Include="Specifications\SpecificationInterceptors.cs" />
     <Compile Include="Testing\SpecificationTestHelper.cs" />
   </ItemGroup>

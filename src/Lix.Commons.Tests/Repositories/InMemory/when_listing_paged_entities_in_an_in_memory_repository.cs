@@ -14,7 +14,7 @@ namespace Lix.Commons.Tests.Repositories.InMemory
 
         protected override InMemoryRepository<Fish> CreateRepository()
         {
-            return new InMemoryRepository<Fish>(this.UnitOfWork, null);
+            return new InMemoryRepository<Fish>(this.UnitOfWork);
         }
 
         protected override InMemoryUnitOfWork CreateUnitOfWork()

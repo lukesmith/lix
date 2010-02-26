@@ -60,13 +60,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LixRegistry.cs" />
-    <Compile Include="QueryableSpecificationExecutorRegistrationConvention.cs" />
-    <Compile Include="SpecificationExecutorRegistrationConventionBase.cs" />
-    <Compile Include="StructureMapSpecificationExecutorFactory.cs" />
+    <Compile Include="CommandPublisherContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="UnitOfWorkScope.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lix.Commands\Lix.Commands.csproj">
+      <Project>{BF5C35A6-8EA8-43C8-B506-2656CACA7784}</Project>
+      <Name>Lix.Commands</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Lix.Commons\Lix.Commons.csproj">
       <Project>{3DF3872A-53DB-4BFB-A2E5-E478878A99D3}</Project>
       <Name>Lix.Commons</Name>

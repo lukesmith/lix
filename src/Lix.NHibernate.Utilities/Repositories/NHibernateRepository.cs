@@ -8,8 +8,7 @@ namespace Lix.Commons.Repositories
     public class NHibernateRepository<TEntity> : LinqRepositoryBase<TEntity>, INHibernateRepository<TEntity>
         where TEntity : class
     {
-        public NHibernateRepository(NHibernateUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(specificationExecutorFactory)
+        public NHibernateRepository(NHibernateUnitOfWork unitOfWork)
         {
             this.UnitOfWork = unitOfWork;
         }

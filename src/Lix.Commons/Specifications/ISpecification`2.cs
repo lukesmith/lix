@@ -3,17 +3,16 @@
     /// <summary>
     /// Represents a specification.
     /// </summary>
-    /// <typeparam name="TContext">The type of the context.</typeparam>
+    /// <typeparam name="TContext">The context.</typeparam>
     /// <typeparam name="TResult">The type of the result.</typeparam>
     public interface ISpecification<TContext, TResult> : ISpecification
     {
         /// <summary>
-        /// Builds the specification for the <typeparamref name="TContext"/>.
+        /// Sets the context to use for the specification.
         /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns>
-        /// An object representing the built specification.
-        /// </returns>
-        TResult Build(TContext context);
+        /// <param name="context">The context to use.</param>
+        void SetContext(TContext context);
+
+        new TResult Build();
     }
 }

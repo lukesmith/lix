@@ -38,6 +38,7 @@
         /// An <see cref="FindAll{TEntity}"/> object.
         /// </returns>
         public static IQueryableSpecification<TEntity> Empty<TEntity>()
+            where TEntity : class
         {
             return new FindAll<TEntity>();
         }

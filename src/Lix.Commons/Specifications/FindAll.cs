@@ -7,8 +7,9 @@ namespace Lix.Commons.Specifications
     /// </summary>
     /// <typeparam name="TEntity">Type type of the entity to build the specification for.</typeparam>
     public class FindAll<TEntity> : DefaultQueryableSpecification<TEntity>
+        where TEntity : class
     {
-        public override IQueryable<TEntity> Build(IQueryable<TEntity> context)
+        protected override IQueryable<TEntity> Build(IQueryable<TEntity> context)
         {
             return context;
         }

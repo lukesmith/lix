@@ -26,7 +26,8 @@ namespace Lix.Commons.Repositories
         public static PagedResult<TEntity> PagedList<TEntity>(this ISession session, IQueryableSpecification<TEntity> specification, int startIndex, int pageSize)
         {
             var query = session.Linq<TEntity>();
-            var specificationQuery = specification.Build(query);
+            specification.SetContext(query);
+            var specificationQuery = specification.Build();
 
             // This block of code was found in the NHibernate.Linq source   
             // using NHibernate.Linq.Visitors;   

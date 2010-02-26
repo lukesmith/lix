@@ -144,7 +144,12 @@
     <Compile Include="Repositories\InMemory\when_using_an_in_memory_unit_of_work.cs" />
     <Compile Include="Repositories\when_using_a_unit_of_work.cs" />
     <Compile Include="Examples\Specifications\EmptyFishQueryableSpecification2.cs" />
-    <Compile Include="SpecificationExecutors\using_a_specification_executor.cs" />
+    <Compile Include="Specifications\specification_executes_itself.cs" />
+    <Compile Include="Specifications\when_a_specification_executes_count_itself.cs" />
+    <Compile Include="Specifications\when_a_specification_executes_exists_itself.cs" />
+    <Compile Include="Specifications\when_a_specification_executes_get_itself.cs" />
+    <Compile Include="Specifications\when_a_specification_executes_list_itself.cs" />
+    <Compile Include="Specifications\when_a_specification_executes_pagedlist_itself.cs" />
     <Compile Include="Testing\SpecificationTestHelperTests.cs" />
     <Compile Include="when_a_specification_interceptor\of_type_queryable_has_been_defined.cs" />
     <Compile Include="when_configuring_lix\and_resetting_the_factory.cs" />
@@ -155,7 +160,6 @@
     <Compile Include="when_using_an_in_memory_datastore\and_beginning_a_transaction.cs" />
     <Compile Include="HelperExtensions\InMemoryDataStoreExtensions.cs" />
     <Compile Include="when_a_specification_interceptor\of_type_lamda_function_has_been_defined.cs" />
-    <Compile Include="SpecificationExecutors\when_executing_a_specification\using_the_default_queryable_specification_executor.cs" />
     <Compile Include="when_a_specification_interceptor\has_not_been_defined.cs" />
     <Compile Include="UnitTestingExtensions.cs" />
     <Compile Include="when_using_an_in_memory_datastore\that_has_an_active_transaction.cs" />

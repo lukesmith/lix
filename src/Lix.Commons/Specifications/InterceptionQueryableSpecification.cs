@@ -12,7 +12,7 @@ namespace Lix.Commons.Specifications
             this.data = data;
         }
 
-        public override IQueryable<TEntity> Build(IQueryable<TEntity> context)
+        protected override IQueryable<TEntity> Build(IQueryable<TEntity> context)
         {
             return this.data;
         }

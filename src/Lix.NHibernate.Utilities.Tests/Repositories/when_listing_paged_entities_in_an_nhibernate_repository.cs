@@ -58,7 +58,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
 
         protected override NHibernateRepository<Fish> CreateRepository()
         {
-            return new NHibernateRepository<Fish>(this.UnitOfWork, null);
+            return new NHibernateRepository<Fish>(this.UnitOfWork);
         }
 
         protected override NHibernateUnitOfWork CreateUnitOfWork()

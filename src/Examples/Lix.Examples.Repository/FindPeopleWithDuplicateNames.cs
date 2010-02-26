@@ -5,9 +5,9 @@ using NHibernate.Criterion;
 
 namespace Lix.Examples.Repository
 {
-    public class FindPeopleWithDuplicateNames : DefaultQueryableSpecification<Person>
+    public class FindPeopleWithDuplicateNames2 : DefaultQueryableSpecification<Person>
     {
-        public override IQueryable<Person> Build(IQueryable<Person> context)
+        protected override IQueryable<Person> Build(IQueryable<Person> context)
         {
             return context.GroupBy(x => x.Name, x => x)
                 .Where(x => x.Count() > 1)
@@ -15,7 +15,7 @@ namespace Lix.Examples.Repository
         }
     }
 
-    public class FindPeopleWithDuplicateNames2 : DefaultNHibernateCriteriaSpecification<Person>
+    public class FindPeopleWithDuplicateNames : DefaultNHibernateCriteriaSpecification<Person>
     {
         protected override ICriteria Build(ICriteria criteria)
         {

@@ -1,41 +1,27 @@
+using System;
+using System.Collections.Generic;
+using Lix.Commons.Repositories;
+using Lix.Commons.Specifications.Executors;
 using NHibernate;
 
 namespace Lix.Commons.Specifications
 {
-    public abstract class DefaultNHibernateQuerySpecification : INHibernateQuerySpecification
+    public abstract class DefaultNHibernateQuerySpecification<TEntity> : AbstractSpecification<ISession, IQuery>, INHibernateQuerySpecification, ISpecificationExecutor<TEntity>
+        where TEntity : class
     {
-        public object Build(object context)
-        {
-            return this.Build(context as IQuery);
-        }
-
-        /// <summary>
-        /// Builds the specification for the <see cref="ISession"/>.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns>
-        /// An object representing the built specification.
-        /// </returns>
-        public IQuery Build(ISession context)
-        {
-            var query = context.CreateQuery(this.Query());
-
-            return this.Build(query);
-        }
-
-        /// <summary>
-        /// Builds the specification for the <see name="ISession"/>.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns>
-        /// An object representing the built specification.
-        /// </returns>
-        public IQuery BuildCount(ISession context)
+        IQuery INHibernateQuerySpecification.BuildCount(ISession context)
         {
             var query = context.CreateQuery(this.CountQuery());
-
             return this.Build(query);
         }
+
+        protected override IQuery Build(ISession context)
+        {
+            var query = context.CreateQuery(this.Query());
+            return this.Build(query);
+        }
+
+        protected abstract IQuery Build(IQuery query);
 
         /// <summary>
         /// Defines the hql query.
@@ -45,18 +31,51 @@ namespace Lix.Commons.Specifications
         /// </returns>
         protected abstract string Query();
 
-        /// <summary>
-        /// Builds the hql query.
-        /// </summary>
-        /// <param name="query">The <see cref="IQuery"/>.</param>
-        /// <returns>
-        /// The <see cref="IQuery"/> of the specification.
-        /// </returns>
-        protected abstract IQuery Build(IQuery query);
-
-        public virtual string CountQuery()
+        protected virtual string CountQuery()
         {
             return string.Format("SELECT count(*) {0}", this.Query());
+        }
+
+        TEntity IExecuteGet<TEntity>.Get()
+        {
+            return this.Execute().UniqueResult<TEntity>();
+        }
+
+        IEnumerable<TEntity> IExecuteList<TEntity>.List()
+        {
+            return this.Execute().List<TEntity>();
+        }
+
+        PagedResult<TEntity> IExecuteList<TEntity>.List(int startIndex, int pageSize)
+        {
+            var query = this.Execute();
+            var countQuery = ((INHibernateQuerySpecification)this).BuildCount(this.Context);
+
+            return query.PagedList<TEntity>(countQuery, startIndex, pageSize);
+        }
+
+        long IExecuteCount.Count()
+        {
+            return this.Execute().Count();
+        }
+
+        bool IExecuteExists.Exists()
+        {
+            return this.Execute().Count() > 0;
+        }
+
+        public void SetRepository(IReportingRepository<TEntity> repository)
+        {
+            var nhibernateRepository = repository as INHibernateRepository<TEntity>;
+
+            if (nhibernateRepository != null)
+            {
+                ((ISpecification<ISession, ICriteria>)this).SetContext(nhibernateRepository.CurrentSession);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Repository is not of type {0}", typeof(INHibernateRepository<TEntity>)));
+            }
         }
     }
 }

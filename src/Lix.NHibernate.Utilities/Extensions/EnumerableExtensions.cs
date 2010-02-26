@@ -22,8 +22,9 @@ namespace Lix.Commons.Repositories
         /// </returns>
         public static PagedResult<T> PagedList<T>(this INHibernateQueryable<T> query, IQueryableSpecification<T> specification, int startIndex, int pageSize)
         {
-            var specificationCountQuery = specification.Build(query);
-            var specificationQuery = specification.Build(query);
+            specification.SetContext(query);
+            var specificationCountQuery = specification.Build();
+            var specificationQuery = specification.Build();
 
             var totalItems = specificationCountQuery.LongCount();
             var items = specificationQuery.Skip(startIndex).Take(pageSize).ToList();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lix.Commons.Specifications;
 using Lix.Commons.Specifications.Executors;
 
@@ -11,24 +12,6 @@ namespace Lix.Commons.Repositories
     public abstract class RepositoryBase<TEntity> : IReportingRepository<TEntity>, IDomainRepository<TEntity>
         where TEntity : class
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RepositoryBase{TEntity}"/> class.
-        /// </summary>
-        /// <param name="specificationExecutorFactory">The <see cref="ISpecificationExecutorFactory"/> to use.</param>
-        protected RepositoryBase(ISpecificationExecutorFactory specificationExecutorFactory)
-        {
-            this.SpecificationExecutorFactory = specificationExecutorFactory;
-        }
-
-        /// <summary>
-        /// Gets an instance of the <see cref="ISpecificationExecutorFactory"/>.
-        /// </summary>
-        protected ISpecificationExecutorFactory SpecificationExecutorFactory
-        {
-            get;
-            private set;
-        }
-
         /// <summary>
         /// Adds the specified entity.
         /// </summary>
@@ -44,13 +27,19 @@ namespace Lix.Commons.Repositories
         /// <param name="entity">The entity to remove.</param>
         public abstract void Remove(TEntity entity);
 
-        private ISpecificationExecutor<TEntity> GetExecutor<TSpecification>(TSpecification specification)
-            where TSpecification : class, ISpecification
+        protected ISpecificationExecutor<TEntity> GetExecutor(ISpecification specification)
         {
             var interceptedSpecification = Specification.Interceptors.GetReplacement(specification);
 
-            return this.SpecificationExecutorFactory.CreateExecutor<ISpecification, TEntity, IReportingRepository<TEntity>>(
-                interceptedSpecification, this);
+            Type specificationExecutorType = typeof(ISpecificationExecutor<TEntity>);
+
+            if (specificationExecutorType.IsAssignableFrom(interceptedSpecification.GetType()))
+            {
+                ((ISpecificationExecutor<TEntity>)specification).SetRepository(this);
+                return specification as ISpecificationExecutor<TEntity>;
+            }
+
+            throw new InvalidOperationException(string.Format("No executor could be found for {0}", specification));
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Lix.Commons.Tests.Examples.Specifications
             this.id = id;
         }
 
-        public override IQueryable<Fish> Build(IQueryable<Fish> context)
+        protected override IQueryable<Fish> Build(IQueryable<Fish> context)
         {
             return context.Where(x => x.Id == this.id);
         }

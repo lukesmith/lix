@@ -7,8 +7,8 @@ namespace Lix.Futures.Tests.NHibernate
 {
     public class FutureFishNHibernateRepository : NHibernateRepository<Fish>
     {
-        public FutureFishNHibernateRepository(NHibernateUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(unitOfWork, specificationExecutorFactory)
+        public FutureFishNHibernateRepository(NHibernateUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
         }
 

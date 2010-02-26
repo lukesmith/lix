@@ -30,7 +30,8 @@ namespace Lix.Commons.Testing
                 return Enumerable.Empty<TEntity>();
             }
 
-            var result = specification.Build(sourceData.AsQueryable());
+            specification.SetContext(sourceData.AsQueryable());
+            var result = specification.Build();
 
             return result;
         }

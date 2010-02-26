@@ -26,10 +26,9 @@ namespace Lix.Futures.Tests.InMemory
                                                 {
                                                     cfg.TheCallingAssembly();
                                                     cfg.AssemblyContainingType<Fish>();
-                                                    cfg.With(new QueryableSpecificationExecutorRegistrationConvention());
                                                 }));
 
-            return new InMemoryRepository<Fish>(this.UnitOfWork, new StructureMapSpecificationExecutorFactory(container));
+            return new InMemoryRepository<Fish>(this.UnitOfWork);
         }
 
         protected override void SaveToUnitOfWork(InMemoryUnitOfWork unitOfWork, Fish entity)

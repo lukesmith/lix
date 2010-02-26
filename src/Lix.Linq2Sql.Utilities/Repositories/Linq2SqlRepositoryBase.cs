@@ -1,13 +1,11 @@
 ﻿using System.Linq;
-using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
 {
     class Linq2SqlRepositoryBase<TEntity> : LinqRepositoryBase<TEntity>
         where TEntity : class
     {
-        protected Linq2SqlRepositoryBase(Linq2SqlUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(specificationExecutorFactory)
+        protected Linq2SqlRepositoryBase(Linq2SqlUnitOfWork unitOfWork)
         {
             this.UnitOfWork = unitOfWork;
         }

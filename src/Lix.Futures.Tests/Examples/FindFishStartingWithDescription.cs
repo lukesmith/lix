@@ -14,7 +14,7 @@ namespace Lix.Futures.Tests.Examples
             this.description = description;
         }
 
-        public override IQueryable<Fish> Build(IQueryable<Fish> context)
+        protected override IQueryable<Fish> Build(IQueryable<Fish> context)
         {
             return context.Where(x => x.Description.Like(this.description, ComparisonType.StartsWith));
         }

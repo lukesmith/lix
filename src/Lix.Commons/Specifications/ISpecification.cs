@@ -6,12 +6,11 @@ namespace Lix.Commons.Specifications
     public interface ISpecification
     {
         /// <summary>
-        /// Builds the specification for the <paramref name="context"/>.
+        /// Sets the context to use for the specification.
         /// </summary>
-        /// <param name="context">The context.</param>
-        /// <returns>
-        /// An object representing the built specification.
-        /// </returns>
-        object Build(object context);
+        /// <param name="context">The context to use.</param>
+        void SetContext(object context);
+
+        object Build();
     }
 }

@@ -61,12 +61,6 @@ namespace Lix.Examples.Repository
                          {
                              s.TheCallingAssembly();
 
-                             // Register the queryable specification executor convention
-                             s.With(new QueryableSpecificationExecutorRegistrationConvention());
-
-                             // Register the nhibernate specification executor convention
-                             s.With(new NHibernateCriteriaSpecificationExecutorRegistrationConvention());
-                             
                              s.WithDefaultConventions();
                          });
         }
@@ -89,9 +83,6 @@ namespace Lix.Examples.Repository
             cfg.Scan(s =>
             {
                 s.TheCallingAssembly();
-
-                // Register the queryable specification executor convention
-                s.With(new QueryableSpecificationExecutorRegistrationConvention());
 
                 s.WithDefaultConventions();
             });

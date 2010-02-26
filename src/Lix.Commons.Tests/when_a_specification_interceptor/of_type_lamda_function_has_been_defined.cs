@@ -31,11 +31,13 @@ namespace Lix.Commons.Tests.when_a_specification_interceptor
         public void should_return_the_lamba_functions_result_when_building_the_specification()
         {
             var fish = new Fish();
-            var interceptWith = new Func<IQueryable<Fish>>(() => new List<Fish> { fish }.AsQueryable());
+            var context = new List<Fish> { fish }.AsQueryable();
+            var interceptWith = new Func<IQueryable<Fish>>(() => context);
             Specification.Intercept<FindAll<Fish>>().With(interceptWith);
 
             var interceptBy = Specification.Interceptors.GetReplacement(new FindAll<Fish>());
-            var result = interceptBy.Build(fish) as IQueryable;
+            interceptBy.SetContext(context);
+            var result = interceptBy.Build() as IQueryable;
             result.Cast<Fish>().Contains(fish).ShouldBeEqualTo(true);
         }
 

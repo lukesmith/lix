@@ -1,18 +1,10 @@
-using System.Collections.Generic;
+using Lix.Commons.Repositories;
 
 namespace Lix.Commons.Specifications.Executors
 {
-    public interface ISpecificationExecutor<TEntity>
+    public interface ISpecificationExecutor<TEntity> : IExecuteGet<TEntity>, IExecuteList<TEntity>, IExecuteCount, IExecuteExists
         where TEntity : class
     {
-        TEntity Get();
-
-        IEnumerable<TEntity> List();
-
-        PagedResult<TEntity> List(int startIndex, int pageSize);
-
-        long Count();
-
-        bool Exists();
+        void SetRepository(IReportingRepository<TEntity> repository);
     }
 }

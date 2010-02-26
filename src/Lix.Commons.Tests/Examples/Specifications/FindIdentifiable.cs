@@ -12,7 +12,7 @@ namespace Lix.Commons.Tests.Examples.Specifications
             this.id = id;
         }
 
-        public override IQueryable<IIdentifiable> Build(IQueryable<IIdentifiable> context)
+        protected override IQueryable<IIdentifiable> Build(IQueryable<IIdentifiable> context)
         {
             return context.Where(x => x.Id == this.id);
         }

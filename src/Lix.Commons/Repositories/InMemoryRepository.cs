@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
 {
@@ -16,11 +15,7 @@ namespace Lix.Commons.Repositories
         /// <param name="unitOfWork">
         /// The unit of work.
         /// </param>
-        /// <param name="specificationExecutorFactory">
-        /// The <see cref="ISpecificationExecutorFactory"/>.
-        /// </param>
-        public InMemoryRepository(InMemoryUnitOfWork unitOfWork, ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(specificationExecutorFactory)
+        public InMemoryRepository(InMemoryUnitOfWork unitOfWork)
         {
             this.UnitOfWork = unitOfWork;
         }

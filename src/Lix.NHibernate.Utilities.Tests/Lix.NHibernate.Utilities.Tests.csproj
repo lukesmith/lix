@@ -132,10 +132,6 @@
     <Compile Include="Repositories\when_requesting_a_paged_list_using_criteria.cs" />
     <Compile Include="Repositories\when_requesting_a_paged_list_using_linq.cs" />
     <Compile Include="Repositories\when_using_an_nhibernate_unit_of_work.cs" />
-    <Compile Include="Temp\Class1.cs" />
-    <Compile Include="using_a_nhibernate_specification_executor.cs" />
-    <Compile Include="SpecificationExecutors\when_executing_a_specification\using_the_default_critieria_specification_executor.cs" />
-    <Compile Include="SpecificationExecutors\when_executing_a_specification\using_the_default_query_specification_executor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Adapters\Lix.StructureMapAdapter\Lix.StructureMapAdapter.csproj">

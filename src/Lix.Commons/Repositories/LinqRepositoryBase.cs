@@ -1,5 +1,4 @@
 using System.Linq;
-using Lix.Commons.Specifications.Executors;
 
 namespace Lix.Commons.Repositories
 {
@@ -10,17 +9,6 @@ namespace Lix.Commons.Repositories
     public abstract class LinqRepositoryBase<TEntity> : RepositoryBase<TEntity>, ILinqEnabledRepository<TEntity>
         where TEntity : class
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LinqRepositoryBase{TEntity}"/> class.
-        /// </summary>
-        /// <param name="specificationExecutorFactory">
-        /// The <see cref="ISpecificationExecutorFactory"/> to use.
-        /// </param>
-        protected LinqRepositoryBase(ISpecificationExecutorFactory specificationExecutorFactory)
-            : base(specificationExecutorFactory)
-        {
-        }
-
         /// <summary>
         /// Gets the <see cref="IQueryable{T}"/> for the <see cref="ILinqEnabledRepository{TEntity}"/>.
         /// </summary>
