@@ -210,16 +210,16 @@
       </violation>
     </violations>
   </sourcecode>
+  <project key="216931907">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="CommonAssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/05/2010 00:25:04</timestamp>
       <milliseconds>891</milliseconds>
     </settings>
-    <timestamp>02/20/2010 15:23:17</timestamp>
-    <milliseconds>705</milliseconds>
+    <timestamp>03/13/2010 20:59:19</timestamp>
+    <milliseconds>439</milliseconds>
     <violations />
   </sourcecode>
-  <project key="216931907">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
 </stylecopresultscache>

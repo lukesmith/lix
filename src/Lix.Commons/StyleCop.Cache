@@ -506,15 +506,6 @@
       </violation>
     </violations>
   </sourcecode>
-  <sourcecode name="CommonAssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/05/2010 00:25:04</timestamp>
-      <milliseconds>891</milliseconds>
-    </settings>
-    <timestamp>02/20/2010 15:23:17</timestamp>
-    <milliseconds>705</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="ILinqEnabledRepository.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/05/2010 00:25:04</timestamp>
@@ -933,15 +924,6 @@
       </violation>
     </violations>
   </sourcecode>
-  <sourcecode name="LinqRepositoryBase.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>02/05/2010 00:25:04</timestamp>
-      <milliseconds>891</milliseconds>
-    </settings>
-    <timestamp>02/26/2010 18:18:56</timestamp>
-    <milliseconds>151</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="AbstractSpecification.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>02/05/2010 00:25:04</timestamp>
@@ -1107,7 +1089,25 @@
       </violation>
     </violations>
   </sourcecode>
+  <sourcecode name="LinqRepositoryBase.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/05/2010 00:25:04</timestamp>
+      <milliseconds>891</milliseconds>
+    </settings>
+    <timestamp>02/26/2010 20:45:39</timestamp>
+    <milliseconds>497</milliseconds>
+    <violations />
+  </sourcecode>
   <project key="883390076">
     <configuration>DEBUG;TRACE</configuration>
   </project>
+  <sourcecode name="CommonAssemblyInfo.cs" parser="Microsoft.StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>02/05/2010 00:25:04</timestamp>
+      <milliseconds>891</milliseconds>
+    </settings>
+    <timestamp>03/13/2010 20:59:19</timestamp>
+    <milliseconds>439</milliseconds>
+    <violations />
+  </sourcecode>
 </stylecopresultscache>
