@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Machine.Specifications;
+using Moq;
+using It=Machine.Specifications.It;
 
 namespace Lix.Commands.Tests
 {
@@ -13,7 +15,8 @@ namespace Lix.Commands.Tests
         private Establish context = () =>
                                         {
                                             command = new ValidCommand();
-                                            commandPublisher = new CommandPublisher(new CommandPublisherContainerStub(), new UnitOfWorkFactory());
+                                            var commandLogger = new Mock<ICommandLogger>().Object;
+                                            commandPublisher = new CommandPublisher(new CommandPublisherContainerStub(), new UnitOfWorkFactory(), commandLogger);
                                         };
 
         private Because of = () =>

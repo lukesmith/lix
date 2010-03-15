@@ -6,33 +6,17 @@ using It=Machine.Specifications.It;
 namespace Lix.Commands.Tests
 {
     [Subject(typeof(CommandPublisher))]
-    public class when_publishing_an_invalid_command
+    public class when_publishing_an_invalid_command : CommandPublisherSpecification<when_publishing_an_invalid_command.InvalidCommand>
     {
-        private static Command command;
-        private static Exception exception;
-
-        private Establish context = () =>
-                                        {
-                                            command = new InvalidCommand();
-                                        };
-
-        private Because of = () =>
-                                 {
-                                     try
-                                     {
-                                         new CommandPublisher(null, new UnitOfWorkFactory()).Publish(command);
-                                     }
-                                     catch (Exception ex)
-                                     {
-                                         exception = ex;
-                                     }
-                                 };
+        private Because of = () => exception = Catch.Exception(() => CommandPublisher.Publish(Command));
 
         private It should_cause_an_exception = () => exception.ShouldNotBeNull();
 
         private It should_be_an_invalid_command_exception = () => exception.ShouldBeOfType<InvalidCommandException>();
 
-        private class InvalidCommand : Command
+        private static Exception exception;
+
+        public class InvalidCommand : Command
         {
             public override IEnumerable<CommandValidationRule> Validate()
             {

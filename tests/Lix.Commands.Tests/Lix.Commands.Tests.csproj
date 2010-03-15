@@ -67,10 +67,14 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommandPublisherSpecification.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
+    <Compile Include="ValidCommand.cs" />
     <Compile Include="when_more_than_one_command_handler_exists.cs" />
     <Compile Include="when_no_command_handlers_exist.cs" />
     <Compile Include="when_publishing_an_invalid_command.cs" />
+    <Compile Include="when_publishing_a_command_that_fails.cs" />
+    <Compile Include="when_publishing_a_command_that_succeeds.cs" />
     <Compile Include="when_publishing_a_valid_command.cs" />
   </ItemGroup>
   <ItemGroup>

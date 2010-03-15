@@ -59,6 +59,7 @@
     <Compile Include="CommandValidationRule.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandHandler.cs" />
+    <Compile Include="ICommandLogger.cs" />
     <Compile Include="ICommandPublisher.cs" />
     <Compile Include="ICommandPublisherContainer.cs" />
     <Compile Include="InvalidCommandException.cs" />

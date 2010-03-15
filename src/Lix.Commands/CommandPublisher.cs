@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Lix.Commons.Repositories;
 
@@ -7,11 +8,13 @@ namespace Lix.Commands
     {
         private readonly ICommandPublisherContainer container;
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
+        private readonly ICommandLogger commandLogger;
 
-        public CommandPublisher(ICommandPublisherContainer container, IUnitOfWorkFactory unitOfWorkFactory)
+        public CommandPublisher(ICommandPublisherContainer container, IUnitOfWorkFactory unitOfWorkFactory, ICommandLogger commandLogger)
         {
             this.container = container;
             this.unitOfWorkFactory = unitOfWorkFactory;
+            this.commandLogger = commandLogger;
         }
 
         public void Publish<TCommand>(TCommand command)
@@ -34,12 +37,22 @@ namespace Lix.Commands
                 throw new CommandPublishingException(string.Format("No command handlers found for command {0}.", command.GetType()));
             }
 
-            using (var unitOfWork = this.unitOfWorkFactory.Create())
+            try
             {
-                unitOfWork.Begin();
-                commandHandlers.First().Execute(command);
-                unitOfWork.Commit();
+                using (var unitOfWork = this.unitOfWorkFactory.Create())
+                {
+                    unitOfWork.Begin();
+                    commandHandlers.First().Execute(command);
+                    unitOfWork.Commit();
+                }
             }
+            catch (Exception ex)
+            {
+                this.commandLogger.LogFailure(command, ex);
+                throw;
+            }
+
+            this.commandLogger.LogSuccess(command);
         }
     }
 }
