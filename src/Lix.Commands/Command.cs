@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Lix.Commands
 {
+    [Serializable]
     public abstract class Command : ICommand
     {
         private IEnumerable<CommandValidationRule> failedValidationRules;
