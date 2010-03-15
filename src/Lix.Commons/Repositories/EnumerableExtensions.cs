@@ -18,7 +18,7 @@ namespace Lix.Commons.Repositories
         /// <returns>
         /// A <see cref="PagedResult{T}"/> from the enumerable.
         /// </returns>
-        public static PagedResult<T> PagedList<T>(this IEnumerable<T> enumerable, int startIndex, int pageSize)
+        public static PagedResult<T> PagedList<T>(this IQueryable<T> enumerable, int startIndex, int pageSize)
         {
             var totalItems = enumerable.LongCount();
             var items = enumerable.Skip(startIndex).Take(pageSize).ToList();

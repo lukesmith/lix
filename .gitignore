@@ -1,9 +1,13 @@
 build/results
 build/working
-_*
+_ReSharper.*/
+*resharper.user
 .idea/
-bin/
-obj/
+[Bb]in/
+[Oo]bj/
 *.sln.cache
 *.suo
-*.resharper.user
+*.user
+StyleCop.Cache
+[Dd]ebug/
+[Rr]elease/
