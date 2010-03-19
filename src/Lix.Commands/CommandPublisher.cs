@@ -39,20 +39,26 @@ namespace Lix.Commands
 
             try
             {
-                using (var unitOfWork = this.unitOfWorkFactory.Create())
-                {
-                    unitOfWork.Begin();
-                    commandHandlers.First().Execute(command);
-                    unitOfWork.Commit();
-                }
+                this.ExecuteInUnitOfWork(() => commandHandlers.Single().Execute(command));
             }
             catch (Exception ex)
             {
-                this.commandLogger.LogFailure(command, ex);
+                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+
                 throw;
             }
 
-            this.commandLogger.LogSuccess(command);
+            this.ExecuteInUnitOfWork(() => this.commandLogger.LogSuccess(command));
+        }
+
+        private void ExecuteInUnitOfWork(Action action)
+        {
+            using (var unitOfWork = this.unitOfWorkFactory.Create())
+            {
+                unitOfWork.Begin();
+                action();
+                unitOfWork.Commit();
+            }
         }
     }
 }
