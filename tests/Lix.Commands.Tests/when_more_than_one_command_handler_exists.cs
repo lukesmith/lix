@@ -8,32 +8,27 @@ namespace Lix.Commands.Tests
 {
     public class when_more_than_one_command_handler_exists
     {
-        private static ValidCommand command;
-        private static CommandPublisher commandPublisher;
-        private static Exception exception;
-
         private Establish context = () =>
                                         {
-                                            command = new ValidCommand();
-                                            var commandLogger = new Mock<ICommandLogger>().Object;
-                                            commandPublisher = new CommandPublisher(new CommandPublisherContainerStub(), new UnitOfWorkFactory(), commandLogger);
+                                            Command = new ValidCommand();
+                                            CommandLogger = new Mock<ICommandLogger>();
+                                            commandPublisher = new CommandPublisher(new CommandPublisherContainerStub(), new UnitOfWorkFactory(), CommandLogger.Object);
                                         };
 
-        private Because of = () =>
-                                 {
-                                     try
-                                     {
-                                         commandPublisher.Publish(command);
-                                     }
-                                     catch (Exception ex)
-                                     {
-                                         exception = ex;
-                                     }
-                                 };
+        private Because of = () => ExceptionThrownFromPublishing = Catch.Exception(() => commandPublisher.Publish(Command));
 
-        private It should_cause_an_exception = () => exception.ShouldNotBeNull();
+        private It should_cause_an_exception = () => ExceptionThrownFromPublishing.ShouldNotBeNull();
 
-        private It should_cause_an_invalid_operation_exception = () => exception.ShouldBeOfType<CommandPublishingException>();
+        private It should_cause_an_invalid_operation_exception = () => ExceptionThrownFromPublishing.ShouldBeOfType<CommandPublishingException>();
+
+#pragma warning disable 169
+        protected Behaves_like<FailedCommandLoggerBehavior> it_logs_a_failed_command;
+#pragma warning restore 169
+
+        protected static ValidCommand Command;
+        private static CommandPublisher commandPublisher;
+        protected static Exception ExceptionThrownFromPublishing;
+        protected static Mock<ICommandLogger> CommandLogger;
 
         public class ValidCommand : Command
         {

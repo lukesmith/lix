@@ -7,18 +7,14 @@ namespace Lix.Commands.Tests
     public class when_publishing_a_command_that_fails : CommandPublisherSpecification<ValidCommand>
     {
         private Establish context =
-            () =>
-                {
-                    exceptionThrownByHandler = new Exception();
-                    CommandHandler.Setup(x => x.Execute(Moq.It.IsAny<ValidCommand>())).Throws(exceptionThrownByHandler);
-                };
+            () => CommandHandler.Setup(x => x.Execute(Moq.It.IsAny<ValidCommand>())).Throws(new Exception());
 
-        private Because of = () => exceptionThrownByHandler = Catch.Exception(() => CommandPublisher.Publish(Command));
+        private Because of = () => ExceptionThrownFromPublishing = Catch.Exception(() => CommandPublisher.Publish(Command));
 
-        private It should_log_a_failure_notification = () => CommandLogger.Verify(x => x.LogFailure(
-                                                                                           Moq.It.Is<ICommand>(c => c == Command),
-                                                                                           Moq.It.Is<Exception>(e => e == exceptionThrownByHandler)));
+#pragma warning disable 169
+        private Behaves_like<FailedCommandLoggerBehavior> it_logs_a_failed_command;
+#pragma warning restore 169
 
-        private static Exception exceptionThrownByHandler;
+        protected static Exception ExceptionThrownFromPublishing;
     }
 }

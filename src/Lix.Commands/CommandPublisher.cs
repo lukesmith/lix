@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Lix.Commons.Repositories;
 
@@ -22,19 +23,36 @@ namespace Lix.Commands
         {
             if (!command.IsValid)
             {
-                throw new InvalidCommandException(command, command.Validate());
+                var ex = new InvalidCommandException(command, command.Validate());
+                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                throw ex;
             }
 
-            var commandHandlers = this.container.GetInstances(command);
+            IEnumerable<ICommandHandler<TCommand>> commandHandlers;
+            try
+            {
+                commandHandlers = this.container.GetInstances(command);
+            }
+            catch (Exception ex)
+            {
+                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                throw;
+            }
 
             if (commandHandlers.Count() > 1)
             {
-                throw new CommandPublishingException(string.Format("Multiple command handlers found for command {0}.", command.GetType()));
+                var ex =
+                    new CommandPublishingException(string.Format("Multiple command handlers found for command {0}.", command.GetType()));
+                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                throw ex;
             }
 
             if (commandHandlers.Count() == 0)
             {
-                throw new CommandPublishingException(string.Format("No command handlers found for command {0}.", command.GetType()));
+                var ex =
+                    new CommandPublishingException(string.Format("No command handlers found for command {0}.", command.GetType()));
+                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                throw ex;
             }
 
             try

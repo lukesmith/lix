@@ -7,7 +7,8 @@ namespace Lix.Commands.Tests
     {
         private Because of = () => CommandPublisher.Publish(Command);
 
-        private It should_log_a_succeeded_notification = () => CommandLogger.Verify(
-                                                                   x => x.LogSuccess(Moq.It.Is<ICommand>(c => c == Command)));
+#pragma warning disable 169
+        protected Behaves_like<SuccessfulCommandLoggerBehavior> it_logs_a_succesful_command;
+#pragma warning restore 169
     }
 }
