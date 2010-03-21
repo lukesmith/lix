@@ -24,7 +24,7 @@ namespace Lix.Commands
             if (!command.IsValid)
             {
                 var ex = new InvalidCommandException(command, command.Validate());
-                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                this.commandLogger.LogFailure(command, ex);
                 throw ex;
             }
 
@@ -35,7 +35,7 @@ namespace Lix.Commands
             }
             catch (Exception ex)
             {
-                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                this.commandLogger.LogFailure(command, ex);
                 throw;
             }
 
@@ -43,7 +43,7 @@ namespace Lix.Commands
             {
                 var ex =
                     new CommandPublishingException(string.Format("Multiple command handlers found for command {0}.", command.GetType()));
-                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                this.commandLogger.LogFailure(command, ex);
                 throw ex;
             }
 
@@ -51,7 +51,7 @@ namespace Lix.Commands
             {
                 var ex =
                     new CommandPublishingException(string.Format("No command handlers found for command {0}.", command.GetType()));
-                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                this.commandLogger.LogFailure(command, ex);
                 throw ex;
             }
 
@@ -61,12 +61,12 @@ namespace Lix.Commands
             }
             catch (Exception ex)
             {
-                this.ExecuteInUnitOfWork(() => this.commandLogger.LogFailure(command, ex));
+                this.commandLogger.LogFailure(command, ex);
 
                 throw;
             }
 
-            this.ExecuteInUnitOfWork(() => this.commandLogger.LogSuccess(command));
+            this.commandLogger.LogSuccess(command);
         }
 
         private void ExecuteInUnitOfWork(Action action)
