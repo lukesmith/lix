@@ -4,5 +4,7 @@ namespace Lix.Commands
         where TCommand : ICommand
     {
         void Execute(TCommand command);
+        
+        void SetEventPublisher(IEventPublisher eventPublisher);
     }
 }

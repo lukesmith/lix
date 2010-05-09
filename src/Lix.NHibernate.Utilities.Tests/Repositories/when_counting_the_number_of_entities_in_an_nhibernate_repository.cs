@@ -1,3 +1,4 @@
+using Lix.Commons;
 using Lix.Commons.Repositories;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Repositories;
@@ -63,7 +64,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
 
         protected override NHibernateUnitOfWork CreateUnitOfWork()
         {
-            return new NHibernateUnitOfWork(this.Session);
+            return new NHibernateUnitOfWork(new SpecificSessionProvider(this.Session));
         }
     }
 }

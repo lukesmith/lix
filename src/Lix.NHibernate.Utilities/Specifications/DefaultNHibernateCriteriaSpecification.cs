@@ -29,7 +29,7 @@ namespace Lix.Commons.Specifications
         /// </returns>
         protected abstract ICriteria Build(ICriteria criteria);
 
-        void ISpecificationExecutor<TEntity>.SetRepository(IReportingRepository<TEntity> repository)
+        void ISpecificationExecutor<TEntity>.SetRepository(IRepository<TEntity> repository)
         {
             var nhibernateRepository = repository as INHibernateRepository<TEntity>;
 

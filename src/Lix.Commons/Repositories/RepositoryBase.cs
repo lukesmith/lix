@@ -9,7 +9,7 @@ namespace Lix.Commons.Repositories
     /// Represents an implementation of <see cref="IRepository{TEntity}"/>.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public abstract class RepositoryBase<TEntity> : IReportingRepository<TEntity>, IDomainRepository<TEntity>
+    public abstract class RepositoryBase<TEntity> : IRepository<TEntity>, IReportingRepository<TEntity>, IDomainRepository<TEntity>
         where TEntity : class
     {
         /// <summary>
@@ -50,6 +50,18 @@ namespace Lix.Commons.Repositories
         /// A <typeparamref name="TEntity"/> that matched the specification.
         /// </returns>
         TEntity IReportingRepository<TEntity>.Get<TSpecification>(TSpecification specification)
+        {
+            return this.GetExecutor(specification).Get();
+        }
+
+        /// <summary>
+        /// Gets a single <typeparamref name="TEntity"/> that matches the specified specification.
+        /// </summary>
+        /// <param name="specification">The specification.</param>
+        /// <returns>
+        /// A <typeparamref name="TEntity"/> that matched the specification.
+        /// </returns>
+        TEntity IDomainRepository<TEntity>.Get<TSpecification>(TSpecification specification)
         {
             return this.GetExecutor(specification).Get();
         }

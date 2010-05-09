@@ -11,11 +11,11 @@ namespace Lix.Commons.Repositories
         /// <summary>
         /// Initializes a new instance of the <see cref="NHibernateUnitOfWork"/> class.
         /// </summary>
-        /// <param name="session">The session.</param>
-        public NHibernateUnitOfWork(ISession session)
+        /// <param name="sessionProvider">The <see cref="ISessionProvider"/>.</param>
+        public NHibernateUnitOfWork(ISessionProvider sessionProvider)
         {
-            this.Session = session;
-            this.Transaction = session.Transaction;
+            this.Session = sessionProvider.GetSession();
+            this.Transaction = this.Session.Transaction;
         }
 
         /// <summary>
@@ -53,13 +53,13 @@ namespace Lix.Commons.Repositories
         /// <summary>
         /// Creates and begins a new instance of an <see cref="NHibernateUnitOfWork"/> for the the specified session.
         /// </summary>
-        /// <param name="session">The session.</param>
+        /// <param name="sessionProvider">The <see cref="ISessionProvider"/>.</param>
         /// <returns>
         /// A new <see cref="NHibernateUnitOfWork"/>.
         /// </returns>
-        public static NHibernateUnitOfWork Begin(ISession session)
+        public static NHibernateUnitOfWork Begin(ISessionProvider sessionProvider)
         {
-            var unitOfWork = new NHibernateUnitOfWork(session);
+            var unitOfWork = new NHibernateUnitOfWork(sessionProvider);
             unitOfWork.Begin();
 
             return unitOfWork;
@@ -133,6 +133,8 @@ namespace Lix.Commons.Repositories
             {
                 throw new InvalidOperationException("Unable to rollback when not active.");
             }
+
+            this.Session.Close();
 
             this.Transaction.Rollback();
         }

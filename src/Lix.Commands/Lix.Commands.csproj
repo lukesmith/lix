@@ -53,15 +53,18 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AbstractCommandHandler.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="CommandPublisher.cs" />
     <Compile Include="CommandPublishingException.cs" />
     <Compile Include="CommandValidationRule.cs" />
+    <Compile Include="DelayedEventPublisher.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandHandler.cs" />
     <Compile Include="ICommandLogger.cs" />
     <Compile Include="ICommandPublisher.cs" />
-    <Compile Include="ICommandPublisherContainer.cs" />
+    <Compile Include="ICommandHandlerContainer.cs" />
+    <Compile Include="IEvent.cs" />
+    <Compile Include="IEventPublisher.cs" />
     <Compile Include="InvalidCommandException.cs" />
   </ItemGroup>
   <ItemGroup>

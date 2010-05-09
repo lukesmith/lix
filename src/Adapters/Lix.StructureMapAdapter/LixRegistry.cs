@@ -15,7 +15,7 @@ namespace Lix.StructureMapAdapter
                               s.WithDefaultConventions();
                           });
 
-            this.For<ICommandPublisherContainer>().Use<CommandPublisherContainer>();
+            this.For<ICommandHandlerContainer>().Use<CommandHandlerContainer>();
             this.For<IUnitOfWorkFactory>().Use<UnitOfWorkFactory>();
 
             // Register default IQueryableSpecification<> instance

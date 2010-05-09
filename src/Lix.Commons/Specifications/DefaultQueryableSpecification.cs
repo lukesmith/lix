@@ -51,7 +51,7 @@ namespace Lix.Commons.Specifications
             return this.Execute().Count() > 0;
         }
 
-        void ISpecificationExecutor<TEntity>.SetRepository(IReportingRepository<TEntity> repository)
+        void ISpecificationExecutor<TEntity>.SetRepository(IRepository<TEntity> repository)
         {
             var linqRepository = repository as ILinqEnabledRepository<TEntity>;
 

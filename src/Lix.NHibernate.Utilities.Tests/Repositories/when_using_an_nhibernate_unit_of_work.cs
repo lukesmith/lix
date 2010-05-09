@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Lix.Commons;
 using Lix.Commons.Repositories;
 using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
@@ -41,7 +42,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
 
         protected override NHibernateUnitOfWork CreateUnitOfWork()
         {
-            return new NHibernateUnitOfWork(this.session);
+            return new NHibernateUnitOfWork(new SpecificSessionProvider(this.session));
         }
 
         protected override IEnumerable<Fish> List()
@@ -52,7 +53,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
         [Test]
         public void should_commit_transaction_on_commit()
         {
-            using (var unitOfWork = new NHibernateUnitOfWork(this.session))
+            using (var unitOfWork = new NHibernateUnitOfWork(new SpecificSessionProvider(this.session)))
             {
                 unitOfWork.Begin();
                 unitOfWork.Commit();
@@ -64,7 +65,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
         [Test]
         public void should_rollback_transaction_on_dispose_if_not_committed_and_unit_of_work_has_begun()
         {
-            var unitOfWork = new NHibernateUnitOfWork(this.session);
+            var unitOfWork = new NHibernateUnitOfWork(new SpecificSessionProvider(this.session));
             unitOfWork.Begin();
             unitOfWork.Dispose();
 
@@ -74,7 +75,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
         [Test]
         public void should_not_fail_resuing_the_same_unit_of_work()
         {
-            using (var unitOfWork = new NHibernateUnitOfWork(this.session))
+            using (var unitOfWork = new NHibernateUnitOfWork(new SpecificSessionProvider(this.session)))
             {
                 unitOfWork.Begin();
                 unitOfWork.Commit();

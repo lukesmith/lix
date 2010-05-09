@@ -43,7 +43,7 @@ namespace Lix.NHibernate.Utilities.Tests.Repositories
                 tx.Commit();
             }
 
-            this.UnitOfWork = new NHibernateUnitOfWork(this.Session);
+            this.UnitOfWork = new NHibernateUnitOfWork(new SpecificSessionProvider(this.Session));
             this.UnitOfWork.Begin();
 
             this.PerformSetUp();

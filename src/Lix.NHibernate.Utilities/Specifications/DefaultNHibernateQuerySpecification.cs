@@ -64,7 +64,7 @@ namespace Lix.Commons.Specifications
             return this.Execute().Count() > 0;
         }
 
-        public void SetRepository(IReportingRepository<TEntity> repository)
+        public void SetRepository(IRepository<TEntity> repository)
         {
             var nhibernateRepository = repository as INHibernateRepository<TEntity>;
 

@@ -83,7 +83,7 @@ namespace Lix.Commons.Tests.Specifications
                 throw new NotImplementedException();
             }
 
-            public void SetRepository(IReportingRepository<Person> repository)
+            public void SetRepository(IRepository<Person> repository)
             {
                 this.SetRepositoryCalled = true;
             }

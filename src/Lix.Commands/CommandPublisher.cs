@@ -7,15 +7,21 @@ namespace Lix.Commands
 {
     public class CommandPublisher : ICommandPublisher
     {
-        private readonly ICommandPublisherContainer container;
+        private readonly ICommandHandlerContainer commandHandlerContainer;
         private readonly IUnitOfWorkFactory unitOfWorkFactory;
         private readonly ICommandLogger commandLogger;
+        private readonly IEventPublisher eventPublisher;
 
-        public CommandPublisher(ICommandPublisherContainer container, IUnitOfWorkFactory unitOfWorkFactory, ICommandLogger commandLogger)
+        public CommandPublisher(
+            ICommandHandlerContainer commandHandlerContainer,
+            IUnitOfWorkFactory unitOfWorkFactory,
+            ICommandLogger commandLogger,
+            IEventPublisher eventPublisher)
         {
-            this.container = container;
+            this.commandHandlerContainer = commandHandlerContainer;
             this.unitOfWorkFactory = unitOfWorkFactory;
             this.commandLogger = commandLogger;
+            this.eventPublisher = eventPublisher;
         }
 
         public void Publish<TCommand>(TCommand command)
@@ -28,10 +34,55 @@ namespace Lix.Commands
                 throw ex;
             }
 
+            var commandHandler = this.GetCommandHandler(command);
+            var delayedEventPublisher = new DelayedEventPublisher(this.eventPublisher);
+            commandHandler.SetEventPublisher(delayedEventPublisher);
+
+            try
+            {
+                this.ExecuteInUnitOfWork(() =>
+                                             {
+                                                 commandHandler.Execute(command);
+
+                                                 // Log the success as part of this unit of work incase it logging success fails.
+                                                 this.commandLogger.LogSuccess(command);
+                                             });
+            }
+            catch (Exception ex)
+            {
+                this.commandLogger.LogFailure(command, ex);
+
+                throw;
+            }
+
+            delayedEventPublisher.PublishAllEvents();
+        }
+
+        private void ExecuteInUnitOfWork(Action action)
+        {
+            using (var unitOfWork = this.unitOfWorkFactory.Create())
+            {
+                unitOfWork.Begin();
+                try
+                {
+                    action();
+                    unitOfWork.Commit();
+                }
+                catch
+                {
+                    unitOfWork.Rollback();
+                    throw;
+                }
+            }
+        }
+
+        private ICommandHandler<TCommand> GetCommandHandler<TCommand>(TCommand command)
+            where TCommand : ICommand
+        {
             IEnumerable<ICommandHandler<TCommand>> commandHandlers;
             try
             {
-                commandHandlers = this.container.GetInstances(command);
+                commandHandlers = this.commandHandlerContainer.GetInstances(command);
             }
             catch (Exception ex)
             {
@@ -55,28 +106,7 @@ namespace Lix.Commands
                 throw ex;
             }
 
-            try
-            {
-                this.ExecuteInUnitOfWork(() => commandHandlers.Single().Execute(command));
-            }
-            catch (Exception ex)
-            {
-                this.commandLogger.LogFailure(command, ex);
-
-                throw;
-            }
-
-            this.commandLogger.LogSuccess(command);
-        }
-
-        private void ExecuteInUnitOfWork(Action action)
-        {
-            using (var unitOfWork = this.unitOfWorkFactory.Create())
-            {
-                unitOfWork.Begin();
-                action();
-                unitOfWork.Commit();
-            }
+            return commandHandlers.Single();
         }
     }
 }

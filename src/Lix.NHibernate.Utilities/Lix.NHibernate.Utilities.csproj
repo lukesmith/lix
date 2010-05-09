@@ -70,6 +70,7 @@
     <Compile Include="Repositories\CriteriaExtensions.cs" />
     <Compile Include="Repositories\INHibernateRepository.cs" />
     <Compile Include="Repositories\ISessionExtensions.cs" />
+    <Compile Include="ISessionProvider.cs" />
     <Compile Include="Repositories\NHibernateRepository.cs" />
     <Compile Include="Repositories\NHibernateUnitOfWork.cs" />
     <Compile Include="Repositories\QueryExtensions.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Specifications\INHibernateCriteriaSpecification.cs" />
     <Compile Include="Specifications\INHibernateQuerySpecification.cs" />
     <Compile Include="Specifications\INHibernateSpecification.cs" />
+    <Compile Include="SpecificSessionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lix.Commons\Lix.Commons.csproj">

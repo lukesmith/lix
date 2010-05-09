@@ -7,7 +7,7 @@ namespace Lix.Commons.Repositories
     /// Represents the interface for a repository used for reporting purposes.
     /// </summary>
     /// <typeparam name="TEntity">The entity type of the repository.</typeparam>
-    public interface IReportingRepository<TEntity>
+    public interface IReportingRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace Lix.Commons.Repositories
         /// <param name="specification">The specification.</param>
         /// <typeparam name="TSpecification">The <see cref="ISpecification"/> type.</typeparam>
         /// <returns>
-        /// true if the <see cref="IRepository{TEntity}"/> contains an item matching the specification; otherwise false.
+        /// true if the <see cref="IReportingRepository{TEntity}"/> contains an item matching the specification; otherwise false.
         /// </returns>
         bool Exists<TSpecification>(TSpecification specification)
             where TSpecification : class, ISpecification;

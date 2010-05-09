@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Lix.Commons.Specifications.Executors;
 using NHibernate;
 using NHibernate.Linq;
 
