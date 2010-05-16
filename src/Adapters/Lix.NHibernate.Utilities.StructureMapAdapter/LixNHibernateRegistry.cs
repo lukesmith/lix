@@ -1,5 +1,4 @@
 ﻿using Lix.Commons.Repositories;
-using StructureMap;
 using StructureMap.Configuration.DSL;
 
 namespace Lix.NHibernate.Utilities.StructureMapAdapter
@@ -13,7 +12,7 @@ namespace Lix.NHibernate.Utilities.StructureMapAdapter
             this.For(typeof(IDomainRepository<>)).Use(queryInstance);
             this.For(typeof(INHibernateRepository<>)).Use(queryInstance);
 
-            this.For(typeof(IUnitOfWork)).LifecycleIs(InstanceScope.Hybrid).Use(typeof(NHibernateUnitOfWork));
+            this.For<IUnitOfWork>().Use<NHibernateUnitOfWork>();
         }
     }
 }

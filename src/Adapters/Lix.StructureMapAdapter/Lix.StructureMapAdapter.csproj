@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LixRegistry.cs" />
-    <Compile Include="CommandPublisherContainer.cs" />
+    <Compile Include="CommandHandlerContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="UnitOfWorkScope.cs" />

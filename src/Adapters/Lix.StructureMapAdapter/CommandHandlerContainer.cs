@@ -16,8 +16,6 @@ namespace Lix.StructureMapAdapter
 
         public IEnumerable<ICommandHandler<TCommand>> GetInstances<TCommand>(TCommand command) where TCommand : ICommand
         {
-            this.container.Configure(x => x.For<ICurrentCommandProvider>().Use(new CurrentCommandProvider(command)));
-
             var commandHandler = this.container.ForGenericType(typeof(ICommandHandler<>))
                 .WithParameters(command.GetType())
                 .GetInstanceAs<ICommandHandler<TCommand>>();
@@ -28,25 +26,6 @@ namespace Lix.StructureMapAdapter
         public void Dispose()
         {
             this.container.Dispose();
-        }
-    }
-
-    public interface ICurrentCommandProvider
-    {
-        ICommand CurrentCommand { get; }
-    }
-
-    public class CurrentCommandProvider : ICurrentCommandProvider
-    {
-        public CurrentCommandProvider(ICommand command)
-        {
-            this.CurrentCommand = command;
-        }
-
-        public ICommand CurrentCommand
-        {
-            get;
-            private set;
         }
     }
 }

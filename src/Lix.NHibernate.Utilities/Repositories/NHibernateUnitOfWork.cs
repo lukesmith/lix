@@ -134,9 +134,8 @@ namespace Lix.Commons.Repositories
                 throw new InvalidOperationException("Unable to rollback when not active.");
             }
 
-            this.Session.Close();
-
             this.Transaction.Rollback();
+            this.Session.Close();
         }
     }
 }

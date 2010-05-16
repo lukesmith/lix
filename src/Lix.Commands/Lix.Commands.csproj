@@ -57,12 +57,13 @@
     <Compile Include="Command.cs" />
     <Compile Include="CommandPublishingException.cs" />
     <Compile Include="CommandValidationRule.cs" />
+    <Compile Include="CurrentCommandProvider.cs" />
     <Compile Include="DelayedEventPublisher.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandHandler.cs" />
-    <Compile Include="ICommandLogger.cs" />
     <Compile Include="ICommandPublisher.cs" />
     <Compile Include="ICommandHandlerContainer.cs" />
+    <Compile Include="ICurrentCommandProvider.cs" />
     <Compile Include="IEvent.cs" />
     <Compile Include="IEventPublisher.cs" />
     <Compile Include="InvalidCommandException.cs" />
