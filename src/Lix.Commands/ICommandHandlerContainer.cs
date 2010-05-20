@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Lix.Commands
@@ -6,5 +7,7 @@ namespace Lix.Commands
     {
         IEnumerable<ICommandHandler<TCommand>> GetInstances<TCommand>(TCommand command)
             where TCommand : ICommand;
+
+        IEnumerable<ICommandHandler> GetInstances(Type commandType);
     }
 }

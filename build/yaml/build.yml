@@ -2,3 +2,4 @@ targets: [:Clean, :Build]
 solution: "../Lix.sln"
 configuration: :Release
 parameters: ["/p:RakeBuild=true"]
+path_to_command: "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe"

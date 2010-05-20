@@ -1,7 +1,9 @@
+using System;
+
 namespace Lix.Commands
 {
     public abstract class AbstractCommandHandler<T> : ICommandHandler<T>
-        where T : ICommand
+        where T : class, ICommand
     {
         private IEventPublisher eventPublisher;
 
@@ -12,7 +14,12 @@ namespace Lix.Commands
             this.eventPublisher.Publish(@event);
         }
 
-        void ICommandHandler<T>.SetEventPublisher(IEventPublisher eventPublisher)
+        void ICommandHandler.Execute(ICommand command)
+        {
+            this.Execute(command as T);
+        }
+
+        void ICommandHandler.SetEventPublisher(IEventPublisher eventPublisher)
         {
             this.eventPublisher = eventPublisher;
         }

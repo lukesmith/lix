@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-using NHibernate.Linq.Visitors;
+using ExpressionVisitor = NHibernate.Linq.Visitors.ExpressionVisitor;
 
 namespace Lix.Futures
 {

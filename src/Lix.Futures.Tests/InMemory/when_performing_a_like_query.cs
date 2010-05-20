@@ -1,11 +1,9 @@
 ﻿using System.Linq;
-using Lix.Commons;
 using Lix.Commons.Repositories;
 using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using Lix.Commons.Tests.Repositories;
 using Lix.Futures.Tests.Examples;
-using Lix.StructureMapAdapter;
 using MbUnit.Framework;
 
 namespace Lix.Futures.Tests.InMemory

@@ -33,13 +33,13 @@ desc "Initialize the build"
 task :init => ["working", "results"] do
 end
 
-mspec :mspec
+#mspec :mspec
 #galliotask :rungallio
 assemblyinfo :assemblyinfo
 msbuild :build
 
 
-task :runtests => [:inittests, :mspec] do
+task :runtests => [:inittests] do
 end
 
 task :inittests => 'tests' do

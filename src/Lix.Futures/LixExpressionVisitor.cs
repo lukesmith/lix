@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using NHibernate.Linq.Visitors;
+using ExpressionVisitor = NHibernate.Linq.Visitors.ExpressionVisitor;
 
 namespace Lix.Futures
 {

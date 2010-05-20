@@ -3,7 +3,6 @@ using Lix.Commons.Tests;
 using Lix.Commons.Tests.Examples;
 using Lix.Futures.Tests.Examples;
 using Lix.NHibernate.Utilities.Tests.Repositories;
-using Lix.StructureMapAdapter;
 using MbUnit.Framework;
 
 namespace Lix.Futures.Tests.NHibernate
